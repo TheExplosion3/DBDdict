@@ -10,7 +10,7 @@ namespace N
         private:
             std::string rarity;
             std::string name;
-            std::vector otherEffects
+            std::vector<string> otherEffects
             unsigned short accuracy;
             unsigned short width;
             unsigned short range;
