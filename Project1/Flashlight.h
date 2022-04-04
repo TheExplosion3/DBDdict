@@ -111,10 +111,10 @@ namespace N
               return useTime;
             }
             void setAddOns(unsigned short index, Addons addon) {
-              this -> addOns[index] = addon
+              this -> addOns[index] = addon;
             }
             Addons getAddOn(unsigned short index) {
-              return addOns[index]
+              return addOns[index];
             }
 
             void calculateEffects(std::string effectType, float effectPotency) {
