@@ -118,19 +118,19 @@ namespace N
             }
 
             void calculateEffects(std::string effectType, float effectPotency) {
-              switch(effectType) {
-                case "accuracy": {
+              switch(hash(effectType)) {
+                case hash("accuracy"): {
                   this -> accuracy = this -> accuracy * effectPotency;
                   continue;
                 }
-                case "width": {
+                case hash("width"): {
                   this -> width = this -> width * effectPotency;
                   continue;
                 }
-                case "range": {
+                case hash("range"): {
                   this -> range = this -> range * effectPotency;
                 }
-                case "usetime": {
+                case hash("usetime"): {
                   if(effectPotency - (short)effectPotency == 0)
                   {
                     this -> useTime = this -> useTime + effectPotency;
@@ -140,7 +140,7 @@ namespace N
                     this -> useTime = this -> useTime * effectPotency;
                   }
                 }
-                case "brightness": {
+                case hash("brightness"): {
                   this -> brightness = this -> brightness * effectPotency;
                 }
                 default: {

@@ -2,6 +2,15 @@
 #include <string>
 #include <vector>
 
+constexpr uint32_t hash(const char* data, size_t const size) noexcept{
+    uint32_t hash = 5381;
+
+    for(const char *c = data; c < data + size; ++c)
+        hash = ((hash << 5) + hash) + (unsigned char) *c;
+
+    return hash;
+}
+
 namespace N
 {
     class Addons
@@ -87,8 +96,8 @@ namespace N
             // defines addon via method, reassigning mainly the default constructor as that is the primary one.
             public void defineAddon(std::string itemType, unsigned short index)
             {
-              switch(itemType) {
-                case "FLASHLIGHT": {
+              switch(hash(itemType)) {
+                case hash("FLASHLIGHT"): {
                   this -> name = flashlightAddonList[index].getName();
                   this -> rarity = flashlightAddonList[index].getRarity();
                   this -> forItem = flashlightAddonList[index].getForItem();
@@ -97,7 +106,7 @@ namespace N
                   this -> totalOfEffects = flashlightAddonList[index].getTotalOfEffects();
                   continue;
                 }
-                case "KEY": {
+                case hash("KEY"): {
                   this -> name = keyAddonList[index].getName();
                   this -> rarity = keyAddonList[index].getRarity();
                   this -> forItem = keyAddonList[index].getForItem();
@@ -106,7 +115,7 @@ namespace N
                   this -> totalOfEffects = keyAddonList[index].getTotalOfEffects();
                   continue;
                 }
-                case "MAP": {
+                case hash("MAP"): {
                   this -> name = mapAddonList[index].getName();
                   this -> rarity = mapAddonList[index].getRarity();
                   this -> forItem = mapAddonList[index].getForItem();
@@ -115,7 +124,7 @@ namespace N
                   this -> totalOfEffects = mapAddonList[index].getTotalOfEffects();
                   continue;
                 }
-                case "MEDKIT": {
+                case hash("MEDKIT"): {
                   this -> name = mapAddonList[index].getName();
                   this -> rarity = mapAddonList[index].getRarity();
                   this -> forItem = mapAddonList[index].getForItem();
@@ -124,7 +133,7 @@ namespace N
                   this -> totalOfEffects = mapAddonList[index].getTotalOfEffects();
                   continue;
                 }
-                case "TOOLBOX": {
+                case hash("TOOLBOX"): {
                   this -> name = toolboxAddonList[index].getName();
                   this -> rarity = toolboxAddonList[index].getRarity();
                   this -> forItem = toolboxAddonList[index].getForItem();
