@@ -4,6 +4,7 @@
 #include <string.h>
 #include <algorithm>
 
+// ptr original vars
 unsigned short userInput = 0;
 std::string userInputString = "";
 unsigned short numAddons = 0;
@@ -22,12 +23,14 @@ void inputReset()
 }
 
 
-
 int main() {
 
+  // user input ptrs
 	unsigned short* ptr = &userInput;
 	std::string* ptrTwo = &userInputString;
 	unsigned short* ptrThree = &numAddons;
+
+  // switch case entering into what item you would like to examine
 	std::cout << "What would you like to customize? \n1 | Medkit \n2 | Toolbox \n 3 | Key \n 4 | Map \n 5 | Flashlight \n 6 | Exit Program" << std::endl;
 	std::cin >> *ptr;
 	while(true)
@@ -46,13 +49,16 @@ int main() {
 
 			}
 			case 5: {
+        
 				std::string tempName = "";
 				bool addonPresent = false;
-
+    
 				std::cout << "What type of flashlight is it? 1 | Brown \n 2 | Yellow \n 3 | Green \n 4 | Purple" << std::endl;
 				std::cin >> *ptr;
+        
 				std::cout << "Are there any addons on it? If so, type the first name below, otherwise type N/A." << std::endl;
 				std::cin >> *ptrTwo;
+        
 				if(capitalizeString(*ptrTwo) != "N/A")
 				{
 					addonPresent = true;
