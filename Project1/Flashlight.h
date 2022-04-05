@@ -10,7 +10,7 @@ namespace N
         private:
             std::string rarity;
             std::string name;
-            std::vector<string> otherEffects
+            std::vector<std::string> otherEffects;
             unsigned short accuracy;
             unsigned short width;
             unsigned short range;
@@ -28,7 +28,7 @@ namespace N
                 brightness = 100;
                 useTime = 0;
             }
-            Flashlight(std::string rarity, std::string name, std::vector<string> otherEffects, unsigned short accuracy, unsigned short width, unsigned short range, unsigned short brightness, unsigned short useTime, Addons addOnOne, Addons addOnTwo) {
+            Flashlight(std::string rarity, std::string name, std::vector<std::string> otherEffects, unsigned short accuracy, unsigned short width, unsigned short range, unsigned short brightness, unsigned short useTime, Addons addOnOne, Addons addOnTwo) {
                 this -> rarity = rarity;
                 this -> name = name;
                 this -> otherEffects = otherEffects;
@@ -40,7 +40,7 @@ namespace N
                 addOns[1] = addOnOne;
                 addOns[2] = addOnTwo;
             }
-            Flashlight(std::string rarity, std::string name, std::srting otherEffects, unsigned short accuracy, unsigned short width, unsigned short range, unsigned short brightness, unsigned short useTime, Addons addOnOne) {
+            Flashlight(std::string rarity, std::string name, std::vector<std::string> otherEffects, unsigned short accuracy, unsigned short width, unsigned short range, unsigned short brightness, unsigned short useTime, Addons addOnOne) {
                 this -> rarity = rarity;
                 this -> name = name;
                 this -> otherEffects = otherEffects;
@@ -51,7 +51,7 @@ namespace N
                 this -> useTime = useTime;
                 addOns[1] = addOnOne;
             }
-            Flashlight(std::string rarity, std::string name, std::vector<string> otherEffects, unsigned short accuracy, unsigned short width, unsigned short range, unsigned short brightness, unsigned short useTime) {
+            Flashlight(std::string rarity, std::string name, std::vector<std::string> otherEffects, unsigned short accuracy, unsigned short width, unsigned short range, unsigned short brightness, unsigned short useTime) {
                 this -> rarity = rarity;
                 this -> name = name;
                 this -> otherEffects = otherEffects;
@@ -74,10 +74,10 @@ namespace N
             std::string getRarity() {
               return rarity;
             }
-            void setOtherEffects(std::vector<string> otherEffects) {
+            void setOtherEffects(std::vector<std::string> otherEffects) {
               this -> otherEffects = otherEffects;
             }
-            std::vector<string> getOtherEffects() {
+            std::vector<std::string> getOtherEffects() {
               return otherEffects;
             }
             void setAccuracy(unsigned short accuracy) {
@@ -121,11 +121,9 @@ namespace N
               switch(hash(effectType)) {
                 case hash("accuracy"): {
                   this -> accuracy = this -> accuracy * effectPotency;
-                  continue;
                 }
                 case hash("width"): {
                   this -> width = this -> width * effectPotency;
-                  continue;
                 }
                 case hash("range"): {
                   this -> range = this -> range * effectPotency;
@@ -144,7 +142,7 @@ namespace N
                   this -> brightness = this -> brightness * effectPotency;
                 }
                 default: {
-                  continue;
+                  break;
                 }
               }
             }

@@ -93,7 +93,7 @@ int main() {
 			default: {
 				std::cout << "Please only insert numerical characters ranging between 1 and 5!" << std::endl;
 				inputReset();
-        continue;
+        		continue;
 			}
 		}
 	}
