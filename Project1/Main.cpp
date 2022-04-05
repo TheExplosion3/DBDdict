@@ -22,7 +22,6 @@ void inputReset()
   std::cin.clear();
 }
 
-
 int main() {
 
   // user input ptrs
@@ -55,35 +54,154 @@ int main() {
     
 				std::cout << "What type of flashlight is it? 1 | Brown \n 2 | Yellow \n 3 | Green \n 4 | Purple" << std::endl;
 				std::cin >> *ptr;
-        
-				std::cout << "Are there any addons on it? If so, type the first name below, otherwise type N/A." << std::endl;
-				std::cin >> *ptrTwo;
-        
-				if(capitalizeString(*ptrTwo) != "N/A")
-				{
-					addonPresent = true;
-					std::string tempStr = *ptrTwo;
-				}
-				if(addonPresent == true)
-				{
-					std::cout << "What does the first addon do? Type out its effects below." << std::endl;
-					std::cin >> *ptrTwo;
-				}
-
-				// need to make it so type of flashlight is id'd via pointer number,  and that it auto sets in the flashlight class declaration for simplicity's sake
-				switch(*ptrThree){
+        switch(*ptr){
 					case 1: {
 						N::Flashlight flashlight;
+            flashlight.flashlightTypeSetter(1);
+            break;
 					}
 					case 2: {
 						N::Flashlight flashlight;
+            flashlight.flashlightTypeSetter(2);
+            break;
 					}
+          case 3: {
+            N::Flashlight flashlight;
+            flashlight.flashlightTypeSetter(3);
+            break;
+          }
+          case 4: {
+            N::Flashlight flashlight;
+            flashlight.flashlightTypeSetter(4);
+            break;
+          }
+          case 5: {
+            N::Flashlight flashlight;
+            flashlight.flashlightTypeSetter(5);
+            break;
+          }
 					default: {
-						N::Flashlight flashlight;
+						std::cout << "Please only input valid numerical inputs!" << std::endl;
+            inputReset();
+            continue;
 					}
 				}
-				
 
+        // this is very spaghetti
+				std::cout << "Are there any addons on it? If so, type the first name below, otherwise type N/A." << std::endl;
+				std::cin >> *ptrTwo;
+        if(!(hash(capitalizeString(*ptrTwo), sizeof(*ptrTwo)) == hash("N/A", sizeof("N/A"))
+        {
+          while(true) {
+            // iterates through addonlist
+            for(int i = 0; i < sizeof(N::Addons::flashlightAddonsList)/sizeof(*N::Addons::flashlightAddonsList); i++) {
+            // verifies if current value at iterator index is or is not variable, if so break and set the addon to the first slot
+              if(N::Addons::flashlightAddonsList[i].getName() == capitalizeString(*ptrTwo))
+              {
+                flashlight.setAddOns(0, N::Addons::flashlightAddonsList[i]);
+                addonPresent = true;
+                break;
+              }
+            } 
+            // if it wasnt found, it gives the user to retry input or to fully break out
+            if(addonPresent == false) {
+              std::cout << "Make sure you typed the word correctly! If there are no addons, type N/A." << std::endl;
+              inputReset();
+              std::cin >> *ptrTwo;
+            }
+            // check for the pass command
+            if(!(hash(capitalizeString(*ptrTwo), sizeof(*ptrTwo)) == hash("N/A", sizeof("N/A"))
+            {
+              break;
+            }
+            else if(addonPresent == true)
+            {
+              break;
+            }
+          }
+        }
+        else {
+          addonPresent = false;
+        }
+        // spaghetti cont.
+        std::cout << "Is there a second addon present? If so, type the second name below, otherwise type N/A." << std::endl;
+				std::cin >> *ptrTwo;
+        // immediately checks for a pass cmd, if not one it continues
+        if(!(hash(capitalizeString(*ptrTwo), sizeof(*ptrTwo)) == hash("N/A", sizeof("N/A"))
+        {
+          while(true) {
+            bool invalidInput = false;
+            addonPresent = false;
+            // verifies addon is not the same as the first
+            else if(flashlight.getAddons(0).getName() == capitalizeString(*ptrTwo))
+            {
+              std::cout << "You can't have two of the same addon on one item!" << std::endl;
+              invalidInput = true;
+            }
+            //if pass cmd is not found, iterates again through list, verifies the name is the same, and a check for invalid input is run, if passed checks then it will continue to scan for the addon listed
+            for(int i = 0; i < sizeof(N::Addons::flashlightAddonsList)/sizeof(*N::Addons::flashlightAddonsList); i++) {
+              if(N::Addons::flashlightAddonsList[i].getName() == capitalizeString(*ptrTwo) && invalidInput == false)
+              {
+                flashlight.setAddOns(1, N::Addons::flashlightAddonsList[i]);
+                addonPresent = true;
+                break;
+              }
+            }
+            // if addon not found and input is valid, this if is passed and allows the user to retry, or type the break cmd
+            if(addonPresent == false && invalidInput == false;) {
+               std::cout << "Make sure you typed the word correctly! If there are no addons, type N/A." << std::endl;
+              inputReset();
+              std::cin >> *ptrTwo;
+            }
+            // else if statement to reset the input
+            else if(invalidInput == true)
+            {
+              inputReset();
+              std::cin >> *ptrTwo;
+            }
+            // standard break statements from the first addon set
+            if(!(hash(capitalizeString(*ptrTwo), sizeof(*ptrTwo)) == hash("N/A", sizeof("N/A"))
+            {
+              break;
+            }
+            else if(addonPresent == true)
+            {
+              break;
+            }
+          }
+          if (addonPresent == true)
+          {
+            std::string temp = "";
+            boolean effectFound = false;
+            for(int i = 0; i < sizeof(flashlight.getAddOn[0].getEffects()); i++)
+              {
+                if(flashlight.getAddon[0].getEffects()[i] != ' ')
+                {
+                  temp += flashlight.getAddon[0].getEffects()[i]
+                }
+                else
+                {
+                  switch(hash(temp, sizeof(temp))) {
+                    case hash("RANGE", sizeof("RANGE"): {
+                      effectFound = true;
+                      calculateEffects("range", flashlight.getAddon[0].getEffectPotency[0]))
+                      break;
+                    }
+                    default: {
+                      temp = "";
+                      break;
+                    }
+                  }
+                  if(!(temp[i - 1] == ',') && effectFound == true;)
+                  {
+                    break;
+                  }
+                }
+              }
+          }
+          
+          
+          
 
 			}
 			case 6: {

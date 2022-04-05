@@ -15,7 +15,8 @@ namespace N
             unsigned short width;
             unsigned short range;
             unsigned short brightness;
-            unsigned short useTime;
+            unsigned float useTime;
+            unsigned short blindnessDuration;
             Addons addOns[2];
         public:
 
@@ -28,7 +29,7 @@ namespace N
                 brightness = 100;
                 useTime = 0;
             }
-            Flashlight(std::string rarity, std::string name, std::vector<std::string> otherEffects, unsigned short accuracy, unsigned short width, unsigned short range, unsigned short brightness, unsigned short useTime, Addons addOnOne, Addons addOnTwo) {
+            Flashlight(std::string rarity, std::string name, std::vector<std::string> otherEffects, unsigned short accuracy, unsigned short width, unsigned short range, unsigned short brightness, unsigned float useTime, unsigned short blindnessDuration, Addons addOnOne, Addons addOnTwo) {
                 this -> rarity = rarity;
                 this -> name = name;
                 this -> otherEffects = otherEffects;
@@ -37,10 +38,11 @@ namespace N
                 this -> range = range;
                 this -> brightness = brightness;
                 this -> useTime = useTime;
-                addOns[1] = addOnOne;
-                addOns[2] = addOnTwo;
+                this -> blindnessDuration = blindnessDuration;
+                addOns[0] = addOnOne;
+                addOns[1] = addOnTwo;
             }
-            Flashlight(std::string rarity, std::string name, std::vector<std::string> otherEffects, unsigned short accuracy, unsigned short width, unsigned short range, unsigned short brightness, unsigned short useTime, Addons addOnOne) {
+            Flashlight(std::string rarity, std::string name, std::vector<std::string> otherEffects, unsigned short accuracy, unsigned short width, unsigned short range, unsigned short brightness, unsigned float useTime, unsigned short blindnessDuration Addons addOnOne) {
                 this -> rarity = rarity;
                 this -> name = name;
                 this -> otherEffects = otherEffects;
@@ -49,9 +51,10 @@ namespace N
                 this -> range = range;
                 this -> brightness = brightness;
                 this -> useTime = useTime;
-                addOns[1] = addOnOne;
+                this -> blindnessDuration = blindnessDuration;
+                addOns[0] = addOnOne;
             }
-            Flashlight(std::string rarity, std::string name, std::vector<std::string> otherEffects, unsigned short accuracy, unsigned short width, unsigned short range, unsigned short brightness, unsigned short useTime) {
+            Flashlight(std::string rarity, std::string name, std::vector<std::string> otherEffects, unsigned short accuracy, unsigned short width, unsigned short range, unsigned short brightness, unsigned float useTime) {
                 this -> rarity = rarity;
                 this -> name = name;
                 this -> otherEffects = otherEffects;
@@ -60,75 +63,95 @@ namespace N
                 this -> range = range;
                 this -> brightness = brightness;
                 this -> useTime = useTime;
+            }
+            ~Flashlight() {
+              delete[] addOns;
+              delete otherEffects;
+            }
+            Flashlight(const Flashlight other) {
+              this -> rarity = other.getRarity();
+              this -> name = other.getName();
+              this -> otherEffects = other.getEffects();
+              this -> accuracy = other.getAccuracy();
+              this -> width = other.getWidth();
+              this -> range = other.getRange();
+              this -> brightness = other.getBrightness;
+              this -> useTime = other.getUseTime();
             }
 
             void setName(std::string name) {
               this -> name = name;
             }
-            std::string getName() {
+            std::string getName() const{
               return name;
             }
             void setRarity(std::string rarity) {
               this -> rarity = rarity;
             }
-            std::string getRarity() {
+            std::string getRarity() const {
               return rarity;
             }
             void setOtherEffects(std::vector<std::string> otherEffects) {
               this -> otherEffects = otherEffects;
             }
-            std::vector<std::string> getOtherEffects() {
+            std::vector<std::string> getOtherEffects() const {
               return otherEffects;
             }
             void setAccuracy(unsigned short accuracy) {
               this -> accuracy = accuracy;
             }
-            unsigned short getAccuracy() {
+            unsigned short getAccuracy() const {
               return accuracy;
             }
             void setWidth(unsigned short width) {
               this -> width = width;
             }
-            unsigned short getWidth() {
+            unsigned short getWidth() const {
               return width;
             }
             void setRange(unsigned short range) {
               this -> range = range;
             }
-            unsigned short getRange() {
+            unsigned short getRange() const {
               return range;
             }
             void setBrightness(unsigned short Brightness) {
               this -> brightness = brightness;
             }
-            unsigned short getBrightness() {
+            unsigned short getBrightness() const {
               return brightness;
             }
-            void setUseTime(unsigned short useTime) {
+            void setUseTime(unsigned float useTime) {
               this -> useTime = useTime;
             }
-            unsigned short getUseTime() {
+            unsigned float getUseTime() const {
               return useTime;
             }
             void setAddOns(unsigned short index, Addons addon) {
               this -> addOns[index] = addon;
             }
-            Addons getAddOn(unsigned short index) {
+            Addons getAddOn(unsigned short index) const {
               return addOns[index];
+            }
+            void setBlindnessDuration(unsigned short blindnessDuration) {
+              this -> blindnessDuration;
+            }
+            Addons getBlindnessDuration() const {
+              return blindnessDuration;
             }
 
             void calculateEffects(std::string effectType, float effectPotency) {
               switch(hash(effectType)) {
-                case hash("accuracy"): {
+                case hash("accuracy", sizeof(effectType)): {
                   this -> accuracy = this -> accuracy * effectPotency;
                 }
-                case hash("width"): {
+                case hash("width", sizeof(effectType)): {
                   this -> width = this -> width * effectPotency;
                 }
-                case hash("range"): {
+                case hash("range", sizeof(effectType)): {
                   this -> range = this -> range * effectPotency;
                 }
-                case hash("usetime"): {
+                case hash("usetime", sizeof(effectType)): {
                   if(effectPotency - (short)effectPotency == 0)
                   {
                     this -> useTime = this -> useTime + effectPotency;
@@ -138,8 +161,64 @@ namespace N
                     this -> useTime = this -> useTime * effectPotency;
                   }
                 }
-                case hash("brightness"): {
+                case hash("brightness", sizeof(effectType)): {
                   this -> brightness = this -> brightness * effectPotency;
+                }
+                default: {
+                  break;
+                }
+              }
+            }
+
+            void flashlightTypeSetter(unsigned short type) {
+              switch(type) {
+                case 1: {
+                  setName("Flashlight");
+                  setRarity("Uncommon");
+                  setBrightness(100)
+                  setAccuracy(100);
+                  setWidth(100);
+                  setRange(100);
+                  setBlindnessDuration(100);
+                  setUseTime(8);
+                }
+                case 2: {
+                  setName("Sport Flashlight");
+                  setRarity("Rare");
+                  setBrightness(100)
+                  setAccuracy(120);
+                  setWidth(100);
+                  setBlindnessDuration(100);
+                  setUseTime(7.12)
+                }
+                case 3: {
+                  setName("Utility Flashlight");
+                  setRarity("Very Rare");
+                  setBrightness(130);
+                  setAccuracy(85);
+                  setWidth(100);
+                  setBlindnessDuration(115);
+                  setUseTime(12);
+                }
+                case 4: {
+                  setName("Will O' Wisp");
+                  setRarity("Event");
+                  setBrightness(100);
+                  setAccuracy(100);
+                  setWidth(100);
+                  setBlindnessDuration(100);
+                  setUseTime(8);
+                  addOtherEffects("More friendly ghosts in your life");
+                }
+                case 5: {
+                  setName("Anniversary Flashlight");
+                  setRarity("Event");
+                  setBrightness(100);
+                  setAccuracy(100);
+                  setWidth(100);
+                  setBlindnessDuration(100);
+                  setUseTime(8);
+                  addOtherEffects("Explodes with confetti upon blinding a killer");
                 }
                 default: {
                   break;
