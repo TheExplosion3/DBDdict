@@ -1,14 +1,11 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <unordered_map>
 
-constexpr uint32_t hash(const char* data, size_t const size) noexcept{
-    uint32_t hash = 5381;
-
-    for(const char *c = data; c < data + size; ++c)
-        hash = ((hash << 5) + hash) + (unsigned char) *c;
-
-    return hash;
+const unsigned short hash(const std::string s) {
+  std::size_t h1 = std::hash<std::string>{}(s);
+  return h1;
 }
 
 namespace N
@@ -55,10 +52,7 @@ namespace N
                 }
                 totalOfEffects++;
             }
-            ~Addons() {
-              delete effectPotency;
-            }
-            Addons(const Addons other) {
+            Addons(const N::Addons& other) {
               this -> name = other.getName();
               this -> rarity = other.getRarity();
               this -> forItem = other.getForItem();
@@ -105,9 +99,9 @@ namespace N
             }
 
             // defines addon via method, reassigning mainly the default constructor as that is the primary one.
-            public void defineAddon(unsigned short itemType, unsigned short index)
+            void defineAddon(unsigned short itemType, unsigned short index)
             {
-              switch(hash(itemType)) {
+              switch(itemType) {
                 case 1: {
                   this -> name = flashlightAddonsList[index].getName();
                   this -> rarity = flashlightAddonsList[index].getRarity();
@@ -119,7 +113,7 @@ namespace N
                 case 2: {
                   this -> name = keyAddonsList[index].getName();
                   this -> rarity = keyAddonsList[index].getRarity();
-                  this -> forItem = keyAddonList[index].getForItem();
+                  this -> forItem = keyAddonsList[index].getForItem();
                   this -> effects = keyAddonsList[index].getEffects();
                   this -> effectPotency = keyAddonsList[index].getEffectPotency();
                   this -> totalOfEffects = keyAddonsList[index].getTotalOfEffects();

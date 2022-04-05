@@ -43,6 +43,11 @@
         "xtr1common": "cpp",
         "xutility": "cpp",
         "string": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "vector": "cpp",
+        "unordered_map": "cpp",
+        "hash_map": "cpp",
+        "list": "cpp",
+        "xhash": "cpp"
     }
 }

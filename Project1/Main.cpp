@@ -110,7 +110,7 @@ int main() {
               std::cin >> *ptrTwo;
             }
             // check for the pass command
-            if(!(hash(capitalizeString(*ptrTwo), sizeof(*ptrTwo)) == hash("N/A", sizeof("N/A"))
+            if(!(hash(capitalizeString(*ptrTwo), sizeof(*ptrTwo)) == hash("N/A", sizeof("N/A"))))
             {
               break;
             }
@@ -125,7 +125,7 @@ int main() {
         }
         // spaghetti cont.
         std::cout << "Is there a second addon present? If so, type the second name below, otherwise type N/A." << std::endl;
-				std::cin >> *ptrTwo;
+		std::cin >> *ptrTwo;
         // immediately checks for a pass cmd, if not one it continues
         if(!(hash(capitalizeString(*ptrTwo), sizeof(*ptrTwo)) == hash("N/A", sizeof("N/A"))
         {
@@ -148,7 +148,7 @@ int main() {
               }
             }
             // if addon not found and input is valid, this if is passed and allows the user to retry, or type the break cmd
-            if(addonPresent == false && invalidInput == false;) {
+            if(addonPresent == false && invalidInput == false) {
                std::cout << "Make sure you typed the word correctly! If there are no addons, type N/A." << std::endl;
               inputReset();
               std::cin >> *ptrTwo;

@@ -1,0 +1,7 @@
+namespace N
+{
+    class Toolbox
+    {
+
+    };
+}

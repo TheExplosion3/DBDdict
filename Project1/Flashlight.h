@@ -11,12 +11,12 @@ namespace N
             std::string rarity;
             std::string name;
             std::vector<std::string> otherEffects;
-            unsigned short accuracy;
-            unsigned short width;
-            unsigned short range;
-            unsigned short brightness;
-            unsigned float useTime;
-            unsigned short blindnessDuration;
+            unsigned mutable short accuracy;
+            unsigned mutable short width;
+            unsigned mutable short range;
+            unsigned mutable short brightness;
+            float useTime;
+            unsigned mutable short blindnessDuration;
             Addons addOns[2];
         public:
 
@@ -29,7 +29,7 @@ namespace N
                 brightness = 100;
                 useTime = 0;
             }
-            Flashlight(std::string rarity, std::string name, std::vector<std::string> otherEffects, unsigned short accuracy, unsigned short width, unsigned short range, unsigned short brightness, unsigned float useTime, unsigned short blindnessDuration, Addons addOnOne, Addons addOnTwo) {
+            Flashlight(std::string rarity, std::string name, std::vector<std::string> otherEffects, unsigned short accuracy, unsigned short width, unsigned short range, unsigned short brightness, float useTime, unsigned short blindnessDuration, Addons addOnOne, Addons addOnTwo) {
                 this -> rarity = rarity;
                 this -> name = name;
                 this -> otherEffects = otherEffects;
@@ -42,7 +42,7 @@ namespace N
                 addOns[0] = addOnOne;
                 addOns[1] = addOnTwo;
             }
-            Flashlight(std::string rarity, std::string name, std::vector<std::string> otherEffects, unsigned short accuracy, unsigned short width, unsigned short range, unsigned short brightness, unsigned float useTime, unsigned short blindnessDuration Addons addOnOne) {
+            Flashlight(std::string rarity, std::string name, std::vector<std::string> otherEffects, unsigned short accuracy, unsigned short width, unsigned short range, unsigned short brightness, float useTime, unsigned short blindnessDuration, N::Addons addOnOne) {
                 this -> rarity = rarity;
                 this -> name = name;
                 this -> otherEffects = otherEffects;
@@ -54,7 +54,7 @@ namespace N
                 this -> blindnessDuration = blindnessDuration;
                 addOns[0] = addOnOne;
             }
-            Flashlight(std::string rarity, std::string name, std::vector<std::string> otherEffects, unsigned short accuracy, unsigned short width, unsigned short range, unsigned short brightness, unsigned float useTime) {
+            Flashlight(std::string rarity, std::string name, std::vector<std::string> otherEffects, unsigned short accuracy, unsigned short width, unsigned short range, unsigned short brightness, float useTime) {
                 this -> rarity = rarity;
                 this -> name = name;
                 this -> otherEffects = otherEffects;
@@ -66,16 +66,15 @@ namespace N
             }
             ~Flashlight() {
               delete[] addOns;
-              delete otherEffects;
             }
-            Flashlight(const Flashlight other) {
+            Flashlight(const Flashlight& other) {
               this -> rarity = other.getRarity();
               this -> name = other.getName();
-              this -> otherEffects = other.getEffects();
+              this -> otherEffects = other.getOtherEffects();
               this -> accuracy = other.getAccuracy();
               this -> width = other.getWidth();
               this -> range = other.getRange();
-              this -> brightness = other.getBrightness;
+              this -> brightness = other.getBrightness();
               this -> useTime = other.getUseTime();
             }
 
@@ -121,10 +120,10 @@ namespace N
             unsigned short getBrightness() const {
               return brightness;
             }
-            void setUseTime(unsigned float useTime) {
+            void setUseTime(float useTime) {
               this -> useTime = useTime;
             }
-            unsigned float getUseTime() const {
+            float getUseTime() const {
               return useTime;
             }
             void setAddOns(unsigned short index, Addons addon) {
@@ -134,24 +133,25 @@ namespace N
               return addOns[index];
             }
             void setBlindnessDuration(unsigned short blindnessDuration) {
-              this -> blindnessDuration;
+              this -> blindnessDuration = blindnessDuration;
             }
-            Addons getBlindnessDuration() const {
+            unsigned short getBlindnessDuration() const {
               return blindnessDuration;
             }
-
-            void calculateEffects(std::string effectType, float effectPotency) {
+            // i have no clue why but i cannot for the life of me get it to hash these strings and properly read them
+            void calculateEffects(const std::string effectType, float effectPotency) {
+              const std::vector<unsigned short> types{ hash("accuracy"), hash("width"), hash("range"), hash("useTime"), hash("brightness")};
               switch(hash(effectType)) {
-                case hash("accuracy", sizeof(effectType)): {
+                case types.at(0): {
                   this -> accuracy = this -> accuracy * effectPotency;
                 }
-                case hash("width", sizeof(effectType)): {
+                case types.at(1): {
                   this -> width = this -> width * effectPotency;
                 }
-                case hash("range", sizeof(effectType)): {
+                case types.at(2): {
                   this -> range = this -> range * effectPotency;
                 }
-                case hash("usetime", sizeof(effectType)): {
+                case types.at(3): {
                   if(effectPotency - (short)effectPotency == 0)
                   {
                     this -> useTime = this -> useTime + effectPotency;
@@ -161,7 +161,7 @@ namespace N
                     this -> useTime = this -> useTime * effectPotency;
                   }
                 }
-                case hash("brightness", sizeof(effectType)): {
+                case types.at(4): {
                   this -> brightness = this -> brightness * effectPotency;
                 }
                 default: {
@@ -175,7 +175,7 @@ namespace N
                 case 1: {
                   setName("Flashlight");
                   setRarity("Uncommon");
-                  setBrightness(100)
+                  setBrightness(100);
                   setAccuracy(100);
                   setWidth(100);
                   setRange(100);
@@ -185,7 +185,7 @@ namespace N
                 case 2: {
                   setName("Sport Flashlight");
                   setRarity("Rare");
-                  setBrightness(100)
+                  setBrightness(100);
                   setAccuracy(120);
                   setWidth(100);
                   setBlindnessDuration(100);
