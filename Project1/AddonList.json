@@ -126,7 +126,7 @@
       "name": "Butterfly Tape",
       "rarity": "Common",
       "forItem": "Medkit",
-      "effects": "Increases healing speed by 5%","
+      "effects": "Increases healing speed by 5%",
       "effectPotency": {1.05}
     },
 
