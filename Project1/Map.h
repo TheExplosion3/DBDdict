@@ -13,6 +13,7 @@ namespace N
         std::string name;
         std::string rarity;
         std::vector<std::string> otherEffects;
+        std::array<Addons> addOns[2];
       public:
         Map() {
           useTime = 0;
@@ -21,12 +22,16 @@ namespace N
           rarity = "";
           otherEffects = std::vector<std::string>>{""};
         }
-        Map(float useTime, unsigned short range, std::string name, std::string rarity, std::vector<std::string> otherEffects) {
+        Map(float useTime, unsigned short range, std::string name, std::string rarity, std::vector<std::string> otherEffects, std::array<Addons> addOns) {
           this -> useTime = useTime;
           this -> range = range;
           this -> name = name;
           this -> rarity = rarity;
           this -> otherEffects = otherEffects;
+          this -> addOns = addOns;
+        }
+        ~Map() {
+          delete[] addOns;
         }
         Map(const Map& other) {
           this -> useTime = other.getUseTime();
@@ -34,6 +39,7 @@ namespace N
           this -> name = other.getName();
           this -> rarity = other.getRarity();
           this -> otherEffects = other.getOtherEffects();
+          this -> addOns = other.getAddOns();
         }
 
         void setName(std::string name) {
@@ -65,6 +71,18 @@ namespace N
         }
         std::vector<std::string> getOtherEffects() const {
           return otherEffects;
+        }
+        void setAddOns(std::array<Addons> addOns) {
+          this -> addOns = addOns;
+        }
+        void setAddOn(unsigned short index, Addons addon) {
+          this -> addOns[index] = addon;
+        }
+        Addons getAddOn(unsigned short index) const {
+          return addOns[index];
+        }
+        std::array<Addons> getAddOns() const {
+          return addOns;
         }
 
         void addOtherEffects(std::string nEffect) {

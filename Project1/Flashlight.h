@@ -79,6 +79,7 @@ namespace N
               this -> useTime = other.getUseTime();
             }
 
+            // why does OOP have to use so many getters and setters lmao
             void setName(std::string name) {
               this -> name = name;
             }
@@ -133,6 +134,13 @@ namespace N
             Addons getAddOn(unsigned short index) const {
               return addOns[index];
             }
+            void setAddOns(std::array<Addons> addOns) {
+              this -> addOns = addOns;
+            }
+            void setAddOn(unsigned short index, Addons addon) {
+              this -> addOns[index] = addon;
+            }
+
             void setBlindnessDuration(unsigned short blindnessDuration) {
               this -> blindnessDuration = blindnessDuration;
             }
