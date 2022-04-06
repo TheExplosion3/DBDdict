@@ -12,7 +12,7 @@
       "name": "Power Bulb",
       "rarity": "Common",
       "forItem": "Flashlight",
-      "effects": "Increases brightness of beam by 20%, increases blindness duration by 10%"
+      "effects": "Increases brightness of beam by 20%, increases blindness duration by 10%",
       "effectPotency": {1.2, 1.1}
     },
 
@@ -44,7 +44,7 @@
       "name": "Rubber Grip",
       "rarity": "Uncommon",
       "forItem": "Flashlight",
-      "effects": "Increases accuracy by 40%"
+      "effects": "Increases accuracy by 40%",
       "effectPotency": {1.4}
     },
 
@@ -108,7 +108,7 @@
       "name": "Broken Bulb",
       "rarity": "Event",
       "forItem": "Flashlight",
-      "effects": "Causes the flashlight to flicker, increases brightness by 30%, increases blindness duration by 15%, increases spookiness"
+      "effects": "Causes the flashlight to flicker, increases brightness by 30%, increases blindness duration by 15%, increases spookiness",
       "effectPotency": {1.3, 1.15}
     }
   ],
@@ -142,7 +142,7 @@
       "name": "Sponge",
       "rarity": "Uncommon",
       "forItem": "Medkit",
-      "effects": "Increases Great Skill Check progression by 5%"
+      "effects": "Increases Great Skill Check progression by 5%",
       "effectPotency": {1.05}
     },
 
@@ -237,7 +237,7 @@
     },
 
     {
-      "name":"Scratched Pearl",
+      "name": "Scratched Pearl",
       "rarity": "Uncommon",
       "forItem": "Key",
       "effects": "Increases Aura-reading range by 12m",
@@ -272,7 +272,7 @@
       "name": "Weaved Ring",
       "rarity": "Very Rare",
       "forItem": "Key",
-      "effects": "On death, key is not lost, lose this addon instead"
+      "effects": "On death, key is not lost, lose this addon instead",
       "effectPotency": {0}
     },
 
@@ -288,7 +288,7 @@
       "name": "Blood Amber",
       "rarity": "Very Rare",
       "forItem": "Key",
-      "effects": "Unlocks Aura reading ability to see the killer within 32m, increases depletino rate by 100%",
+      "effects": "Unlocks Aura reading ability to see the killer within 32m, increases depletion rate by 100%",
       "effectPotency": {32, 100}
     },
 
@@ -322,7 +322,7 @@
       "name": "Unusual Stamp",
       "rarity": "Uncommon",
       "forItem": "Map",
-      "effects": "Increases tracking range by 8m"
+      "effects": "Increases tracking range by 8m",
       "effectPotency": {8}
     },
 
@@ -330,7 +330,7 @@
       "name": "Retardant Jelly",
       "rarity": "Uncommon",
       "forItem": "Map",
-      "effects": "Decreases depletion rate by 20%"
+      "effects": "Decreases depletion rate by 20%",
       "effectPotency": {1.2}
     },
 
@@ -396,7 +396,7 @@
       "name": "Clean Rag",
       "rarity": "Common",
       "forItem": "Toolbox",
-      "effects": "Increases repair speed by 20%"
+      "effects": "Increases repair speed by 20%",
       "effectPotency": {1.2}
     },
 
@@ -452,7 +452,7 @@
       "name": "Grip Wrench",
       "rarity": "Rare",
       "forItem": "Toolbox",
-      "effects": "Increases the auto repair timer for hooks sabotaged by 15 seconds"",
+      "effects": "Increases the auto repair timer for hooks sabotaged by 15 seconds",
       "effectPotency": {15}
     },
 
