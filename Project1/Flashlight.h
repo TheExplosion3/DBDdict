@@ -28,6 +28,7 @@ namespace N
                 range = 100;
                 brightness = 100;
                 useTime = 0;
+                otherEffects = std::vector<std::string>{""};
             }
             Flashlight(std::string rarity, std::string name, std::vector<std::string> otherEffects, unsigned short accuracy, unsigned short width, unsigned short range, unsigned short brightness, float useTime, unsigned short blindnessDuration, Addons addOnOne, Addons addOnTwo) {
                 this -> rarity = rarity;
@@ -140,18 +141,18 @@ namespace N
             }
             // i have no clue why but i cannot for the life of me get it to hash these strings and properly read them
             void calculateEffects(const std::string effectType, float effectPotency) {
-              const std::vector<unsigned short> types{ hash("accuracy"), hash("width"), hash("range"), hash("useTime"), hash("brightness")};
+              const std::vector<unsigned short> hashedEffects{ hash("accuracy"), hash("width"), hash("range"), hash("useTime"), hash("brightness")};
               switch(hash(effectType)) {
-                case types.at(0): {
+                case hashedEffects.at(0): {
                   this -> accuracy = this -> accuracy * effectPotency;
                 }
-                case types.at(1): {
+                case hashedEffects.at(1): {
                   this -> width = this -> width * effectPotency;
                 }
-                case types.at(2): {
+                case hashedEffects.at(2): {
                   this -> range = this -> range * effectPotency;
                 }
-                case types.at(3): {
+                case hashedEffects.at(3): {
                   if(effectPotency - (short)effectPotency == 0)
                   {
                     this -> useTime = this -> useTime + effectPotency;
@@ -161,7 +162,7 @@ namespace N
                     this -> useTime = this -> useTime * effectPotency;
                   }
                 }
-                case types.at(4): {
+                case hashedEffects.at(4): {
                   this -> brightness = this -> brightness * effectPotency;
                 }
                 default: {
@@ -170,7 +171,7 @@ namespace N
               }
             }
 
-            void flashlightTypeSetter(unsigned short type) {
+            void flashlighthashedEffectsetter(unsigned short type) {
               switch(type) {
                 case 1: {
                   setName("Flashlight");
@@ -221,6 +222,7 @@ namespace N
                   addOtherEffects("Explodes with confetti upon blinding a killer");
                 }
                 default: {
+                  delete[] hashedEffects;
                   break;
                 }
               }

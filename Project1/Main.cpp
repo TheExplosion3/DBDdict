@@ -136,6 +136,7 @@ int main() {
             else if(flashlight.getAddons(0).getName() == capitalizeString(*ptrTwo))
             {
               std::cout << "You can't have two of the same addon on one item!" << std::endl;
+              inputClear();
               invalidInput = true;
             }
             //if pass cmd is not found, iterates again through list, verifies the name is the same, and a check for invalid input is run, if passed checks then it will continue to scan for the addon listed
@@ -211,7 +212,7 @@ int main() {
 			default: {
 				std::cout << "Please only insert numerical characters ranging between 1 and 5!" << std::endl;
 				inputReset();
-        		continue;
+        continue;
 			}
 		}
 	}
