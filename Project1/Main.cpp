@@ -3,6 +3,7 @@
 #include "Addons.h"
 #include <string.h>
 #include <algorithm>
+#include <fstream>
 
 // ptr original vars
 unsigned short userInput = 0;
@@ -49,8 +50,8 @@ int main() {
 			}
 			case 5: {
         
-				std::string tempName = "";
 				bool addonPresent = false;
+        bool validAddon = true;
     
 				std::cout << "What type of flashlight is it? 1 | Brown \n 2 | Yellow \n 3 | Green \n 4 | Purple" << std::endl;
 				std::cin >> *ptr;
@@ -81,7 +82,7 @@ int main() {
             break;
           }
 					default: {
-						std::cout << "Please only input valid numerical inputs!" << std::endl;
+						std::cout << "Please only input valid numerical inputs!" << '\n';
             inputReset();
             continue;
 					}
@@ -92,28 +93,33 @@ int main() {
 				std::cin >> *ptrTwo;
         if(!(hash(capitalizeString(*ptrTwo), sizeof(*ptrTwo)) == hash("N/A", sizeof("N/A"))
         {
+          std::ifstream AddonList_file("AddonList.json", std::ifstream::binary);
+          AddonList >> aL
+          Addons() newAddon;
           while(true) {
-            // iterates through addonlist
-            for(int i = 0; i < sizeof(N::Addons::flashlightAddonsList)/sizeof(*N::Addons::flashlightAddonsList); i++) {
-            // verifies if current value at iterator index is or is not variable, if so break and set the addon to the first slot
-              if(N::Addons::flashlightAddonsList[i].getName() == capitalizeString(*ptrTwo))
-              {
-                flashlight.setAddOns(0, N::Addons::flashlightAddonsList[i]);
-                addonPresent = true;
-                break;
-              }
-            } 
-            // if it wasnt found, it gives the user to retry input or to fully break out
-            if(addonPresent == false) {
-              std::cout << "Make sure you typed the word correctly! If there are no addons, type N/A." << std::endl;
-              inputReset();
-              std::cin >> *ptrTwo;
+            // tries to find addon in JSON, if it cant it catches the exception and continues onwards, and has the user reinput.
+            try {
+              newAddon.defineAddon(1, *ptrTwo);
+            }
+            catch {
+              inputClear();
+              validAddon = false;
+              continue;
+            }
+            if(validAddon == true)
+            {   
+              flashlight.setAddon(0, newAddon);
+            }
+            else {
+              std::cout << "Please only input valid addons!" << '\n';
+              validAddon = true;
             }
             // check for the pass command
-            if(!(hash(capitalizeString(*ptrTwo), sizeof(*ptrTwo)) == hash("N/A", sizeof("N/A"))))
+            if(hash(capitalizeString(*ptrTwo), sizeof(*ptrTwo)) == hash("N/A", sizeof("N/A")))
             {
               break;
             }
+            
             else if(addonPresent == true)
             {
               break;
@@ -135,30 +141,26 @@ int main() {
             // verifies addon is not the same as the first
             else if(flashlight.getAddons(0).getName() == capitalizeString(*ptrTwo))
             {
-              std::cout << "You can't have two of the same addon on one item!" << std::endl;
+              std::cout << "You can't have two of the same addon on one item!" << '\n';
               inputClear();
               invalidInput = true;
             }
             //if pass cmd is not found, iterates again through list, verifies the name is the same, and a check for invalid input is run, if passed checks then it will continue to scan for the addon listed
-            for(int i = 0; i < sizeof(N::Addons::flashlightAddonsList)/sizeof(*N::Addons::flashlightAddonsList); i++) {
-              if(N::Addons::flashlightAddonsList[i].getName() == capitalizeString(*ptrTwo) && invalidInput == false)
-              {
-                flashlight.setAddOns(1, N::Addons::flashlightAddonsList[i]);
-                addonPresent = true;
-                break;
-              }
+             try {
+              newAddon.defineAddon(1, *ptrTwo);
             }
-            // if addon not found and input is valid, this if is passed and allows the user to retry, or type the break cmd
-            if(addonPresent == false && invalidInput == false) {
-               std::cout << "Make sure you typed the word correctly! If there are no addons, type N/A." << std::endl;
-              inputReset();
-              std::cin >> *ptrTwo;
+            catch {
+              inputClear();
+              validAddon = false;
+              continue;
             }
-            // else if statement to reset the input
-            else if(invalidInput == true)
-            {
-              inputReset();
-              std::cin >> *ptrTwo;
+            if(validAddon == true)
+            {   
+              flashlight.setAddon(0, newAddon);
+            }
+            else {
+              std::cout << "Please only input valid addons!" << '\n';
+              validAddon = true;
             }
             // standard break statements from the first addon set
             if(!(hash(capitalizeString(*ptrTwo), sizeof(*ptrTwo)) == hash("N/A", sizeof("N/A"))

@@ -98,52 +98,57 @@ namespace N
 
             // defines addon via method, reassigning mainly the default constructor as that is the primary one.
 
-            std::ifstream AddonList_file("AddonList.json", std::ifstream::binary);
+            
 
             void defineAddon(unsigned short itemType, std::string name)
             {
+
+              std::ifstream AddonList_file("AddonList.json", std::ifstream::binary);
+              AddonList >> aL
+              
               switch(itemType) {
                 case 1: {
-                  this -> name = AddonList["flashlight addons"][name]
-                  this -> rarity = AddonList["flashlight addons"][name]
-                  this -> forItem = flashlightAddonsList[index].getForItem();
-                  this -> effects = flashlightAddonsList[index].getEffects();
-                  this -> effectPotency = flashlightAddonsList[index].getEffectPotency();
-                  this -> totalOfEffects = flashlightAddonsList[index].getTotalOfEffects();
+                  this -> name = aL["flashlight addons"][name]["name"];
+                  this -> rarity = aL["flashlight addons"][name]["rarity"];
+                  this -> forItem = aL["flashlight addons"][name]["forItem"];
+                  this -> effects = aL["flashlight addons"][name]["effects"];
+                  this -> effectPotency = aL["flashlight addons"][name]["effectPotency"];
+                  this -> totalOfEffects = aL["flashlight addons"][name]["effectPotency"];
                 }
                 case 2: {
-                  this -> name = keyAddonsList[index].getName();
-                  this -> rarity = keyAddonsList[index].getRarity();
-                  this -> forItem = keyAddonsList[index].getForItem();
-                  this -> effects = keyAddonsList[index].getEffects();
-                  this -> effectPotency = keyAddonsList[index].getEffectPotency();
-                  this -> totalOfEffects = keyAddonsList[index].getTotalOfEffects();
+                  this -> name = aL["key addons"][name]["name"];
+                  this -> rarity = aL["key addons"][name]["rarity"];
+                  this -> forItem = aL["key addons"][name]["forItem"];
+                  this -> effects = aL["key addons"][name]["effects"];
+                  this -> effectPotency = aL["key addons"][name]["effectPotency"];
+                  this -> totalOfEffects = aL["key addons"][name]["totalOfEffects"];
                 }
                 case 3: {
-                  this -> name = mapAddonsList[index].getName();
-                  this -> rarity = mapAddonsList[index].getRarity();
-                  this -> forItem = mapAddonsList[index].getForItem();
-                  this -> effects = mapAddonsList[index].getEffects();
-                  this -> effectPotency = mapAddonsList[index].getEffectPotency();
-                  this -> totalOfEffects = mapAddonsList[index].getTotalOfEffects();
+                  this -> name = aL["map addons"][name]["name"];
+                  this -> rarity = aL["map addons"][name]["rarity"];
+                  this -> forItem = aL["map addons"][name]["forItem"];
+                  this -> effects = aL["map addons"][name]["effects"];
+                  this -> effectPotency = aL["map addons"][name]["effectPotency"];
+                  this -> totalOfEffects = aL["map addons"][name]["totalOfEffects"];
                 }
                 case 4: {
-                  this -> name = mapAddonsList[index].getName();
-                  this -> rarity = mapAddonsList[index].getRarity();
-                  this -> forItem = mapAddonsList[index].getForItem();
-                  this -> effects = mapAddonsList[index].getEffects();
-                  this -> effectPotency = mapAddonsList[index].getEffectPotency();
-                  this -> totalOfEffects = mapAddonsList[index].getTotalOfEffects();
+                  this -> name = aL["medkit addons"][name]["name"];
+                  this -> rarity = aL["medkit addons"][name]["rarity"];
+                  this -> forItem = aL["medkit addons"][name]["forItem"];
+                  this -> effects = aL["medkit addons"][name]["effects"];
+                  this -> effectPotency = aL["medkit addons"][name]["effectPotency"];
+                  this -> totalOfEffects = aL["medkit addons"][name]["totalOfEffects"];
                 }
                 case 5: {
-                  this -> name = toolboxAddonsList[index].getName();
-                  this -> rarity = toolboxAddonsList[index].getRarity();
-                  this -> forItem = toolboxAddonsList[index].getForItem();
-                  this -> effects = toolboxAddonsList[index].getEffects();
-                  this -> effectPotency = toolboxAddonsList[index].getEffectPotency();
-                  this -> totalOfEffects = toolboxAddonsList[index].getTotalOfEffects();
+                  this -> name = aL["toolbox addons"][name]["name"];
+                  this -> rarity = aL["toolbox addons"][name]["rarity"];
+                  this -> forItem = aL["toolbox addons"][name]["forItem"];
+                  this -> effects = aL["toolbox addons"][name]["effects"];
+                  this -> effectPotency = aL["toolbox addons"][name]["effectPotency"];
+                  this -> totalOfEffects = aL["toolbox addons"][name]["totalOfEffects"];
                 }
                 default: {
+                  aL.close();
                   break;
                 }
               }

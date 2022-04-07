@@ -162,7 +162,7 @@
       "effectPotency": {1.15, 1.10, 100}
     },
 
-    {
+    "Medical Scissors": {
       "name": "Medical Scissors",
       "rarity": "Uncommon",
       "forItem": "Medkit",
@@ -170,7 +170,7 @@
       "effectPotency": {1.15}
     },
 
-    {
+    "Gauze Roll": {
       "name": "Gauze Roll",
       "rarity": "Uncommon",
       "forItem": "Medkit",
@@ -178,7 +178,7 @@
       "effectPotency":{12}
     },
 
-    {
+    "Surgical Suture": {
       "name": "Surgical Suture",
       "rarity": "Rare",
       "forItem": "Medkit",
@@ -186,7 +186,7 @@
       "effectPotency":{1.15, 1.15, 150}
     },
     
-    {
+    "Gel Dressings": {
       "name": "Gel Dressings",
       "rarity": "Rare",
       "forItem": "Medkit",
@@ -194,7 +194,7 @@
       "effectPotency":{16}
     },
 
-    {
+    "Abdominal Dressing": {
       "name": "Abdominal Dressing",
       "rarity": "Rare",
       "forItem": "Medkit",
@@ -202,7 +202,7 @@
       "effectPotency": {1.25, -8}
     },
 
-    {
+    "Styptic Agent": {
       "name": "Styptic Agent",
       "rarity": "Very Rare",
       "forItem": "Medkit",
@@ -210,7 +210,7 @@
       "effectPotency": {8}
     },
 
-    {
+    "Anti-Hemmhoragic Syringe": {
       "name": "Anti-Hemorrhagic Syringe",
       "rarity": "Ultra Rare",
       "forItem": "Medkit",
@@ -218,7 +218,7 @@
       "effectPotency": {16}
     },
 
-    {
+    "Refined Serum": {
       "name": "Refined Serum",
       "rarity": "Event",
       "forItem": "Medkit",
@@ -228,7 +228,7 @@
   ],
 
   "key addons": [
-    {
+    "Prayer Rope": {
       "name": "Prayer Rope",
       "rarity": "Common",
       "forItem": "Key",
@@ -236,7 +236,7 @@
       "effectPotency": {10}
     },
 
-    {
+    "Scratched Pearl": {
       "name": "Scratched Pearl",
       "rarity": "Uncommon",
       "forItem": "Key",
@@ -244,7 +244,7 @@
       "effectPotency": {12}
     },
 
-    {
+    "Prayer Beads": {
       "name": "Prayer Beads",
       "rarity": "Uncommon",
       "forItem": "Key",
@@ -252,7 +252,7 @@
       "effectPotency": {15}
     },
 
-    {
+    "Eroded Token": {
       "name": "Eroded Token",
       "rarity": "Uncommon",
       "forItem": "Key",
@@ -260,7 +260,7 @@
       "effectPotency": {24}
     },
 
-    {
+    "Gold Token": {
       "name": "Gold Token",
       "rarity": "Rare",
       "forItem": "Key",
@@ -268,7 +268,7 @@
       "effectPotency": {48}
     },
 
-    {
+    "Weaved Ring": {
       "name": "Weaved Ring",
       "rarity": "Very Rare",
       "forItem": "Key",
@@ -276,7 +276,7 @@
       "effectPotency": {0}
     },
 
-    {
+    "Milky Glass": {
       "name": "Milky Glass",
       "rarity": "Very Rare",
       "forItem": "Key",
@@ -284,7 +284,7 @@
       "effectPotency": {0}
     },
 
-    {
+    "Blood Amber": {
       "name": "Blood Amber",
       "rarity": "Very Rare",
       "forItem": "Key",
@@ -292,7 +292,7 @@
       "effectPotency": {32, 100}
     },
 
-    {
+    "Unique Weddin Ring": {
       "name": "Unique Wedding Ring",
       "rarity": "Very Rare",
       "forItem": "Key",
@@ -302,7 +302,7 @@
   ],
 
   "map addons": [
-    {
+    "Map Addendum": {
       "name": "Map Addendum",
       "rarity": "Common",
       "forItem": "Map",
@@ -310,7 +310,7 @@
       "effectPotency": {5}
     },
 
-    {
+    "Yellow Wire": {
       "name": "Yellow Wire",
       "rarity": "Uncommon",
       "forItem": "Map",
@@ -318,7 +318,7 @@
       "effectPotency": {0}
     },
 
-    {
+    "Unusual Stamp": {
       "name": "Unusual Stamp",
       "rarity": "Uncommon",
       "forItem": "Map",
@@ -326,7 +326,7 @@
       "effectPotency": {8}
     },
 
-    {
+    "Retardant Jelly": {
       "name": "Retardant Jelly",
       "rarity": "Uncommon",
       "forItem": "Map",
@@ -334,7 +334,7 @@
       "effectPotency": {1.2}
     },
 
-    {
+    "Red Twine": {
       "name": "Red Twine",
       "rarity": "Uncommon",
       "forItem": "Map",
@@ -342,7 +342,7 @@
       "effectPotency": {0}
     },
 
-    {
+    "Glass Bead": {
       "name": "Glass Bead",
       "rarity": "Uncommon",
       "forItem": "Map",
@@ -350,7 +350,7 @@
       "effectPotency": {0}
     },
 
-    {
+    "Odd Stamp": {
       "name": "Odd Stamp",
       "rarity": "Rare",
       "forItem": "Map",
@@ -358,7 +358,7 @@
       "effectPotency": {12}
     },
 
-    {
+    "Black Silk Cord": {
       "name": "Black Silk Cord",
       "rarity": "Rare",
       "forItem": "Map",
@@ -366,7 +366,7 @@
       "effectPotency": {0}
     },
 
-    {
+    "Crystal Bead": {
       "name": "Crystal Bead",
       "rarity": "Very Rare",
       "forItem": "Map",
@@ -376,7 +376,7 @@
   ],
 
   "toolbox addons": [
-     {
+     "Scraps": {
       "name": "Scraps",
       "rarity": "Common",
       "forItem": "Toolbox",
@@ -384,7 +384,7 @@
       "effectPotency": {8}
      },
 
-    {
+    "Instructions": {
       "name": "Instructions",
       "rarity": "Common",
       "forItem": "Toolbox",
@@ -392,7 +392,7 @@
       "effectPotency": {0}
     },
 
-    {
+    "Clean Rag": {
       "name": "Clean Rag",
       "rarity": "Common",
       "forItem": "Toolbox",
@@ -400,7 +400,7 @@
       "effectPotency": {1.2}
     },
 
-    {
+    "Wire Spool": {
       "name": "Wire Spool",
       "rarity": "Uncommon",
       "forItem": "Toolbox",
@@ -408,7 +408,7 @@
       "effectPotency": {12}
     },
 
-    {
+    "Spring Clamp": {
       "name": "Spring Clamp",
       "rarity": "Uncommon",
       "forItem": "Toolbox",
@@ -416,7 +416,7 @@
       "effectPotency": {-8}
     },
 
-    {
+    "Socket Swivels": {
       "name": "Socket Swivels",
       "rarity": "Uncommon",
       "forItem": "Toolbox",
@@ -424,7 +424,7 @@
       "effectPotency": {1.3}
     },
 
-    {
+    "Protective Gloves": {
       "name": "Protective Gloves",
       "rarity": "Uncommon",
       "forItem": "Toolbox",
@@ -432,7 +432,7 @@
       "effectPotency": {0}
     },
 
-    {
+    "Cutting Wire": {
       "name": "Cutting Wire",
       "rarity": "Uncommon",
       "forItem": "Toolbox",
@@ -440,7 +440,7 @@
       "effectPotency": {1.15}
     },
 
-    {
+    "Hacksaw": {
       "name": "Hacksaw",
       "rarity": "Rare",
       "forItem": "Toolbox",
@@ -448,7 +448,7 @@
       "effectPotency": {1.15}
     },
 
-    {
+    "Grip Wrench": {
       "name": "Grip Wrench",
       "rarity": "Rare",
       "forItem": "Toolbox",
@@ -456,7 +456,7 @@
       "effectPotency": {15}
     },
 
-    {
+    "Brand New Part": {
       "name": "Brand New Part",
       "rarity": "Ultra Rare",
       "forItem": "Toolbox",

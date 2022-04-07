@@ -179,7 +179,7 @@ namespace N
               }
             }
 
-            void flashlighthashedEffectsetter(unsigned short type) {
+            void flashlightTypeSetter(unsigned short type) {
               switch(type) {
                 case 1: {
                   setName("Flashlight");
