@@ -30,7 +30,7 @@ namespace N
           this -> otherEffects = otherEffects;
           this -> addOns = addOns;
         }
-        ~Map() {
+        virtual ~Map() {
           delete[] addOns;
         }
         Map(const Map& other) {

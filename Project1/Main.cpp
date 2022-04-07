@@ -1,26 +1,57 @@
+// i am going to bash my head into a wall
+
 #include <iostream>
 #include "Flashlight.h"
 #include "Addons.h"
 #include <string.h>
 #include <algorithm>
 #include <fstream>
+#include <vector>
 
 // ptr original vars
 unsigned short userInput = 0;
 std::string userInputString = "";
 unsigned short numAddons = 0;
 
-std::string capitalizeString(std::string s)
+static std::string capitalizeString(std::string s)
 {
   transform(s.begin(), s.end(), s.begin(), 
     [](unsigned char c){ return toupper(c); });
   return s;
 }
 
-void inputReset()
+static void inputReset()
 {
   std::cin.ignore(10000, '\n');
   std::cin.clear();
+}
+
+static void vectorPrinter(std::vector<float> vec)
+{
+  for(float i : vec)
+    {
+      if(vec.back() == i)
+      {
+        std::cout << i < std::endl;
+      }
+      else
+      {
+        std::cout << i << ", ";
+      }
+    }
+}
+static void vectorPrinter(std::vector<std::string> vec)
+{
+  for(std::string i : vec)
+    {
+      if(vec.back() == i)
+      {
+        std::cout << i < std::endl;
+      }
+      else
+      {
+        std::cout << i << ", ";
+      }
 }
 
 int main() {
@@ -172,40 +203,49 @@ int main() {
               break;
             }
           }
+            // i think this is an effect calculator???
           if (addonPresent == true)
           {
-            std::string temp = "";
-            boolean effectFound = false;
-            for(int i = 0; i < sizeof(flashlight.getAddOn[0].getEffects()); i++)
-              {
-                if(flashlight.getAddon[0].getEffects()[i] != ' ')
+            
+          while(true)
+            {
+              *ptrTwo = "";
+              *ptr = 0;
+              boolean effectFound = false;
+              for(int i = 0; i < sizeof(flashlight.getAddOn[*ptr].getEffects()); i++)
                 {
-                  temp += flashlight.getAddon[0].getEffects()[i]
-                }
-                else
-                {
-                  switch(hash(temp, sizeof(temp))) {
-                    case hash("RANGE", sizeof("RANGE"): {
-                      effectFound = true;
-                      calculateEffects("range", flashlight.getAddon[0].getEffectPotency[0]))
-                      break;
-                    }
-                    default: {
-                      temp = "";
-                      break;
-                    }
+                  if(flashlight.getAddon[*ptr].getEffects()[*ptr] != ' ')
+                  {
+                    *ptrTwo += flashlight.getAddon[*ptr].getEffects()[*ptr]
+                  }
+                  else
+                  {
+                    switch(hash(*ptrTwo, sizeof(*ptrTwo))) {
+                      case hash("RANGE", sizeof("RANGE"): {
+                        effectFound = true;
+                        calculateEffects("range", flashlight.getAddon[*ptr].getEffectPotency[*ptr]))
+                        break;
+                      }
+                      default: {
+                        *ptrTwo = "";
+                        break;
+                      }
                   }
                   if(!(temp[i - 1] == ',') && effectFound == true;)
                   {
                     break;
+                    *ptr++;
                   }
                 }
               }
+              if(*ptr == 2)
+              {
+                break;
+              }
+            }
           }
-          
-          
-          
-
+        std::cout << "Name: " << flashlight.getName() << "\nRarity: " << flashlight.getRarity() << "\nRange: " << flashlight.getRange() << "\nWidth: " << flashlight.getWidth() << "\nAccuracy: " << flashlight.getAccuracy() << "\nBrightness: " << flashlight.getBrightness() << "Blindness Duration: " << flashlight.getBlindnessDuration() << "\nUse Time: " << flashlight.getUseTime() << "\nOther Effects: " << vectorPrinter(flashlight.getOtherEffects()) << std::endl;
+          // need to implement a way to print out the addons as well and their effects too, but i dont know atm how to check if an array is empty or not
 			}
 			case 6: {
 				std::cout << "Thanks for using our program!" << std::endl;
@@ -218,4 +258,5 @@ int main() {
 			}
 		}
 	}
+  return 0;
 }

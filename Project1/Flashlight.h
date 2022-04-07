@@ -17,7 +17,7 @@ namespace N
             unsigned mutable short brightness;
             unsigned mutable short blindnessDuration;
             float useTime;
-            Addons addOns[2];
+            std::array<Addons, 2>;
         public:
             Flashlight() {
                 rarity = "";
@@ -64,7 +64,7 @@ namespace N
                 this -> brightness = brightness;
                 this -> useTime = useTime;
             }
-            ~Flashlight() {
+            virtual ~Flashlight() {
               delete[] addOns;
             }
             Flashlight(const Flashlight& other) {

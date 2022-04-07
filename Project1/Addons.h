@@ -20,11 +20,10 @@ namespace N
             std::string forItem;
             std::string effects;
             std::vector<float> effectPotency;
-            unsigned short totalOfEffects;
         public:
             // lists of all addons available, used primarily by the defineAddon method
             
-    
+// base constructor
             Addons()
             {
                 name = "";
@@ -32,8 +31,8 @@ namespace N
                 forItem = "";
                 effects = "";
                 effectPotency = {0};
-                totalOfEffects = 0;
             }
+// controlled param constructor
             Addons(std::string name, std::string rarity, std::string forItem, std::string effects, std::vector<float> effectPotency)
             {
                 this -> name = name;
@@ -41,14 +40,55 @@ namespace N
                 this -> forItem = forItem;
                 this -> effects = effects;
                 this -> effectPotency = effectPotency;
-                for(int i = 0; i < effects.length(); i++)
-                {
-                    if(effects[i] == ',')
-                    {
-                        totalOfEffects++;
-                    }
+            }
+// constructor based upon the JSON file, instead of directly defining the addons
+            Addons(std::string name, unsigned short forItem)
+            {
+              std::ifstream AddonList_file("AddonList.json", std::ifstream::binary);
+              AddonList >> aL
+                
+              this -> name = name;
+              switch(forItem) {
+                case 1: {
+                  this -> rarity = aL["flashlight addons"][name]["rarity"];
+                  this -> forItem = aL["flashlight addons"][name]["forItem"];
+                  this -> effects = aL["flashlight addons"][name]["effects"];
+                  this -> effectPotency = aL["flashlight addons"][name]["effectPotency"];
+                  break;
                 }
-                totalOfEffects++;
+                case 2: {
+                  this -> rarity = aL["medkit addons"][name]["rarity"];
+                  this -> forItem = aL["medkit addons"][name]["forItem"];
+                  this -> effects = aL["medkit addons"][name]["effects"];
+                  this -> effectPotency = aL["medkit addons"][name]["effectPotency"];
+                  break;
+                }
+                case 3: {
+                  this -> rarity = aL["key addons"][name]["rarity"];
+                  this -> forItem = aL["key addons"][name]["forItem"];
+                  this -> effects = aL["key addons"][name]["effects"];
+                  this -> effectPotency = aL["key addons"][name]["effectPotency"];
+                  break;
+                }
+                case 4: {
+                  this -> rarity = aL["map addons"][name]["rarity"];
+                  this -> forItem = aL["map addons"][name]["forItem"];
+                  this -> effects = aL["map addons"][name]["effects"];
+                  this -> effectPotency = aL["map addons"][name]["effectPotency"];
+                  break;
+                }
+                case 5: {
+                  this -> rarity = aL["toolbox addons"][name]["rarity"];
+                  this -> forItem = aL["toolbox addons"][name]["forItem"];
+                  this -> effects = aL["toolbox addons"][name]["effects"];
+                  this -> effectPotency = aL["toolbox addons"][name]["effectPotency"];
+                  break;
+                }
+                default: {
+                  break;
+                }
+              }
+              aL.close();
             }
             Addons(const N::Addons& other) {
               this -> name = other.getName();
@@ -56,7 +96,6 @@ namespace N
               this -> forItem = other.getForItem();
               this -> effects = other.getEffects();
               this -> effectPotency = other.getEffectPotency();
-              this -> totalOfEffects = other.getTotalOfEffects();
             }
               
             void setName(std::string name) {
@@ -89,17 +128,8 @@ namespace N
             std::vector<float> getEffectPotency() const {
               return effectPotency;
             }
-            void setTotalOfEffects(unsigned short totalOfEffects) {
-              this -> totalOfEffects = totalOfEffects;
-            }
-            unsigned short getTotalOfEffects() const {
-              return totalOfEffects;
-            }
 
             // defines addon via method, reassigning mainly the default constructor as that is the primary one.
-
-            
-
             void defineAddon(unsigned short itemType, std::string name)
             {
 
@@ -113,7 +143,7 @@ namespace N
                   this -> forItem = aL["flashlight addons"][name]["forItem"];
                   this -> effects = aL["flashlight addons"][name]["effects"];
                   this -> effectPotency = aL["flashlight addons"][name]["effectPotency"];
-                  this -> totalOfEffects = aL["flashlight addons"][name]["effectPotency"];
+                  break;
                 }
                 case 2: {
                   this -> name = aL["key addons"][name]["name"];
@@ -121,7 +151,7 @@ namespace N
                   this -> forItem = aL["key addons"][name]["forItem"];
                   this -> effects = aL["key addons"][name]["effects"];
                   this -> effectPotency = aL["key addons"][name]["effectPotency"];
-                  this -> totalOfEffects = aL["key addons"][name]["totalOfEffects"];
+                  break;
                 }
                 case 3: {
                   this -> name = aL["map addons"][name]["name"];
@@ -129,7 +159,7 @@ namespace N
                   this -> forItem = aL["map addons"][name]["forItem"];
                   this -> effects = aL["map addons"][name]["effects"];
                   this -> effectPotency = aL["map addons"][name]["effectPotency"];
-                  this -> totalOfEffects = aL["map addons"][name]["totalOfEffects"];
+                  break;
                 }
                 case 4: {
                   this -> name = aL["medkit addons"][name]["name"];
@@ -137,7 +167,7 @@ namespace N
                   this -> forItem = aL["medkit addons"][name]["forItem"];
                   this -> effects = aL["medkit addons"][name]["effects"];
                   this -> effectPotency = aL["medkit addons"][name]["effectPotency"];
-                  this -> totalOfEffects = aL["medkit addons"][name]["totalOfEffects"];
+                  break;
                 }
                 case 5: {
                   this -> name = aL["toolbox addons"][name]["name"];
@@ -145,13 +175,13 @@ namespace N
                   this -> forItem = aL["toolbox addons"][name]["forItem"];
                   this -> effects = aL["toolbox addons"][name]["effects"];
                   this -> effectPotency = aL["toolbox addons"][name]["effectPotency"];
-                  this -> totalOfEffects = aL["toolbox addons"][name]["totalOfEffects"];
+                  break;
                 }
                 default: {
-                  aL.close();
                   break;
                 }
               }
+              aL.close();
             }
     };
 }
