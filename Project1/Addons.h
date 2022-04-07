@@ -3,6 +3,7 @@
 #include <vector>
 #include <unordered_map>
 #include <json.h>
+#include <fstream>
 
 const unsigned short hash(const std::string s) {
   std::size_t h1 = std::hash<std::string>{}(s);
@@ -11,8 +12,8 @@ const unsigned short hash(const std::string s) {
 
 namespace N
 {
-    class Addons
-    {
+    class Addons {
+
         private:
             std::string name;
             std::string rarity;
@@ -96,12 +97,15 @@ namespace N
             }
 
             // defines addon via method, reassigning mainly the default constructor as that is the primary one.
-            void defineAddon(unsigned short itemType, unsigned short index)
+
+            std::ifstream AddonList_file("AddonList.json", std::ifstream::binary);
+
+            void defineAddon(unsigned short itemType, std::string name)
             {
               switch(itemType) {
                 case 1: {
-                  this -> name = flashlightAddonsList[index].getName();
-                  this -> rarity = flashlightAddonsList[index].getRarity();
+                  this -> name = AddonList["flashlight addons"][name]
+                  this -> rarity = AddonList["flashlight addons"][name]
                   this -> forItem = flashlightAddonsList[index].getForItem();
                   this -> effects = flashlightAddonsList[index].getEffects();
                   this -> effectPotency = flashlightAddonsList[index].getEffectPotency();

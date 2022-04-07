@@ -1,6 +1,6 @@
 {
   "flashlight addons": [
-    {
+    "Wide Lens": {
       "name": "Wide Lens",
       "rarity": "Common",
       "forItem": "Flashlight",
@@ -8,7 +8,7 @@
       "effectPotency": {1.15, 0.75}
     },
      
-    {
+    "Power Bulb": {
       "name": "Power Bulb",
       "rarity": "Common",
       "forItem": "Flashlight",
@@ -16,7 +16,7 @@
       "effectPotency": {1.2, 1.1}
     },
 
-    {
+    "Leather Grip": {
       "name": "Leather Grip",
       "rarity": "Common",
       "forItem": "Flashlight",
@@ -24,7 +24,7 @@
       "effectPotency":{1.2}
     },
 
-    {
+    "Battery": {
       "name": "Battery",
       "rarity": "Common",
       "forItem": "Flashlight",
@@ -32,7 +32,7 @@
       "effectPotency": {2}
     },
 
-    {
+    "TIR Optic": {
       "name": "TIR Optic",
       "rarity": "Uncommon",
       "forItem": "Flashlight",
@@ -40,7 +40,7 @@
       "effectPotency": {1.3, 1.15}
     },
 
-    {
+    "Rubber Grip": {
       "name": "Rubber Grip",
       "rarity": "Uncommon",
       "forItem": "Flashlight",
@@ -48,7 +48,7 @@
       "effectPotency": {1.4}
     },
 
-    {
+    "Low Amp Filament": {
       "name": "Low Amp Filament",
       "rarity": "Uncommon",
       "forItem": "Flashlight",
@@ -56,7 +56,7 @@
       "effectPotency": {0.8}
     },
 
-    {
+    "Heavy Duty Battery": {
       "name": "Heavy Duty Battery",
       "rarity": "Uncommon",
       "forItem": "Flashlight",
@@ -64,7 +64,7 @@
       "effectPotency": {4}
     },
 
-    {
+    "Focus Lens": {
       "name": "Focus Lens",
       "rarity": "Uncommon",
       "forItem": "Flashlight",
@@ -72,7 +72,7 @@
       "effectPotency": {1.24, 1.2, 1.1, 0.85}
     },
 
-    {
+    "Long Life Battery": {
       "name": "Long Life Battery",
       "rarity": "Rare",
       "forItem": "Flashlight",
@@ -80,7 +80,7 @@
       "effectPotency": {6}
     },
 
-    {
+    "Intense Halogen": {
       "name": "Intense Halogen",
       "rarity": "Rare",
       "forItem": "Flashlight",
@@ -88,7 +88,7 @@
       "effectPotency": {1.4, 1.2}
     },
 
-    {
+    "High-End Sapphire Lens": {
       "name": "High-End Sapphire Lens",
       "rarity": "Very Rare",
       "forItem": "Flashlight",
@@ -96,7 +96,7 @@
       "effectPotency": {1.25, 1.3, 1.15, 1.25}
     },
 
-    {
+    "Odd Bulb": {
       "name": "Odd Bulb",
       "rarity": "Ultra Rare",
       "forItem": "Flashlight",
@@ -104,7 +104,7 @@
       "effectPotency": {1.5, 1.25, 0.86}
     },
 
-    {
+    "Broken Bulb": {
       "name": "Broken Bulb",
       "rarity": "Event",
       "forItem": "Flashlight",
@@ -114,7 +114,7 @@
   ],
 
   "medkit addons": [
-    {
+    "Rubber Gloves": {
       "name": "Rubber Gloves",
       "rarity": "Common",
       "forItem": "Medkit",
@@ -122,7 +122,7 @@
       "effectPotency":{1.03}
     },
 
-    {
+    "Butterfly Tape": {
       "name": "Butterfly Tape",
       "rarity": "Common",
       "forItem": "Medkit",
@@ -130,7 +130,7 @@
       "effectPotency": {1.05}
     },
 
-    {
+    "Bandages": {
       "name": "Bandages",
       "rarity": "Common",
       "forItem": "Medkit",
@@ -138,7 +138,7 @@
       "effectPotency": {8}
     },
 
-    {
+    "Sponge": {
       "name": "Sponge",
       "rarity": "Uncommon",
       "forItem": "Medkit",
@@ -146,7 +146,7 @@
       "effectPotency": {1.05}
     },
 
-    {
+    "Self Adherent Wrap": {
       "name": "Self Adherent Wrap",
       "rarity": "Uncommon",
       "forItem": "Medkit"
@@ -154,7 +154,7 @@
       "effectPotency": {8, 1.05}
     },
 
-    {
+    "Needle & Thread": {
       "name": "Needle & Thread",
       "rarity": "Uncommon",
       "forItem": "Medkit",
