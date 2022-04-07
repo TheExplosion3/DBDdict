@@ -131,7 +131,7 @@ int main() {
         }
         // spaghetti cont.
         std::cout << "Is there a second addon present? If so, type the second name below, otherwise type N/A." << std::endl;
-		std::cin >> *ptrTwo;
+	    	std::cin >> *ptrTwo;
         // immediately checks for a pass cmd, if not one it continues
         if(!(hash(capitalizeString(*ptrTwo), sizeof(*ptrTwo)) == hash("N/A", sizeof("N/A"))
         {
