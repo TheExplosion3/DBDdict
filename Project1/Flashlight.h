@@ -15,11 +15,10 @@ namespace N
             unsigned mutable short width;
             unsigned mutable short range;
             unsigned mutable short brightness;
-            float useTime;
             unsigned mutable short blindnessDuration;
+            float useTime;
             Addons addOns[2];
         public:
-
             Flashlight() {
                 rarity = "";
                 name = "Flashlight";
@@ -149,7 +148,7 @@ namespace N
             }
             // i have no clue why but i cannot for the life of me get it to hash these strings and properly read them
             void calculateEffects(const std::string effectType, float effectPotency) {
-              const std::vector<unsigned short> hashedEffects{ hash("accuracy"), hash("width"), hash("range"), hash("useTime"), hash("brightness")};
+              const std::array<unsigned short> hashedEffects{ hash("accuracy"), hash("width"), hash("range"), hash("useTime"), hash("brightness")};
               switch(hash(effectType)) {
                 case hashedEffects.at(0): {
                   this -> accuracy = this -> accuracy * effectPotency;
@@ -190,6 +189,7 @@ namespace N
                   setRange(100);
                   setBlindnessDuration(100);
                   setUseTime(8);
+                  break;
                 }
                 case 2: {
                   setName("Sport Flashlight");
@@ -198,7 +198,8 @@ namespace N
                   setAccuracy(120);
                   setWidth(100);
                   setBlindnessDuration(100);
-                  setUseTime(7.12)
+                  setUseTime(7.12);
+                  break;
                 }
                 case 3: {
                   setName("Utility Flashlight");
@@ -208,6 +209,7 @@ namespace N
                   setWidth(100);
                   setBlindnessDuration(115);
                   setUseTime(12);
+                  break;
                 }
                 case 4: {
                   setName("Will O' Wisp");
@@ -218,6 +220,7 @@ namespace N
                   setBlindnessDuration(100);
                   setUseTime(8);
                   addOtherEffects("More friendly ghosts in your life");
+                  break;
                 }
                 case 5: {
                   setName("Anniversary Flashlight");
@@ -228,11 +231,12 @@ namespace N
                   setBlindnessDuration(100);
                   setUseTime(8);
                   addOtherEffects("Explodes with confetti upon blinding a killer");
-                }
-                default: {
-                  delete[] hashedEffects;
                   break;
                 }
+                default: {
+                  break;
+                }
+                delete[] hashedEffects;
               }
             }
             void addOtherEffects(std::string altEffect) {
