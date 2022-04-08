@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <json.h>
 #include <fstream>
+#include <niohmann/json.hpp>
 
 const unsigned short hash(const std::string s) {
   std::size_t h1 = std::hash<std::string>{}(s);
@@ -45,7 +46,7 @@ namespace N
             Addons(std::string name, unsigned short forItem)
             {
               std::ifstream AddonList_file("AddonList.json", std::ifstream::binary);
-              AddonList >> aL
+              AddonList >> aL;
                 
               this -> name = name;
               switch(forItem) {
@@ -132,9 +133,18 @@ namespace N
             // defines addon via method, reassigning mainly the default constructor as that is the primary one.
             void defineAddon(unsigned short itemType, std::string name)
             {
-
+              bool validity = false;
               std::ifstream AddonList_file("AddonList.json", std::ifstream::binary);
               AddonList >> aL
+              for(const auto& item : aL.items()) {
+                if(item == name) {
+                  validity = true;
+                  break;
+                }
+              }
+              if(validity = false) {
+                return;
+              }
               
               switch(itemType) {
                 case 1: {
