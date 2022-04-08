@@ -135,7 +135,8 @@ namespace N
             {
               bool validity = false;
               std::ifstream AddonList_file("AddonList.json", std::ifstream::binary);
-              AddonList >> aL
+              AddonList >> aL;
+
               for(const auto& item : aL.items()) {
                 if(item == name) {
                   validity = true;

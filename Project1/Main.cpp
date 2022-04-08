@@ -14,7 +14,7 @@ unsigned short userInput = 0;
 std::string userInputString = "";
 unsigned short numAddons = 0;
 
-// capitalizes the string thats inputted
+// capitalizes the string thats inputted to the function, dont ask me how it works its from stack overflow
 static std::string capitalizeString(std::string s)
 {
   transform(s.begin(), s.end(), s.begin(), 
@@ -23,7 +23,7 @@ static std::string capitalizeString(std::string s)
 }
 
 
-// resets cin, for when invalid input is sent
+// resets cin, for when invalid input is sent, i only have it in a function because it makes things easier than remembering the values needed
 static void inputReset()
 {
   std::cin.ignore(10000, '\n');
@@ -35,16 +35,16 @@ static void inputReset()
 static void vectorPrinter(std::vector<float> vec)
 {
   for(float i : vec)
+  {
+    if(vec.back() == i)
     {
-      if(vec.back() == i)
-      {
-        std::cout << i < std::endl;
-      }
-      else
-      {
-        std::cout << i << ", ";
-      }
+      std::cout << i < std::endl;
     }
+    else
+    {
+      std::cout << i << ", ";
+    }
+  }
 }
 // overloaded vector printer, meant for string vectors
 static void vectorPrinter(std::vector<std::string> vec)
@@ -59,6 +59,7 @@ static void vectorPrinter(std::vector<std::string> vec)
       {
         std::cout << i << ", ";
       }
+    }
 }
 
 int main() {
@@ -194,12 +195,12 @@ int main() {
               //if pass cmd is not found, iterates again through list, verifies the name is the same, and a check for invalid input is run, if passed checks then it will continue to scan for the addon listed
               try {
                 newAddon.defineAddon(1, *ptrTwo);
-              }
-            }
+              } 
               catch {
-              inputClear();
-              validAddon = false;
-              continue;
+                inputClear();
+                validAddon = false;
+                continue;
+              }
             }
             if(validAddon == true)
             {   
@@ -232,14 +233,14 @@ int main() {
                 {
                   if(flashlight.getAddon[*ptr].getEffects()[*ptr] != ' ')
                   {
-                    *ptrTwo += flashlight.getAddon[*ptr].getEffects()[*ptr]
+                    *ptrTwo += flashlight.getAddon[*ptr].getEffects()[*ptr];
                   }
                   else
                   {
                     switch(hash(*ptrTwo, sizeof(*ptrTwo))) {
                       case hash("RANGE", sizeof("RANGE"): {
                         effectFound = true;
-                        calculateEffects("range", flashlight.getAddon[*ptr].getEffectPotency[*ptr]))
+                        calculateEffects("range", flashlight.getAddon[*ptr].getEffectPotency[*ptr]));
                         break;
                       }
                       default: {
