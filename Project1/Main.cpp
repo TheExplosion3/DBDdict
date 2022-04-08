@@ -13,6 +13,7 @@ unsigned short userInput = 0;
 std::string userInputString = "";
 unsigned short numAddons = 0;
 
+// capitalizes the string thats inputted
 static std::string capitalizeString(std::string s)
 {
   transform(s.begin(), s.end(), s.begin(), 
@@ -20,12 +21,16 @@ static std::string capitalizeString(std::string s)
   return s;
 }
 
+
+// resets cin, for when invalid input is sent
 static void inputReset()
 {
   std::cin.ignore(10000, '\n');
   std::cin.clear();
 }
 
+
+// prints a float vector out, items separated by commas
 static void vectorPrinter(std::vector<float> vec)
 {
   for(float i : vec)
@@ -40,6 +45,7 @@ static void vectorPrinter(std::vector<float> vec)
       }
     }
 }
+// overloaded vector printer, meant for string vectors
 static void vectorPrinter(std::vector<std::string> vec)
 {
   for(std::string i : vec)
@@ -64,6 +70,7 @@ int main() {
   // switch case entering into what item you would like to examine
 	std::cout << "What would you like to customize? \n1 | Medkit \n2 | Toolbox \n 3 | Key \n 4 | Map \n 5 | Flashlight \n 6 | Exit Program" << std::endl;
 	std::cin >> *ptr;
+  // switch case for user choice
 	while(true)
 	{
 		switch(*ptr) {
@@ -80,12 +87,16 @@ int main() {
 
 			}
 			case 5: {
-        
+
+        // booleans to make addon detection and addition easier, though the scope that theyre in makes it so they will last way longer than ideally wanted
 				bool addonPresent = false;
         bool validAddon = true;
-    
+
+        // flashlight identification
 				std::cout << "What type of flashlight is it? 1 | Brown \n 2 | Yellow \n 3 | Green \n 4 | Purple" << std::endl;
 				std::cin >> *ptr;
+
+        // switch case for flashlight rarity, sets base stats via input and switch case
         switch(*ptr){
 					case 1: {
 						N::Flashlight flashlight;
@@ -120,12 +131,13 @@ int main() {
 				}
 
         // this is very spaghetti
+        // what this is supposed to do is determine what addon it is, by first determining if its a valid addon, then scanning through the json file (which i dont know how to do yet) to check for the item and add it if found, and reset if not
 				std::cout << "Are there any addons on it? If so, type the first name below, otherwise type N/A." << std::endl;
 				std::cin >> *ptrTwo;
         if(!(hash(capitalizeString(*ptrTwo), sizeof(*ptrTwo)) == hash("N/A", sizeof("N/A"))
         {
           std::ifstream AddonList_file("AddonList.json", std::ifstream::binary);
-          AddonList >> aL
+          AddonList >> aL["flashlight addons"][*ptrTwo]
           Addons() newAddon;
           while(true) {
             // tries to find addon in JSON, if it cant it catches the exception and continues onwards, and has the user reinput.
@@ -206,7 +218,7 @@ int main() {
             // i think this is an effect calculator???
           if (addonPresent == true)
           {
-            
+          
           while(true)
             {
               *ptrTwo = "";
@@ -244,6 +256,7 @@ int main() {
               }
             }
           }
+          // print statement for flashlight, cause i dont know how to make the c++ equivalent of tostring function
         std::cout << "Name: " << flashlight.getName() << "\nRarity: " << flashlight.getRarity() << "\nRange: " << flashlight.getRange() << "\nWidth: " << flashlight.getWidth() << "\nAccuracy: " << flashlight.getAccuracy() << "\nBrightness: " << flashlight.getBrightness() << "Blindness Duration: " << flashlight.getBlindnessDuration() << "\nUse Time: " << flashlight.getUseTime() << "\nOther Effects: " << vectorPrinter(flashlight.getOtherEffects()) << std::endl;
           // need to implement a way to print out the addons as well and their effects too, but i dont know atm how to check if an array is empty or not
 			}
