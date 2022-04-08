@@ -63,7 +63,7 @@ static void vectorPrinter(std::vector<std::string> vec)
 }
 
 int main() {
-
+// welcome to hell
   // user input ptrs
 	unsigned short* ptr = &userInput;
 	std::string* ptrTwo = &userInputString;
@@ -90,7 +90,6 @@ int main() {
 			}
 			case 5: {
 
-        // booleans to make addon detection and addition easier, though the scope that theyre in makes it so they will last way longer than ideally wanted
 				bool addonPresent = false;
         bool validAddon = true;
 
@@ -139,8 +138,10 @@ int main() {
         if(!(hash(capitalizeString(*ptrTwo), sizeof(*ptrTwo)) == hash("N/A", sizeof("N/A"))
         {
           std::ifstream AddonList_file("AddonList.json", std::ifstream::binary);
-          AddonList >> aL["flashlight addons"][*ptrTwo]
+          AddonList >> aL;
+
           Addons() newAddon;
+
           while(true) {
             // tries to find addon in JSON, if it cant it catches the exception and continues onwards, and has the user reinput.
             try {
@@ -154,6 +155,7 @@ int main() {
             if(validAddon == true)
             {   
               flashlight.setAddon(0, newAddon);
+              delete newAddon;
             }
             else {
               std::cout << "Please only input valid addons!" << '\n';
@@ -180,6 +182,9 @@ int main() {
         // immediately checks for a pass cmd, if not one it continues
         if(!(hash(capitalizeString(*ptrTwo), sizeof(*ptrTwo)) == hash("N/A", sizeof("N/A"))
         {
+
+          Addons() newAddon;
+
           while(true) {
             bool invalidInput = false;
             addonPresent = false;
@@ -228,19 +233,19 @@ int main() {
             {
               *ptrTwo = "";
               *ptr = 0;
-              boolean effectFound = false;
-              for(int i = 0; i < sizeof(flashlight.getAddOn[*ptr].getEffects()); i++)
+              bool effectFound = false;
+              for(int i = 0; i < sizeof(flashlight.getAddOn(*ptr).getEffects()); i++)
                 {
-                  if(flashlight.getAddon[*ptr].getEffects()[*ptr] != ' ')
+                  if(flashlight.getAddon(*ptr).getEffects()[*ptr] != ' ')
                   {
-                    *ptrTwo += flashlight.getAddon[*ptr].getEffects()[*ptr];
+                    *ptrTwo += flashlight.getAddon(*ptr).getEffects()[*ptr];
                   }
                   else
                   {
                     switch(hash(*ptrTwo, sizeof(*ptrTwo))) {
-                      case hash("RANGE", sizeof("RANGE"): {
+                      case hash("RANGE", sizeof("RANGE")): {
                         effectFound = true;
-                        calculateEffects("range", flashlight.getAddon[*ptr].getEffectPotency[*ptr]));
+                        calculateEffects("range", flashlight.getAddon(*ptr).getEffectPotency(*ptr));
                         break;
                       }
                       default: {
@@ -248,7 +253,7 @@ int main() {
                         break;
                       }
                   }
-                  if(!(temp[i - 1] == ',') && effectFound == true;)
+                  if(!(temp[i - 1] == ',') && effectFound == true)
                   {
                     break;
                     *ptr++;
@@ -263,7 +268,19 @@ int main() {
           }
           // print statement for flashlight, cause i dont know how to make the c++ equivalent of tostring function
         std::cout << "Name: " << flashlight.getName() << "\nRarity: " << flashlight.getRarity() << "\nRange: " << flashlight.getRange() << "\nWidth: " << flashlight.getWidth() << "\nAccuracy: " << flashlight.getAccuracy() << "\nBrightness: " << flashlight.getBrightness() << "Blindness Duration: " << flashlight.getBlindnessDuration() << "\nUse Time: " << flashlight.getUseTime() << "\nOther Effects: " << vectorPrinter(flashlight.getOtherEffects()) << std::endl;
-          // need to implement a way to print out the addons as well and their effects too, but i dont know atm how to check if an array is empty or not
+          // i think this'll properly print the addons if they are present?
+        if(flashlight.getAddOns().empty() == 0)
+        {
+          std::cout << "\nAddons:\n" << std::endl;
+          std::cout << "Name: " << flashlight.getAddOn(0).getName() << "\nRarity: " << flashlight.getAddOn(0).getRarity() << "\nEffects: " << flashlight.getAddOn(0).getEffects() << std::endl;
+
+          try: {
+          std::cout << "Name: " << flashlight.getAddOn(1).getName() << "\nRarity: " << flashlight.getAddOn(1).getRarity() << "\nEffects: " << flashlight.getAddOn(1).getEffects() << std::endl;
+          }
+          catch: {
+            continue;
+          }
+        }
 			}
 			case 6: {
 				std::cout << "Thanks for using our program!" << std::endl;

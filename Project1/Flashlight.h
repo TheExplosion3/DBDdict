@@ -148,7 +148,9 @@ namespace N
             }
             // i have no clue why but i cannot for the life of me get it to hash these strings and properly read them
             void calculateEffects(const std::string effectType, float effectPotency) {
+
               const std::array<unsigned short> hashedEffects{ hash("accuracy"), hash("width"), hash("range"), hash("useTime"), hash("brightness")};
+              
               switch(hash(effectType)) {
                 case hashedEffects.at(0): {
                   this -> accuracy = this -> accuracy * effectPotency;
@@ -236,7 +238,6 @@ namespace N
                 default: {
                   break;
                 }
-                delete[] hashedEffects;
               }
             }
             void addOtherEffects(std::string altEffect) {
