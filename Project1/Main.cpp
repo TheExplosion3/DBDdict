@@ -1,29 +1,69 @@
+// i am going to bash my head into a wall
+
 #include <iostream>
 #include "Flashlight.h"
 #include "Addons.h"
 #include <string.h>
 #include <algorithm>
+#include <fstream>
+#include <vector>
+#include <niohmann/json.hpp>
 
 // ptr original vars
 unsigned short userInput = 0;
 std::string userInputString = "";
 unsigned short numAddons = 0;
 
-std::string capitalizeString(std::string s)
+// capitalizes the string thats inputted to the function, dont ask me how it works its from stack overflow
+static std::string capitalizeString(std::string s)
 {
   transform(s.begin(), s.end(), s.begin(), 
     [](unsigned char c){ return toupper(c); });
   return s;
 }
 
-void inputReset()
+
+// resets cin, for when invalid input is sent, i only have it in a function because it makes things easier than remembering the values needed
+static void inputReset()
 {
   std::cin.ignore(10000, '\n');
   std::cin.clear();
 }
 
-int main() {
 
+// prints a float vector out, items separated by commas
+static void vectorPrinter(std::vector<float> vec)
+{
+  for(float i : vec)
+  {
+    if(vec.back() == i)
+    {
+      std::cout << i < std::endl;
+    }
+    else
+    {
+      std::cout << i << ", ";
+    }
+  }
+}
+// overloaded vector printer, meant for string vectors
+static void vectorPrinter(std::vector<std::string> vec)
+{
+  for(std::string i : vec)
+    {
+      if(vec.back() == i)
+      {
+        std::cout << i < std::endl;
+      }
+      else
+      {
+        std::cout << i << ", ";
+      }
+    }
+}
+
+int main() {
+// welcome to hell
   // user input ptrs
 	unsigned short* ptr = &userInput;
 	std::string* ptrTwo = &userInputString;
@@ -32,6 +72,7 @@ int main() {
   // switch case entering into what item you would like to examine
 	std::cout << "What would you like to customize? \n1 | Medkit \n2 | Toolbox \n 3 | Key \n 4 | Map \n 5 | Flashlight \n 6 | Exit Program" << std::endl;
 	std::cin >> *ptr;
+  // switch case for user choice
 	while(true)
 	{
 		switch(*ptr) {
@@ -48,12 +89,15 @@ int main() {
 
 			}
 			case 5: {
-        
-				std::string tempName = "";
+
 				bool addonPresent = false;
-    
+        bool validAddon = true;
+
+        // flashlight identification
 				std::cout << "What type of flashlight is it? 1 | Brown \n 2 | Yellow \n 3 | Green \n 4 | Purple" << std::endl;
 				std::cin >> *ptr;
+
+        // switch case for flashlight rarity, sets base stats via input and switch case
         switch(*ptr){
 					case 1: {
 						N::Flashlight flashlight;
@@ -81,39 +125,48 @@ int main() {
             break;
           }
 					default: {
-						std::cout << "Please only input valid numerical inputs!" << std::endl;
+						std::cout << "Please only input valid numerical inputs!" << '\n';
             inputReset();
             continue;
 					}
 				}
 
         // this is very spaghetti
+        // what this is supposed to do is determine what addon it is, by first determining if its a valid addon, then scanning through the json file (which i dont know how to do yet) to check for the item and add it if found, and reset if not
 				std::cout << "Are there any addons on it? If so, type the first name below, otherwise type N/A." << std::endl;
 				std::cin >> *ptrTwo;
         if(!(hash(capitalizeString(*ptrTwo), sizeof(*ptrTwo)) == hash("N/A", sizeof("N/A"))
         {
+          std::ifstream AddonList_file("AddonList.json", std::ifstream::binary);
+          AddonList >> aL;
+
+          Addons() newAddon;
+
           while(true) {
-            // iterates through addonlist
-            for(int i = 0; i < sizeof(N::Addons::flashlightAddonsList)/sizeof(*N::Addons::flashlightAddonsList); i++) {
-            // verifies if current value at iterator index is or is not variable, if so break and set the addon to the first slot
-              if(N::Addons::flashlightAddonsList[i].getName() == capitalizeString(*ptrTwo))
-              {
-                flashlight.setAddOns(0, N::Addons::flashlightAddonsList[i]);
-                addonPresent = true;
-                break;
-              }
-            } 
-            // if it wasnt found, it gives the user to retry input or to fully break out
-            if(addonPresent == false) {
-              std::cout << "Make sure you typed the word correctly! If there are no addons, type N/A." << std::endl;
-              inputReset();
-              std::cin >> *ptrTwo;
+            // tries to find addon in JSON, if it cant it catches the exception and continues onwards, and has the user reinput.
+            try {
+              newAddon.defineAddon(1, *ptrTwo);
+            }
+            catch {
+              inputClear();
+              validAddon = false;
+              continue;
+            }
+            if(validAddon == true)
+            {   
+              flashlight.setAddon(0, newAddon);
+              delete newAddon;
+            }
+            else {
+              std::cout << "Please only input valid addons!" << '\n';
+              validAddon = true;
             }
             // check for the pass command
-            if(!(hash(capitalizeString(*ptrTwo), sizeof(*ptrTwo)) == hash("N/A", sizeof("N/A"))))
+            if(hash(capitalizeString(*ptrTwo), sizeof(*ptrTwo)) == hash("N/A", sizeof("N/A")))
             {
               break;
             }
+            
             else if(addonPresent == true)
             {
               break;
@@ -125,39 +178,42 @@ int main() {
         }
         // spaghetti cont.
         std::cout << "Is there a second addon present? If so, type the second name below, otherwise type N/A." << std::endl;
-		std::cin >> *ptrTwo;
+	    	std::cin >> *ptrTwo;
         // immediately checks for a pass cmd, if not one it continues
         if(!(hash(capitalizeString(*ptrTwo), sizeof(*ptrTwo)) == hash("N/A", sizeof("N/A"))
         {
+
+          Addons() newAddon;
+
           while(true) {
             bool invalidInput = false;
             addonPresent = false;
-            // verifies addon is not the same as the first
-            else if(flashlight.getAddons(0).getName() == capitalizeString(*ptrTwo))
-            {
-              std::cout << "You can't have two of the same addon on one item!" << std::endl;
-              invalidInput = true;
-            }
-            //if pass cmd is not found, iterates again through list, verifies the name is the same, and a check for invalid input is run, if passed checks then it will continue to scan for the addon listed
-            for(int i = 0; i < sizeof(N::Addons::flashlightAddonsList)/sizeof(*N::Addons::flashlightAddonsList); i++) {
-              if(N::Addons::flashlightAddonsList[i].getName() == capitalizeString(*ptrTwo) && invalidInput == false)
+
+            
+              // verifies addon is not the same as the first
+              if(flashlight.getAddons(0).getName() == capitalizeString(*ptrTwo))
               {
-                flashlight.setAddOns(1, N::Addons::flashlightAddonsList[i]);
-                addonPresent = true;
-                break;
+                std::cout << "You can't have two of the same addon on one item!" << '\n';
+                inputClear();
+                invalidInput = true;
+              }
+              //if pass cmd is not found, iterates again through list, verifies the name is the same, and a check for invalid input is run, if passed checks then it will continue to scan for the addon listed
+              try {
+                newAddon.defineAddon(1, *ptrTwo);
+              } 
+              catch {
+                inputClear();
+                validAddon = false;
+                continue;
               }
             }
-            // if addon not found and input is valid, this if is passed and allows the user to retry, or type the break cmd
-            if(addonPresent == false && invalidInput == false) {
-               std::cout << "Make sure you typed the word correctly! If there are no addons, type N/A." << std::endl;
-              inputReset();
-              std::cin >> *ptrTwo;
+            if(validAddon == true)
+            {   
+              flashlight.setAddon(0, newAddon);
             }
-            // else if statement to reset the input
-            else if(invalidInput == true)
-            {
-              inputReset();
-              std::cin >> *ptrTwo;
+            else {
+              std::cout << "Please only input valid addons!" << '\n';
+              validAddon = true;
             }
             // standard break statements from the first addon set
             if(!(hash(capitalizeString(*ptrTwo), sizeof(*ptrTwo)) == hash("N/A", sizeof("N/A"))
@@ -169,40 +225,62 @@ int main() {
               break;
             }
           }
+            // i think this is an effect calculator???
           if (addonPresent == true)
           {
-            std::string temp = "";
-            boolean effectFound = false;
-            for(int i = 0; i < sizeof(flashlight.getAddOn[0].getEffects()); i++)
-              {
-                if(flashlight.getAddon[0].getEffects()[i] != ' ')
+          
+          while(true)
+            {
+              *ptrTwo = "";
+              *ptr = 0;
+              bool effectFound = false;
+              for(int i = 0; i < sizeof(flashlight.getAddOn(*ptr).getEffects()); i++)
                 {
-                  temp += flashlight.getAddon[0].getEffects()[i]
-                }
-                else
-                {
-                  switch(hash(temp, sizeof(temp))) {
-                    case hash("RANGE", sizeof("RANGE"): {
-                      effectFound = true;
-                      calculateEffects("range", flashlight.getAddon[0].getEffectPotency[0]))
-                      break;
-                    }
-                    default: {
-                      temp = "";
-                      break;
-                    }
+                  if(flashlight.getAddon(*ptr).getEffects()[*ptr] != ' ')
+                  {
+                    *ptrTwo += flashlight.getAddon(*ptr).getEffects()[*ptr];
                   }
-                  if(!(temp[i - 1] == ',') && effectFound == true;)
+                  else
+                  {
+                    switch(hash(*ptrTwo, sizeof(*ptrTwo))) {
+                      case hash("RANGE", sizeof("RANGE")): {
+                        effectFound = true;
+                        calculateEffects("range", flashlight.getAddon(*ptr).getEffectPotency(*ptr));
+                        break;
+                      }
+                      default: {
+                        *ptrTwo = "";
+                        break;
+                      }
+                  }
+                  if(!(temp[i - 1] == ',') && effectFound == true)
                   {
                     break;
+                    *ptr++;
                   }
                 }
               }
+              if(*ptr == 2)
+              {
+                break;
+              }
+            }
           }
-          
-          
-          
+          // print statement for flashlight, cause i dont know how to make the c++ equivalent of tostring function
+        std::cout << "Name: " << flashlight.getName() << "\nRarity: " << flashlight.getRarity() << "\nRange: " << flashlight.getRange() << "\nWidth: " << flashlight.getWidth() << "\nAccuracy: " << flashlight.getAccuracy() << "\nBrightness: " << flashlight.getBrightness() << "Blindness Duration: " << flashlight.getBlindnessDuration() << "\nUse Time: " << flashlight.getUseTime() << "\nOther Effects: " << vectorPrinter(flashlight.getOtherEffects()) << std::endl;
+          // i think this'll properly print the addons if they are present?
+        if(flashlight.getAddOns().empty() == 0)
+        {
+          std::cout << "\nAddons:\n" << std::endl;
+          std::cout << "Name: " << flashlight.getAddOn(0).getName() << "\nRarity: " << flashlight.getAddOn(0).getRarity() << "\nEffects: " << flashlight.getAddOn(0).getEffects() << std::endl;
 
+          try: {
+          std::cout << "Name: " << flashlight.getAddOn(1).getName() << "\nRarity: " << flashlight.getAddOn(1).getRarity() << "\nEffects: " << flashlight.getAddOn(1).getEffects() << std::endl;
+          }
+          catch: {
+            continue;
+          }
+        }
 			}
 			case 6: {
 				std::cout << "Thanks for using our program!" << std::endl;
@@ -211,8 +289,9 @@ int main() {
 			default: {
 				std::cout << "Please only insert numerical characters ranging between 1 and 5!" << std::endl;
 				inputReset();
-        		continue;
+        continue;
 			}
 		}
 	}
+  return 0;
 }

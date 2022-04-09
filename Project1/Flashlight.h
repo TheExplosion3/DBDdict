@@ -15,11 +15,10 @@ namespace N
             unsigned mutable short width;
             unsigned mutable short range;
             unsigned mutable short brightness;
-            float useTime;
             unsigned mutable short blindnessDuration;
-            Addons addOns[2];
+            float useTime;
+            std::array<Addons, 2>;
         public:
-
             Flashlight() {
                 rarity = "";
                 name = "Flashlight";
@@ -28,6 +27,7 @@ namespace N
                 range = 100;
                 brightness = 100;
                 useTime = 0;
+                otherEffects = std::vector<std::string>{""};
             }
             Flashlight(std::string rarity, std::string name, std::vector<std::string> otherEffects, unsigned short accuracy, unsigned short width, unsigned short range, unsigned short brightness, float useTime, unsigned short blindnessDuration, Addons addOnOne, Addons addOnTwo) {
                 this -> rarity = rarity;
@@ -64,7 +64,7 @@ namespace N
                 this -> brightness = brightness;
                 this -> useTime = useTime;
             }
-            ~Flashlight() {
+            virtual ~Flashlight() {
               delete[] addOns;
             }
             Flashlight(const Flashlight& other) {
@@ -78,6 +78,7 @@ namespace N
               this -> useTime = other.getUseTime();
             }
 
+            // why does OOP have to use so many getters and setters lmao
             void setName(std::string name) {
               this -> name = name;
             }
@@ -132,6 +133,13 @@ namespace N
             Addons getAddOn(unsigned short index) const {
               return addOns[index];
             }
+            void setAddOns(std::array<Addons> addOns) {
+              this -> addOns = addOns;
+            }
+            void setAddOn(unsigned short index, Addons addon) {
+              this -> addOns[index] = addon;
+            }
+
             void setBlindnessDuration(unsigned short blindnessDuration) {
               this -> blindnessDuration = blindnessDuration;
             }
@@ -140,18 +148,20 @@ namespace N
             }
             // i have no clue why but i cannot for the life of me get it to hash these strings and properly read them
             void calculateEffects(const std::string effectType, float effectPotency) {
-              const std::vector<unsigned short> types{ hash("accuracy"), hash("width"), hash("range"), hash("useTime"), hash("brightness")};
+
+              const std::array<unsigned short> hashedEffects{ hash("accuracy"), hash("width"), hash("range"), hash("useTime"), hash("brightness")};
+              
               switch(hash(effectType)) {
-                case types.at(0): {
+                case hashedEffects.at(0): {
                   this -> accuracy = this -> accuracy * effectPotency;
                 }
-                case types.at(1): {
+                case hashedEffects.at(1): {
                   this -> width = this -> width * effectPotency;
                 }
-                case types.at(2): {
+                case hashedEffects.at(2): {
                   this -> range = this -> range * effectPotency;
                 }
-                case types.at(3): {
+                case hashedEffects.at(3): {
                   if(effectPotency - (short)effectPotency == 0)
                   {
                     this -> useTime = this -> useTime + effectPotency;
@@ -161,7 +171,7 @@ namespace N
                     this -> useTime = this -> useTime * effectPotency;
                   }
                 }
-                case types.at(4): {
+                case hashedEffects.at(4): {
                   this -> brightness = this -> brightness * effectPotency;
                 }
                 default: {
@@ -181,6 +191,7 @@ namespace N
                   setRange(100);
                   setBlindnessDuration(100);
                   setUseTime(8);
+                  break;
                 }
                 case 2: {
                   setName("Sport Flashlight");
@@ -189,7 +200,8 @@ namespace N
                   setAccuracy(120);
                   setWidth(100);
                   setBlindnessDuration(100);
-                  setUseTime(7.12)
+                  setUseTime(7.12);
+                  break;
                 }
                 case 3: {
                   setName("Utility Flashlight");
@@ -199,6 +211,7 @@ namespace N
                   setWidth(100);
                   setBlindnessDuration(115);
                   setUseTime(12);
+                  break;
                 }
                 case 4: {
                   setName("Will O' Wisp");
@@ -209,6 +222,7 @@ namespace N
                   setBlindnessDuration(100);
                   setUseTime(8);
                   addOtherEffects("More friendly ghosts in your life");
+                  break;
                 }
                 case 5: {
                   setName("Anniversary Flashlight");
@@ -219,6 +233,7 @@ namespace N
                   setBlindnessDuration(100);
                   setUseTime(8);
                   addOtherEffects("Explodes with confetti upon blinding a killer");
+                  break;
                 }
                 default: {
                   break;
