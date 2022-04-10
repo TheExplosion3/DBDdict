@@ -48,6 +48,16 @@
         "unordered_map": "cpp",
         "hash_map": "cpp",
         "list": "cpp",
-        "xhash": "cpp"
+        "xhash": "cpp",
+        "array": "cpp",
+        "deque": "cpp",
+        "map": "cpp",
+        "chrono": "cpp",
+        "filesystem": "cpp",
+        "format": "cpp",
+        "forward_list": "cpp",
+        "span": "cpp",
+        "valarray": "cpp",
+        "xtree": "cpp"
     }
 }

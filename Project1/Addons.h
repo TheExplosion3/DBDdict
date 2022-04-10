@@ -3,11 +3,36 @@
 #include <vector>
 #include <unordered_map>
 #include <fstream>
-#include <niohmann/json.hpp>
+#include <nlohmann/json.hpp>
 
 const unsigned short hash(const std::string s) {
   std::size_t h1 = std::hash<std::string>{}(s);
   return h1;
+}
+
+// finds the index of an addon, by iterating through an array;
+unsigned short addonIndexFinder(std::string name) {
+  unsigned short ctr = 0;
+  nlohmann::json aL;
+  for(const auto& item : aL.items()) {
+    ctr = 0;
+    for(auto it = item.begin(); it = item.end(); it++) {
+      if(name == item.at(it))
+      {
+        return ctr;
+      }
+      ctr++;
+    }
+  }
+}
+
+// converts json arrays into c++ vectors
+const std::vector<float> jsonConverter(nlohmann::json& j, unsigned short loc) {
+  const std::vector<float> returnVar;
+  for (auto it = j.begin(); it = j.end(); it++) {
+    returnVar.push_back(*j.at(loc).at(it));
+  }
+  return returnVar;
 }
 
 namespace N
@@ -21,7 +46,7 @@ namespace N
             std::string effects;
             std::vector<float> effectPotency;
         public:
-            // lists of all addons available, used primarily by the defineAddon method
+            nlohmann::json AddonList;
             
 // base constructor
             Addons()
@@ -45,50 +70,50 @@ namespace N
             Addons(std::string name, unsigned short forItem)
             {
               std::ifstream AddonList_file("AddonList.json", std::ifstream::binary);
-              AddonList >> aL;
+              unsigned short addonIndex = addonIndexFinder(name);
                 
               this -> name = name;
               switch(forItem) {
                 case 1: {
-                  this -> rarity = aL["flashlight addons"][name]["rarity"];
-                  this -> forItem = aL["flashlight addons"][name]["forItem"];
-                  this -> effects = aL["flashlight addons"][name]["effects"];
-                  this -> effectPotency = aL["flashlight addons"][name]["effectPotency"];
+                  this -> rarity = AddonList.at(0).at(addonIndex).at(1);
+                  this -> forItem = AddonList.at(0).at(addonIndex).at(2);
+                  this -> effects = AddonList.at(0).at(addonIndex).at(3);
+                  this -> effectPotency = AddonList.at(0).at(addonIndex).at(4);
                   break;
                 }
                 case 2: {
-                  this -> rarity = aL["medkit addons"][name]["rarity"];
-                  this -> forItem = aL["medkit addons"][name]["forItem"];
-                  this -> effects = aL["medkit addons"][name]["effects"];
-                  this -> effectPotency = aL["medkit addons"][name]["effectPotency"];
+                  this -> rarity = AddonList["medkit addons"][name]["rarity"];
+                  this -> forItem = AddonList["medkit addons"][name]["forItem"];
+                  this -> effects = AddonList["medkit addons"][name]["effects"];
+                  this -> effectPotency = AddonList["medkit addons"][name]["effectPotency"];
                   break;
                 }
                 case 3: {
-                  this -> rarity = aL["key addons"][name]["rarity"];
-                  this -> forItem = aL["key addons"][name]["forItem"];
-                  this -> effects = aL["key addons"][name]["effects"];
-                  this -> effectPotency = aL["key addons"][name]["effectPotency"];
+                  this -> rarity = AddonList["key addons"][name]["rarity"];
+                  this -> forItem = AddonList["key addons"][name]["forItem"];
+                  this -> effects = AddonList["key addons"][name]["effects"];
+                  this -> effectPotency = AddonList["key addons"][name]["effectPotency"];
                   break;
                 }
                 case 4: {
-                  this -> rarity = aL["map addons"][name]["rarity"];
-                  this -> forItem = aL["map addons"][name]["forItem"];
-                  this -> effects = aL["map addons"][name]["effects"];
-                  this -> effectPotency = aL["map addons"][name]["effectPotency"];
+                  this -> rarity = AddonList["map addons"][name]["rarity"];
+                  this -> forItem = AddonList["map addons"][name]["forItem"];
+                  this -> effects = AddonList["map addons"][name]["effects"];
+                  this -> effectPotency = AddonList["map addons"][name]["effectPotency"];
                   break;
                 }
                 case 5: {
-                  this -> rarity = aL["toolbox addons"][name]["rarity"];
-                  this -> forItem = aL["toolbox addons"][name]["forItem"];
-                  this -> effects = aL["toolbox addons"][name]["effects"];
-                  this -> effectPotency = aL["toolbox addons"][name]["effectPotency"];
+                  this -> rarity = AddonList["toolbox addons"][name]["rarity"];
+                  this -> forItem = AddonList["toolbox addons"][name]["forItem"];
+                  this -> effects = AddonList["toolbox addons"][name]["effects"];
+                  this -> effectPotency = AddonList["toolbox addons"][name]["effectPotency"];
                   break;
                 }
                 default: {
                   break;
                 }
               }
-              aL.close();
+              AddonList.close();
             }
             Addons(const N::Addons& other) {
               this -> name = other.getName();
@@ -132,68 +157,67 @@ namespace N
             // defines addon via method, reassigning mainly the default constructor as that is the primary one.
             void defineAddon(unsigned short itemType, std::string name)
             {
-              bool validity = false;
+              bool vAddonListidity = false;
               std::ifstream AddonList_file("AddonList.json", std::ifstream::binary);
-              AddonList >> aL;
 
-              for(const auto& item : aL.items()) {
+              for(const auto& item : AddonList.items()) {
                 for(const auto& addonItem : item.items()) {
                   if(item == name) {
-                  validity = true;
+                  vAddonListidity = true;
                   break;
                   }
                 }
               }
-              if(validity = false) {
+              if(vAddonListidity = false) {
                 return;
               }
               
               switch(itemType) {
                 case 1: {
-                  this -> name = aL["flashlight addons"][name]["name"];
-                  this -> rarity = aL["flashlight addons"][name]["rarity"];
-                  this -> forItem = aL["flashlight addons"][name]["forItem"];
-                  this -> effects = aL["flashlight addons"][name]["effects"];
-                  this -> effectPotency = aL["flashlight addons"][name]["effectPotency"];
+                  this -> name = AddonList["flashlight addons"][name]["name"];
+                  this -> rarity = AddonList["flashlight addons"][name]["rarity"];
+                  this -> forItem = AddonList["flashlight addons"][name]["forItem"];
+                  this -> effects = AddonList["flashlight addons"][name]["effects"];
+                  this -> effectPotency = AddonList["flashlight addons"][name]["effectPotency"];
                   break;
                 }
                 case 2: {
-                  this -> name = aL["key addons"][name]["name"];
-                  this -> rarity = aL["key addons"][name]["rarity"];
-                  this -> forItem = aL["key addons"][name]["forItem"];
-                  this -> effects = aL["key addons"][name]["effects"];
-                  this -> effectPotency = aL["key addons"][name]["effectPotency"];
+                  this -> name = AddonList["key addons"][name]["name"];
+                  this -> rarity = AddonList["key addons"][name]["rarity"];
+                  this -> forItem = AddonList["key addons"][name]["forItem"];
+                  this -> effects = AddonList["key addons"][name]["effects"];
+                  this -> effectPotency = AddonList["key addons"][name]["effectPotency"];
                   break;
                 }
                 case 3: {
-                  this -> name = aL["map addons"][name]["name"];
-                  this -> rarity = aL["map addons"][name]["rarity"];
-                  this -> forItem = aL["map addons"][name]["forItem"];
-                  this -> effects = aL["map addons"][name]["effects"];
-                  this -> effectPotency = aL["map addons"][name]["effectPotency"];
+                  this -> name = AddonList["map addons"][name]["name"];
+                  this -> rarity = AddonList["map addons"][name]["rarity"];
+                  this -> forItem = AddonList["map addons"][name]["forItem"];
+                  this -> effects = AddonList["map addons"][name]["effects"];
+                  this -> effectPotency = AddonList["map addons"][name]["effectPotency"];
                   break;
                 }
                 case 4: {
-                  this -> name = aL["medkit addons"][name]["name"];
-                  this -> rarity = aL["medkit addons"][name]["rarity"];
-                  this -> forItem = aL["medkit addons"][name]["forItem"];
-                  this -> effects = aL["medkit addons"][name]["effects"];
-                  this -> effectPotency = aL["medkit addons"][name]["effectPotency"];
+                  this -> name = AddonList["medkit addons"][name]["name"];
+                  this -> rarity = AddonList["medkit addons"][name]["rarity"];
+                  this -> forItem = AddonList["medkit addons"][name]["forItem"];
+                  this -> effects = AddonList["medkit addons"][name]["effects"];
+                  this -> effectPotency = AddonList["medkit addons"][name]["effectPotency"];
                   break;
                 }
                 case 5: {
-                  this -> name = aL["toolbox addons"][name]["name"];
-                  this -> rarity = aL["toolbox addons"][name]["rarity"];
-                  this -> forItem = aL["toolbox addons"][name]["forItem"];
-                  this -> effects = aL["toolbox addons"][name]["effects"];
-                  this -> effectPotency = aL["toolbox addons"][name]["effectPotency"];
+                  this -> name = AddonList["toolbox addons"][name]["name"];
+                  this -> rarity = AddonList["toolbox addons"][name]["rarity"];
+                  this -> forItem = AddonList["toolbox addons"][name]["forItem"];
+                  this -> effects = AddonList["toolbox addons"][name]["effects"];
+                  this -> effectPotency = AddonList["toolbox addons"][name]["effectPotency"];
                   break;
                 }
                 default: {
                   break;
                 }
               }
-              aL.close();
+              AddonList.close();
             }
     };
 }
