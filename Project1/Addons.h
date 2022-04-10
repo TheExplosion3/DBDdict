@@ -2,7 +2,6 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
-#include <json.h>
 #include <fstream>
 #include <niohmann/json.hpp>
 
@@ -138,9 +137,11 @@ namespace N
               AddonList >> aL;
 
               for(const auto& item : aL.items()) {
-                if(item == name) {
+                for(const auto& addonItem : item.items()) {
+                  if(item == name) {
                   validity = true;
                   break;
+                  }
                 }
               }
               if(validity = false) {

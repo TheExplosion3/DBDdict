@@ -7,7 +7,7 @@
 #include <algorithm>
 #include <fstream>
 #include <vector>
-#include <niohmann/json.hpp>
+#include <nlohmann/json.hpp>
 
 // ptr original vars
 unsigned short userInput = 0;
@@ -15,7 +15,7 @@ std::string userInputString = "";
 unsigned short numAddons = 0;
 
 // capitalizes the string thats inputted to the function, dont ask me how it works its from stack overflow
-static std::string capitalizeString(std::string s)
+std::string capitalizeString(std::string s)
 {
   transform(s.begin(), s.end(), s.begin(), 
     [](unsigned char c){ return toupper(c); });
@@ -24,7 +24,7 @@ static std::string capitalizeString(std::string s)
 
 
 // resets cin, for when invalid input is sent, i only have it in a function because it makes things easier than remembering the values needed
-static void inputReset()
+void inputReset()
 {
   std::cin.ignore(10000, '\n');
   std::cin.clear();
@@ -32,7 +32,7 @@ static void inputReset()
 
 
 // prints a float vector out, items separated by commas
-static void vectorPrinter(std::vector<float> vec)
+void vectorPrinter(std::vector<float> vec)
 {
   for(float i : vec)
   {
@@ -47,7 +47,7 @@ static void vectorPrinter(std::vector<float> vec)
   }
 }
 // overloaded vector printer, meant for string vectors
-static void vectorPrinter(std::vector<std::string> vec)
+void vectorPrinter(std::vector<std::string> vec)
 {
   for(std::string i : vec)
     {

@@ -1,11 +1,11 @@
 {
-  "flashlight addons" : [
+  "flashlight addons" : {
     "Wide Lens" : {
       "name" : "Wide Lens",
       "rarity" : "Common",
       "forItem" : "Flashlight",
       "effects" : "Increases width of beam by 15%, decreases beam range by 25%",
-      "effectPotency" : {1.15, 0.75}
+      "effectPotency" : [1.15, 0.75]
     },
      
     "Power Bulb" : {
@@ -13,7 +13,7 @@
       "rarity" : "Common",
       "forItem" : "Flashlight",
       "effects" : "Increases brightness of beam by 20%, increases blindness duration by 10%",
-      "effectPotency" : {1.2, 1.1}
+      "effectPotency" : [1.2, 1.1]
     },
 
     "Leather Grip" : {
@@ -21,7 +21,7 @@
       "rarity" : "Common",
       "forItem" : "Flashlight",
       "effects" : "Increases accuracy by 20%",
-      "effectPotency":{1.2}
+      "effectPotency":[1.2]
     },
 
     "Battery" : {
@@ -29,7 +29,7 @@
       "rarity" : "Common",
       "forItem" : "Flashlight",
       "effects" : "Adds 2 seconds of use",
-      "effectPotency" : {2}
+      "effectPotency" : [2]
     },
 
     "TIR Optic" : {
@@ -37,7 +37,7 @@
       "rarity" : "Uncommon",
       "forItem" : "Flashlight",
       "effects" : "Increases brightness by 30%, increases blindness duration by 15%",
-      "effectPotency" : {1.3, 1.15}
+      "effectPotency" : [1.3, 1.15]
     },
 
     "Rubber Grip" : {
@@ -45,7 +45,7 @@
       "rarity" : "Uncommon",
       "forItem" : "Flashlight",
       "effects" : "Increases accuracy by 40%",
-      "effectPotency" : {1.4}
+      "effectPotency" : [1.4]
     },
 
     "Low Amp Filament" : {
@@ -53,7 +53,7 @@
       "rarity" : "Uncommon",
       "forItem" : "Flashlight",
       "effects" : "Decreases depletion rate by 20%",
-      "effectPotency" : {0.8}
+      "effectPotency" : [0.8]
     },
 
     "Heavy Duty Battery" : {
@@ -61,7 +61,7 @@
       "rarity" : "Uncommon",
       "forItem" : "Flashlight",
       "effects" : "Adds 4 seconds of use",
-      "effectPotency" : {4}
+      "effectPotency" : [4]
     },
 
     "Focus Lens" : {
@@ -69,7 +69,7 @@
       "rarity" : "Uncommon",
       "forItem" : "Flashlight",
       "effects" : "Extends range by 25%, increases brightness by 20%, increases blindness by 10%, decreases width by 15%",
-      "effectPotency" : {1.24, 1.2, 1.1, 0.85}
+      "effectPotency" : [1.24, 1.2, 1.1, 0.85]
     },
 
     "Long Life Battery" : {
@@ -77,7 +77,7 @@
       "rarity" : "Rare",
       "forItem" : "Flashlight",
       "effects" : "Adds 6 seconds of use",
-      "effectPotency" : {6}
+      "effectPotency" : [6]
     },
 
     "Intense Halogen" : {
@@ -85,7 +85,7 @@
       "rarity" : "Rare",
       "forItem" : "Flashlight",
       "effects" : "Increases brightness by 40%, inreases blindness duration by 20%",
-      "effectPotency" : {1.4, 1.2}
+      "effectPotency" : [1.4, 1.2]
     },
 
     "High-End Sapphire Lens" : {
@@ -93,7 +93,7 @@
       "rarity" : "Very Rare",
       "forItem" : "Flashlight",
       "effects" : "Increases range by 25%, increases brightness by 30%, increases blindness duration by 15%, increases width by 25%",
-      "effectPotency" : {1.25, 1.3, 1.15, 1.25}
+      "effectPotency" : [1.25, 1.3, 1.15, 1.25]
     },
 
     "Odd Bulb" : {
@@ -101,7 +101,7 @@
       "rarity" : "Ultra Rare",
       "forItem" : "Flashlight",
       "effects" : "Increases brightness by 50%, increases blindness duration by 25%, increases depletion rate by 14%",
-      "effectPotency" : {1.5, 1.25, 0.86}
+      "effectPotency" : [1.5, 1.25, 0.86]
     },
 
     "Broken Bulb" : {
@@ -109,17 +109,17 @@
       "rarity" : "Event",
       "forItem" : "Flashlight",
       "effects" : "Causes the flashlight to flicker, increases brightness by 30%, increases blindness duration by 15%, increases spookiness",
-      "effectPotency" : {1.3, 1.15}
+      "effectPotency" : [1.3, 1.15]
     }
-  ],
+  },
 
-  "medkit addons" : [
+  "medkit addons" : {
     "Rubber Gloves" : {
       "name" : "Rubber Gloves",
       "rarity" : "Common",
       "forItem" : "Medkit",
       "effects" : "Increases Great Skill Check progression by 3%",
-      "effectPotency":{1.03}
+      "effectPotency":[1.03]
     },
 
     "Butterfly Tape" : {
@@ -127,7 +127,7 @@
       "rarity" : "Common",
       "forItem" : "Medkit",
       "effects" : "Increases healing speed by 5%",
-      "effectPotency" : {1.05}
+      "effectPotency" : [1.05]
     },
 
     "Bandages" : {
@@ -135,7 +135,7 @@
       "rarity" : "Common",
       "forItem" : "Medkit",
       "effects" : "Increases available charges by 8",
-      "effectPotency" : {8}
+      "effectPotency" : [8]
     },
 
     "Sponge" : {
@@ -143,15 +143,15 @@
       "rarity" : "Uncommon",
       "forItem" : "Medkit",
       "effects" : "Increases Great Skill Check progression by 5%",
-      "effectPotency" : {1.05}
+      "effectPotency" : [1.05]
     },
 
     "Self Adherent Wrap" : {
       "name" : "Self Adherent Wrap",
       "rarity" : "Uncommon",
-      "forItem" : "Medkit"
+      "forItem" : "Medkit",
       "effects" : "Increases available charges by 8, increases healing speed by 5%",
-      "effectPotency" : {8, 1.05}
+      "effectPotency" : [8, 1.05]
     },
 
     "Needle & Thread" : {
@@ -159,7 +159,7 @@
       "rarity" : "Uncommon",
       "forItem" : "Medkit",
       "effects" : "Increases healing speed by 15%, increases trigger odds of Skill Checks by 10%, grants 100% bonus BP for Great Skill Checks",
-      "effectPotency" : {1.15, 1.10, 100}
+      "effectPotency" : [1.15, 1.10, 100]
     },
 
     "Medical Scissors" : {
@@ -167,7 +167,7 @@
       "rarity" : "Uncommon",
       "forItem" : "Medkit",
       "effects" : "Increases healing speed by 15%",
-      "effectPotency" : {1.15}
+      "effectPotency" : [1.15]
     },
 
     "Gauze Roll" : {
@@ -175,7 +175,7 @@
       "rarity" : "Uncommon",
       "forItem" : "Medkit",
       "effects" : "Increases available charges by 12",
-      "effectPotency":{12}
+      "effectPotency":[12]
     },
 
     "Surgical Suture" : {
@@ -183,7 +183,7 @@
       "rarity" : "Rare",
       "forItem" : "Medkit",
       "effects" : "Increases healing speed by 15%, increases trigger odds of Skill Checks by 15%, grants 150% bonus BP for Great Skill Checks",
-      "effectPotency":{1.15, 1.15, 150}
+      "effectPotency":[1.15, 1.15, 150]
     },
     
     "Gel Dressings" : {
@@ -191,7 +191,7 @@
       "rarity" : "Rare",
       "forItem" : "Medkit",
       "effects" : "Increases available charges by 16",
-      "effectPotency":{16}
+      "effectPotency":[16]
     },
 
     "Abdominal Dressing" : {
@@ -199,7 +199,7 @@
       "rarity" : "Rare",
       "forItem" : "Medkit",
       "effects" : "Increases healing speed by 25%, decreases available charges by 8",
-      "effectPotency" : {1.25, -8}
+      "effectPotency" : [1.25, -8]
     },
 
     "Styptic Agent" : {
@@ -207,7 +207,7 @@
       "rarity" : "Very Rare",
       "forItem" : "Medkit",
       "effects" : "Applies the Endurance status effect for 8 seconds",
-      "effectPotency" : {8}
+      "effectPotency" : [8]
     },
 
     "Anti-Hemmhoragic Syringe" : {
@@ -215,7 +215,7 @@
       "rarity" : "Ultra Rare",
       "forItem" : "Medkit",
       "effects" : "Over 16 seconds the survivor will gain 1 health state | medkit is consumed on use, affected by healing speed modifiers and cancelled by change of health state | can be used on self or other survivors",
-      "effectPotency" : {16}
+      "effectPotency" : [16]
     },
 
     "Refined Serum" : {
@@ -223,17 +223,17 @@
       "rarity" : "Event",
       "forItem" : "Medkit",
       "effects" : "Increases movement speed by 5% for 16 seconds, leaves a Blight trail behind the affected survivor, consumes medkit on use and can be used on yourself or other survivors",
-      "effectPotency" : {1.05, 16}
+      "effectPotency" : [1.05, 16]
     }
-  ],
+  },
 
-  "key addons" : [
+  "key addons" : {
     "Prayer Rope" : {
       "name" : "Prayer Rope",
       "rarity" : "Common",
       "forItem" : "Key",
       "effects" : "Adds 10 seconds of use",
-      "effectPotency" : {10}
+      "effectPotency" : [10]
     },
 
     "Scratched Pearl" : {
@@ -241,7 +241,7 @@
       "rarity" : "Uncommon",
       "forItem" : "Key",
       "effects" : "Increases Aura-reading range by 12m",
-      "effectPotency" : {12}
+      "effectPotency" : [12]
     },
 
     "Prayer Beads" : {
@@ -249,7 +249,7 @@
       "rarity" : "Uncommon",
       "forItem" : "Key",
       "effects" : "Adds 15 seconds of use",
-      "effectPotency" : {15}
+      "effectPotency" : [15]
     },
 
     "Eroded Token" : {
@@ -257,7 +257,7 @@
       "rarity" : "Uncommon",
       "forItem" : "Key",
       "effects" : "Unlocks Aura reading ability to see all survivors within 24m",
-      "effectPotency" : {24}
+      "effectPotency" : [24]
     },
 
     "Gold Token" : {
@@ -265,7 +265,7 @@
       "rarity" : "Rare",
       "forItem" : "Key",
       "effects" : "Unlocks Aura reading ability to see all survivors within 48m",
-      "effectPotency" : {48}
+      "effectPotency" : [48]
     },
 
     "Weaved Ring" : {
@@ -273,7 +273,7 @@
       "rarity" : "Very Rare",
       "forItem" : "Key",
       "effects" : "On death, key is not lost, lose this addon instead",
-      "effectPotency" : {0}
+      "effectPotency" : [0]
     },
 
     "Milky Glass" : {
@@ -281,7 +281,7 @@
       "rarity" : "Very Rare",
       "forItem" : "Key",
       "effects" : "Upon opening the hatch, key is not lost, lose this addon instead",
-      "effectPotency" : {0}
+      "effectPotency" : [0]
     },
 
     "Blood Amber" : {
@@ -289,7 +289,7 @@
       "rarity" : "Very Rare",
       "forItem" : "Key",
       "effects" : "Unlocks Aura reading ability to see the killer within 32m, increases depletion rate by 100%",
-      "effectPotency" : {32, 100}
+      "effectPotency" : [32, 100]
     },
 
     "Unique Weddin Ring" : {
@@ -297,17 +297,17 @@
       "rarity" : "Very Rare",
       "forItem" : "Key",
       "effects" : "Unlocks Aura reading ability to see the Obsession within 32m, lowers odds of becoming the obsession by 100%",
-      "effectPotency" : {32, 100}
+      "effectPotency" : [32, 100]
     }
-  ],
+  },
 
-  "map addons" : [
+  "map addons" : {
     "Map Addendum" : {
       "name" : "Map Addendum",
       "rarity" : "Common",
       "forItem" : "Map",
       "effects" : "Adds 5 seconds of use",
-      "effectPotency" : {5}
+      "effectPotency" : [5]
     },
 
     "Yellow Wire" : {
@@ -315,7 +315,7 @@
       "rarity" : "Uncommon",
       "forItem" : "Map",
       "effects" : "Unlocks the ability to track Exit Gates",
-      "effectPotency" : {0}
+      "effectPotency" : [0]
     },
 
     "Unusual Stamp" : {
@@ -323,7 +323,7 @@
       "rarity" : "Uncommon",
       "forItem" : "Map",
       "effects" : "Increases tracking range by 8m",
-      "effectPotency" : {8}
+      "effectPotency" : [8]
     },
 
     "Retardant Jelly" : {
@@ -331,7 +331,7 @@
       "rarity" : "Uncommon",
       "forItem" : "Map",
       "effects" : "Decreases depletion rate by 20%",
-      "effectPotency" : {1.2}
+      "effectPotency" : [1.2]
     },
 
     "Red Twine" : {
@@ -339,7 +339,7 @@
       "rarity" : "Uncommon",
       "forItem" : "Map",
       "effects" : "Unlocks the ability to track Killer belongings",
-      "effectPotency" : {0}
+      "effectPotency" : [0]
     },
 
     "Glass Bead" : {
@@ -347,7 +347,7 @@
       "rarity" : "Uncommon",
       "forItem" : "Map",
       "effects" : "Place a pillar of lighat your current location that is visible to all survivors",
-      "effectPotency" : {0}
+      "effectPotency" : [0]
     },
 
     "Odd Stamp" : {
@@ -355,7 +355,7 @@
       "rarity" : "Rare",
       "forItem" : "Map",
       "effects" : "Increases tracking range by 12m",
-      "effectPotency" : {12}
+      "effectPotency" : [12]
     },
 
     "Black Silk Cord" : {
@@ -363,7 +363,7 @@
       "rarity" : "Rare",
       "forItem" : "Map",
       "effects" : "Unlocks the ability to track the hatch",
-      "effectPotency" : {0}
+      "effectPotency" : [0]
     },
 
     "Crystal Bead" : {
@@ -371,17 +371,17 @@
       "rarity" : "Very Rare",
       "forItem" : "Map",
       "effects" : "Reveals the Auras generated by the map to all survivors",
-      "effectPotency" : {0}
+      "effectPotency" : [0]
     }
-  ],
+  },
 
-  "toolbox addons" : [
+  "toolbox addons" : {
      "Scraps" : {
       "name" : "Scraps",
       "rarity" : "Common",
       "forItem" : "Toolbox",
       "effects" : "Adds 8 available charges",
-      "effectPotency" : {8}
+      "effectPotency" : [8]
      },
 
     "Instructions" : {
@@ -389,7 +389,7 @@
       "rarity" : "Common",
       "forItem" : "Toolbox",
       "effects" : "Removes normal Skill Check prompts",
-      "effectPotency" : {0}
+      "effectPotency" : [0]
     },
 
     "Clean Rag" : {
@@ -397,7 +397,7 @@
       "rarity" : "Common",
       "forItem" : "Toolbox",
       "effects" : "Increases repair speed by 20%",
-      "effectPotency" : {1.2}
+      "effectPotency" : [1.2]
     },
 
     "Wire Spool" : {
@@ -405,7 +405,7 @@
       "rarity" : "Uncommon",
       "forItem" : "Toolbox",
       "effects" : "Increases available charges by 12",
-      "effectPotency" : {12}
+      "effectPotency" : [12]
     },
 
     "Spring Clamp" : {
@@ -413,7 +413,7 @@
       "rarity" : "Uncommon",
       "forItem" : "Toolbox",
       "effects" : "Decreases distance repairs can be heard from by 8m",
-      "effectPotency" : {-8}
+      "effectPotency" : [-8]
     },
 
     "Socket Swivels" : {
@@ -421,7 +421,7 @@
       "rarity" : "Uncommon",
       "forItem" : "Toolbox",
       "effects" : "Increases repair speed by 30%",
-      "effectPotency" : {1.3}
+      "effectPotency" : [1.3]
     },
 
     "Protective Gloves" : {
@@ -429,7 +429,7 @@
       "rarity" : "Uncommon",
       "forItem" : "Toolbox",
       "effects" : "Removes the Loud Noise Notification from sabotaging a hook",
-      "effectPotency" : {0}
+      "effectPotency" : [0]
     },
 
     "Cutting Wire" : {
@@ -437,7 +437,7 @@
       "rarity" : "Uncommon",
       "forItem" : "Toolbox",
       "effects" : "Increases sabotage speed by 15%",
-      "effectPotency" : {1.15}
+      "effectPotency" : [1.15]
     },
 
     "Hacksaw" : {
@@ -445,7 +445,7 @@
       "rarity" : "Rare",
       "forItem" : "Toolbox",
       "effects" : "Increases sabotage speed by 20%",
-      "effectPotency" : {1.15}
+      "effectPotency" : [1.15]
     },
 
     "Grip Wrench" : {
@@ -453,7 +453,7 @@
       "rarity" : "Rare",
       "forItem" : "Toolbox",
       "effects" : "Increases the auto repair timer for hooks sabotaged by 15 seconds",
-      "effectPotency" : {15}
+      "effectPotency" : [15]
     },
 
     "Brand New Part" : {
@@ -461,8 +461,8 @@
       "rarity" : "Ultra Rare",
       "forItem" : "Toolbox",
       "effects" : "Takes 5 seconds to install, adds 15% to generator progression. Triggers 2 difficult skillchecks during installation process, successful completion adds 5% extra progression up to a total of 25% progression",
-      "effectPotency" : {5, 15, 5, 25}
+      "effectPotency" : [5, 15, 5, 25]
     }
-  ]
+  }
 }
 
