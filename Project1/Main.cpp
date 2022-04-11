@@ -90,6 +90,7 @@ int main() {
 			}
 			case 5: {
 
+        N::Flashlight flashlight;
 				bool addonPresent = false;
         bool validAddon = true;
 
@@ -100,27 +101,23 @@ int main() {
         // switch case for flashlight rarity, sets base stats via input and switch case
         switch(*ptr){
 					case 1: {
-						N::Flashlight flashlight = new N::Flashlight;
+
             flashlight.flashlightTypeSetter(1);
             break;
 					}
 					case 2: {
-						N::Flashlight flashlight = new N::Flashlight;
             flashlight.flashlightTypeSetter(2);
             break;
 					}
           case 3: {
-            N::Flashlight flashlight = new N::Flashlight;
             flashlight.flashlightTypeSetter(3);
             break;
           }
           case 4: {
-            N::Flashlight flashlight = new N::flashlight;
             flashlight.flashlightTypeSetter(4);
             break;
           }
           case 5: {
-            N::Flashlight flashlight;
             flashlight.flashlightTypeSetter(5);
             break;
           }
@@ -274,14 +271,13 @@ int main() {
           std::cout << "\nAddons:\n" << std::endl;
           std::cout << "Name: " << flashlight.getAddOn(0).getName() << "\nRarity: " << flashlight.getAddOn(0).getRarity() << "\nEffects: " << flashlight.getAddOn(0).getEffects() << std::endl;
 
-          try: {
+          try {
           std::cout << "Name: " << flashlight.getAddOn(1).getName() << "\nRarity: " << flashlight.getAddOn(1).getRarity() << "\nEffects: " << flashlight.getAddOn(1).getEffects() << std::endl;
           }
-          catch: {
+          catch (std::exception& e) {
             continue;
           }
         }
-      delete flashlight;
 			}
 			case 6: {
 				std::cout << "Thanks for using our program!" << std::endl;

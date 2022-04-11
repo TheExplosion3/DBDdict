@@ -127,7 +127,7 @@ namespace N
             float getUseTime() const {
               return useTime;
             }
-            void setAddOns(unsigned short index, Addons addon) {
+            void setAddOn(unsigned short index, Addons addon) {
               this -> addOns[index] = addon;
             }
             Addons getAddOn(unsigned short index) const {
@@ -136,10 +136,9 @@ namespace N
             void setAddOns(std::array<Addons> addOns) {
               this -> addOns = addOns;
             }
-            void setAddOn(unsigned short index, Addons addon) {
-              this -> addOns[index] = addon;
+            std::array<Addons> getAddOns() {
+              return addOns;
             }
-
             void setBlindnessDuration(unsigned short blindnessDuration) {
               this -> blindnessDuration = blindnessDuration;
             }
