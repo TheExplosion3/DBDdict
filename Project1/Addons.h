@@ -11,12 +11,12 @@ const unsigned short hash(const std::string s) {
 }
 
 // finds the index of an addon, by iterating through an array;
-unsigned short addonIndexFinder(std::string name) {
+unsigned short addOnIndexFinder(std::string name) {
   unsigned short ctr = 0;
   nlohmann::json aL;
   for(const auto& item : aL.items()) {
     ctr = 0;
-    for(auto it = item.begin(); it = item.end(); it++) {
+    for(auto it = item.at(it).begin(); it = item.at(it).end(); it++) {
       if(name == item.at(it))
       {
         return ctr;
@@ -24,6 +24,7 @@ unsigned short addonIndexFinder(std::string name) {
       ctr++;
     }
   delete aL;
+  return 0;
   }
 }
 
@@ -71,7 +72,7 @@ namespace N
             Addons(std::string name, unsigned short forItem)
             {
               nlohmann::json AddonList;
-              addonIndex = addonIndexFinder(name);
+              unsigned short addonIndex = addOnIndexFinder(name);
                 
               this -> name = name;
               switch(forItem) {
