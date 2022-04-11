@@ -100,22 +100,22 @@ int main() {
         // switch case for flashlight rarity, sets base stats via input and switch case
         switch(*ptr){
 					case 1: {
-						N::Flashlight flashlight;
+						N::Flashlight flashlight = new N::Flashlight;
             flashlight.flashlightTypeSetter(1);
             break;
 					}
 					case 2: {
-						N::Flashlight flashlight;
+						N::Flashlight flashlight = new N::Flashlight;
             flashlight.flashlightTypeSetter(2);
             break;
 					}
           case 3: {
-            N::Flashlight flashlight;
+            N::Flashlight flashlight = new N::Flashlight;
             flashlight.flashlightTypeSetter(3);
             break;
           }
           case 4: {
-            N::Flashlight flashlight;
+            N::Flashlight flashlight = new N::flashlight;
             flashlight.flashlightTypeSetter(4);
             break;
           }
@@ -281,6 +281,7 @@ int main() {
             continue;
           }
         }
+      delete flashlight;
 			}
 			case 6: {
 				std::cout << "Thanks for using our program!" << std::endl;
