@@ -38,7 +38,7 @@ void vectorPrinter(std::vector<float> vec)
   {
     if(vec.back() == i)
     {
-      std::cout << i < std::endl;
+      std::cout << i << std::endl;
     }
     else
     {
@@ -53,7 +53,7 @@ void vectorPrinter(std::vector<std::string> vec)
     {
       if(vec.back() == i)
       {
-        std::cout << i < std::endl;
+        std::cout << i << std::endl;
       }
       else
       {
@@ -134,10 +134,8 @@ int main() {
 				std::cin >> *ptrTwo;
         if(!(hash(capitalizeString(*ptrTwo), sizeof(*ptrTwo)) == hash("N/A", sizeof("N/A"))
         {
-          std::ifstream AddonList_file("AddonList.json", std::ifstream::binary);
-          AddonList >> aL;
 
-          Addons() newAddon;
+          N::Addons newAddon;
 
           while(true) {
             // tries to find addon in JSON, if it cant it catches the exception and continues onwards, and has the user reinput.
@@ -177,10 +175,10 @@ int main() {
         std::cout << "Is there a second addon present? If so, type the second name below, otherwise type N/A." << std::endl;
 	    	std::cin >> *ptrTwo;
         // immediately checks for a pass cmd, if not one it continues
-        if(!(hash(capitalizeString(*ptrTwo), sizeof(*ptrTwo)) == hash("N/A", sizeof("N/A"))
+        if(!(hash(capitalizeString(*ptrTwo), sizeof(*ptrTwo)) == hash("N/A", sizeof("N/A"))))
         {
 
-          Addons() newAddon;
+          N::Addons newAddon;
 
           while(true) {
             bool invalidInput = false;
@@ -188,32 +186,32 @@ int main() {
 
             
               // verifies addon is not the same as the first
-              if(flashlight.getAddons(0).getName() == capitalizeString(*ptrTwo))
+              if(flashlight.getAddOns(0).getName() == capitalizeString(*ptrTwo))
               {
                 std::cout << "You can't have two of the same addon on one item!" << '\n';
-                inputClear();
+                inputReset();
                 invalidInput = true;
               }
               //if pass cmd is not found, iterates again through list, verifies the name is the same, and a check for invalid input is run, if passed checks then it will continue to scan for the addon listed
               try {
                 newAddon.defineAddon(1, *ptrTwo);
               } 
-              catch {
-                inputClear();
+              catch(std::exception& e) {
+                inputReset();
                 validAddon = false;
                 continue;
               }
             }
             if(validAddon == true)
             {   
-              flashlight.setAddon(0, newAddon);
+              flashlight.setAddOn(0, newAddon);
             }
             else {
               std::cout << "Please only input valid addons!" << '\n';
               validAddon = true;
             }
             // standard break statements from the first addon set
-            if(!(hash(capitalizeString(*ptrTwo), sizeof(*ptrTwo)) == hash("N/A", sizeof("N/A"))
+            if(!(hash(capitalizeString(*ptrTwo), sizeof(*ptrTwo)) == hash("N/A", sizeof("N/A"))))
             {
               break;
             }
@@ -233,9 +231,9 @@ int main() {
               bool effectFound = false;
               for(int i = 0; i < sizeof(flashlight.getAddOn(*ptr).getEffects()); i++)
                 {
-                  if(flashlight.getAddon(*ptr).getEffects()[*ptr] != ' ')
+                  if(flashlight.getAddOn(*ptr).getEffects()[*ptr] != ' ')
                   {
-                    *ptrTwo += flashlight.getAddon(*ptr).getEffects()[*ptr];
+                    *ptrTwo += flashlight.getAddOn(*ptr).getEffects()[*ptr];
                   }
                   else
                   {
@@ -250,10 +248,10 @@ int main() {
                         break;
                       }
                   }
-                  if(!(temp[i - 1] == ',') && effectFound == true)
+                  if(!(flashlight.getAddOn(*ptr)[i - 1] == ',') && effectFound == true)
                   {
-                    break;
                     *ptr++;
+                    break;
                   }
                 }
               }
