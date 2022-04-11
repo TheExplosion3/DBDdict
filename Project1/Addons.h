@@ -23,14 +23,15 @@ unsigned short addonIndexFinder(std::string name) {
       }
       ctr++;
     }
+  delete aL;
   }
 }
 
 // converts json arrays into c++ vectors
 const std::vector<float> jsonConverter(nlohmann::json& j, unsigned short loc) {
   const std::vector<float> returnVar;
-  for (auto it = j.begin(); it = j.end(); it++) {
-    returnVar.push_back(*j.at(loc).at(it));
+  for (auto it = j.at(4).begin(); it = j.at(4).end(); it++) {
+    returnVar.push_back(it);
   }
   return returnVar;
 }
@@ -69,8 +70,8 @@ namespace N
 // constructor based upon the JSON file, instead of directly defining the addons
             Addons(std::string name, unsigned short forItem)
             {
-              std::ifstream AddonList_file("AddonList.json", std::ifstream::binary);
-              unsigned short addonIndex = addonIndexFinder(name);
+              nlohmann::json AddonList;
+              addonIndex = addonIndexFinder(name);
                 
               this -> name = name;
               switch(forItem) {
@@ -78,35 +79,35 @@ namespace N
                   this -> rarity = AddonList.at(0).at(addonIndex).at(1);
                   this -> forItem = AddonList.at(0).at(addonIndex).at(2);
                   this -> effects = AddonList.at(0).at(addonIndex).at(3);
-                  this -> effectPotency = AddonList.at(0).at(addonIndex).at(4);
+                  this -> effectPotency = jsonConverter(AddonList.at(0).at(addonIndex).at(4));
                   break;
                 }
                 case 2: {
-                  this -> rarity = AddonList["medkit addons"][name]["rarity"];
-                  this -> forItem = AddonList["medkit addons"][name]["forItem"];
-                  this -> effects = AddonList["medkit addons"][name]["effects"];
-                  this -> effectPotency = AddonList["medkit addons"][name]["effectPotency"];
+                  this -> rarity = AddonList.at(1).at(addonIndex).at(1);
+                  this -> forItem = AddonList.at(1).at(addonIndex).at(2);
+                  this -> effects = AddonList.at(1).at(addonIndex).at(3);
+                  this -> effectPotency = jsonConverter(AddonList.at(1).at(addonIndex).at(4));
                   break;
                 }
                 case 3: {
-                  this -> rarity = AddonList["key addons"][name]["rarity"];
-                  this -> forItem = AddonList["key addons"][name]["forItem"];
-                  this -> effects = AddonList["key addons"][name]["effects"];
-                  this -> effectPotency = AddonList["key addons"][name]["effectPotency"];
+                  this -> rarity = AddonList.at(2).at(addonIndex).at(1);
+                  this -> forItem = AddonList.at(2).at(addonIndex).at(2);
+                  this -> effects = AddonList.at(2).at(addonIndex).at(3);
+                  this -> effectPotency = jsonConverter(AddonList.at(2).at(addonIndex).at(4));
                   break;
                 }
                 case 4: {
-                  this -> rarity = AddonList["map addons"][name]["rarity"];
-                  this -> forItem = AddonList["map addons"][name]["forItem"];
-                  this -> effects = AddonList["map addons"][name]["effects"];
-                  this -> effectPotency = AddonList["map addons"][name]["effectPotency"];
+                  this -> rarity = AddonList.at(3).at(addonIndex).at(1);
+                  this -> forItem = AddonList.at(3).at(addonIndex).at(2);
+                  this -> effects = AddonList.at(3).at(addonIndex).at(3);
+                  this -> effectPotency = jsonConverter(AddonList.at(3).at(addonIndex).at(4));
                   break;
                 }
                 case 5: {
-                  this -> rarity = AddonList["toolbox addons"][name]["rarity"];
-                  this -> forItem = AddonList["toolbox addons"][name]["forItem"];
-                  this -> effects = AddonList["toolbox addons"][name]["effects"];
-                  this -> effectPotency = AddonList["toolbox addons"][name]["effectPotency"];
+                  this -> rarity = AddonList.at(4).at(addonIndex).at(1);
+                  this -> forItem = AddonList.at(4).at(addonIndex).at(2);
+                  this -> effects = AddonList.at(4).at(addonIndex).at(3);
+                  this -> effectPotency = jsonConverter(AddonList.at(4).at(addonIndex).at(4));
                   break;
                 }
                 default: {
@@ -157,8 +158,8 @@ namespace N
             // defines addon via method, reassigning mainly the default constructor as that is the primary one.
             void defineAddon(unsigned short itemType, std::string name)
             {
+              nlohmann::json addonList;
               bool vAddonListidity = false;
-              std::ifstream AddonList_file("AddonList.json", std::ifstream::binary);
 
               for(const auto& item : AddonList.items()) {
                 for(const auto& addonItem : item.items()) {
@@ -217,7 +218,7 @@ namespace N
                   break;
                 }
               }
-              AddonList.close();
+              delete addonList;
             }
     };
 }
