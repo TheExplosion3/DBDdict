@@ -219,57 +219,7 @@ int main() {
               break;
             }
           }
-            // i think this is an effect calculator???
-          if (addonPresent == true)
-          {
-          
-          while(true)
-            {
-              *ptrTwo = "";
-              *ptr = 0;
-              bool effectFound = false;
-              for(int i = 0; i < sizeof(flashlight.getAddOn(*ptr).getEffects()); i++)
-                {
-                  if(flashlight.getAddOn(*ptr).getEffects()[*ptr] != ' ')
-                  {
-                    *ptrTwo += flashlight.getAddOn(i).getEffects()[i];
-                  }
-                  else
-                  {
-                    // need to calculate how many effects are on one addon, and then run accordingly. otherwise, this wont work at all, and it will only calculate one effect. im sort of thinking to use another while loop, and then count the number of effects that are labeled 
-                    if(capitalizeString(*ptrTwo) == "ACCURACY")
-                    {
-                      break;
-                    }
-                    else if(capitalizeString(*ptrTwo) == "WIDTH")
-                    {
-                      break
-                    }
-                    else if(capitalizeString(*ptrTwo) == "RANGE")
-                    {
-                      break;
-                    }
-                    else if(capitalizeString(*ptrTwo) == "USETIME" || capitalizeString(*ptrTwo) == "USE TIME")
-                    {
-                      break;
-                    }
-                    else
-                    {
-                      break;
-                    }
-                  }
-                  if(!(flashlight.getAddOn(i).getEffects()[i - 1] == ',') && effectFound == true)
-                  {
-                    *ptr++;
-                    break;
-                  }
-                }
-              }
-              if(*ptr == 2)
-              {
-                break;
-              }
-            }
+          // need to redo my addon effect calculator, otherwise it wont work
           // print statement for flashlight
           std::cout << "Name: " << flashlight.getName() << "\nRarity: " << flashlight.getRarity() << "\nRange: " << flashlight.getRange() << "\nWidth: " << flashlight.getWidth() << "\nAccuracy: " << flashlight.getAccuracy() << "\nBrightness: " << flashlight.getBrightness() << "Blindness Duration: " << flashlight.getBlindnessDuration() << "\nUse Time: " << flashlight.getUseTime() << "\nOther Effects: " << vectorPrinter(flashlight.getOtherEffects()) << std::endl;
           // i think this'll properly print the addons if they are present?
