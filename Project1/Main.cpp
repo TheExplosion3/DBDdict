@@ -232,25 +232,30 @@ int main() {
                 {
                   if(flashlight.getAddOn(*ptr).getEffects()[*ptr] != ' ')
                   {
-                    *ptrTwo += flashlight.getAddOn(*ptr).getEffects()[*ptr];
+                    *ptrTwo += flashlight.getAddOn(i).getEffects()[i];
                   }
                   else
                   {
+                    // need to calculate how many effects are on one addon, and then run accordingly. otherwise, this wont work at all, and it will only calculate one effect. im sort of thinking to use another while loop, and then count the number of effects that are labeled 
                     if(capitalizeString(*ptrTwo) == "ACCURACY")
                     {
-                      
+                      break;
                     }
                     else if(capitalizeString(*ptrTwo) == "WIDTH")
                     {
-                      
+                      break
                     }
                     else if(capitalizeString(*ptrTwo) == "RANGE")
                     {
-                      
+                      break;
                     }
                     else if(capitalizeString(*ptrTwo) == "USETIME" || capitalizeString(*ptrTwo) == "USE TIME")
                     {
-                      
+                      break;
+                    }
+                    else
+                    {
+                      break;
                     }
                   }
                   if(!(flashlight.getAddOn(i).getEffects()[i - 1] == ',') && effectFound == true)
@@ -265,9 +270,7 @@ int main() {
                 break;
               }
             }
-          
-          // print statement for flashlight, cause i dont know how to make the c++ equivalent of tostring function
-        // no clue why this doesnt work
+          // print statement for flashlight
           std::cout << "Name: " << flashlight.getName() << "\nRarity: " << flashlight.getRarity() << "\nRange: " << flashlight.getRange() << "\nWidth: " << flashlight.getWidth() << "\nAccuracy: " << flashlight.getAccuracy() << "\nBrightness: " << flashlight.getBrightness() << "Blindness Duration: " << flashlight.getBlindnessDuration() << "\nUse Time: " << flashlight.getUseTime() << "\nOther Effects: " << vectorPrinter(flashlight.getOtherEffects()) << std::endl;
           // i think this'll properly print the addons if they are present?
           if(flashlight.getAddOns().empty() == 0)
