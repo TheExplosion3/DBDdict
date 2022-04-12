@@ -101,7 +101,6 @@ int main() {
         // switch case for flashlight rarity, sets base stats via input and switch case
         switch(*ptr){
 					case 1: {
-
             flashlight.flashlightTypeSetter(1);
             break;
 					}
@@ -175,7 +174,7 @@ int main() {
         std::cout << "Is there a second addon present? If so, type the second name below, otherwise type N/A." << std::endl;
 	    	std::cin >> *ptrTwo;
         // immediately checks for a pass cmd, if not one it continues
-        if(!(hash(capitalizeString(*ptrTwo), sizeof(*ptrTwo)) == hash("N/A", sizeof("N/A"))))
+        if(!(hash(capitalizeString(*ptrTwo), sizeof(*ptrTwo)) == hash("N/A", sizeof("N/A")))
         {
 
           N::Addons newAddon;
@@ -211,7 +210,7 @@ int main() {
               validAddon = true;
             }
             // standard break statements from the first addon set
-            if(!(hash(capitalizeString(*ptrTwo), sizeof(*ptrTwo)) == hash("N/A", sizeof("N/A"))))
+            if(!(hash(capitalizeString(*ptrTwo), sizeof(*ptrTwo)) == hash("N/A", sizeof("N/A")))
             {
               break;
             }
@@ -237,18 +236,24 @@ int main() {
                   }
                   else
                   {
-                    switch(hash(*ptrTwo, sizeof(*ptrTwo))) {
-                      case hash("RANGE", sizeof("RANGE")): {
-                        effectFound = true;
-                        calculateEffects("range", flashlight.getAddon(*ptr).getEffectPotency(*ptr));
-                        break;
-                      }
-                      default: {
-                        *ptrTwo = "";
-                        break;
-                      }
+                    if(capitalizeString(*ptrTwo) == "ACCURACY")
+                    {
+                      
+                    }
+                    else if(capitalizeString(*ptrTwo) == "WIDTH")
+                    {
+                      
+                    }
+                    else if(capitalizeString(*ptrTwo) == "RANGE")
+                    {
+                      
+                    }
+                    else if(capitalizeString(*ptrTwo) == "USETIME" || capitalizeString(*ptrTwo) == "USE TIME")
+                    {
+                      
+                    }
                   }
-                  if(!(flashlight.getAddOn(*ptr)[i - 1] == ',') && effectFound == true)
+                  if(!(flashlight.getAddOn(i).getEffects()[i - 1] == ',') && effectFound == true)
                   {
                     *ptr++;
                     break;
@@ -260,23 +265,24 @@ int main() {
                 break;
               }
             }
-          }
+          
           // print statement for flashlight, cause i dont know how to make the c++ equivalent of tostring function
-        std::cout << "Name: " << flashlight.getName() << "\nRarity: " << flashlight.getRarity() << "\nRange: " << flashlight.getRange() << "\nWidth: " << flashlight.getWidth() << "\nAccuracy: " << flashlight.getAccuracy() << "\nBrightness: " << flashlight.getBrightness() << "Blindness Duration: " << flashlight.getBlindnessDuration() << "\nUse Time: " << flashlight.getUseTime() << "\nOther Effects: " << vectorPrinter(flashlight.getOtherEffects()) << std::endl;
+        // no clue why this doesnt work
+          std::cout << "Name: " << flashlight.getName() << "\nRarity: " << flashlight.getRarity() << "\nRange: " << flashlight.getRange() << "\nWidth: " << flashlight.getWidth() << "\nAccuracy: " << flashlight.getAccuracy() << "\nBrightness: " << flashlight.getBrightness() << "Blindness Duration: " << flashlight.getBlindnessDuration() << "\nUse Time: " << flashlight.getUseTime() << "\nOther Effects: " << vectorPrinter(flashlight.getOtherEffects()) << std::endl;
           // i think this'll properly print the addons if they are present?
-        if(flashlight.getAddOns().empty() == 0)
-        {
-          std::cout << "\nAddons:\n" << std::endl;
-          std::cout << "Name: " << flashlight.getAddOn(0).getName() << "\nRarity: " << flashlight.getAddOn(0).getRarity() << "\nEffects: " << flashlight.getAddOn(0).getEffects() << std::endl;
-
-          try {
-          std::cout << "Name: " << flashlight.getAddOn(1).getName() << "\nRarity: " << flashlight.getAddOn(1).getRarity() << "\nEffects: " << flashlight.getAddOn(1).getEffects() << std::endl;
-          }
-          catch (std::exception& e) {
-            continue;
+          if(flashlight.getAddOns().empty() == 0)
+          {
+            std::cout << "\nAddons:\n" << std::endl;
+            std::cout << "Name: " << flashlight.getAddOn(0).getName() << "\nRarity: " << flashlight.getAddOn(0).getRarity() << "\nEffects: " << flashlight.getAddOn(0).getEffects() << std::endl;
+  
+            try {
+            std::cout << "Name: " << flashlight.getAddOn(1).getName() << "\nRarity: " << flashlight.getAddOn(1).getRarity() << "\nEffects: " << flashlight.getAddOn(1).getEffects() << std::endl;
+            }
+            catch (std::exception& e) {
+              continue;
+            }
           }
         }
-			}
 			case 6: {
 				std::cout << "Thanks for using our program!" << std::endl;
 				break;

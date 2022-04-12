@@ -16,7 +16,7 @@ unsigned short addOnIndexFinder(std::string name) {
   nlohmann::json aL;
   for(const auto& item : aL.items()) {
     ctr = 0;
-    for(auto it = item.at(it).begin(); it = item.at(it).end(); it++) {
+    for(auto it = item.begin(); it = item..end(); it++) {
       if(name == item.at(it))
       {
         return ctr;

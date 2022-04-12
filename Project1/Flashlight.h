@@ -136,7 +136,7 @@ namespace N
             void setAddOns(std::array<Addons> addOns) {
               this -> addOns = addOns;
             }
-            std::array<Addons> getAddOns() {
+            std::array<Addons, 2> getAddOns() {
               return addOns;
             }
             void setBlindnessDuration(unsigned short blindnessDuration) {
@@ -146,21 +146,19 @@ namespace N
               return blindnessDuration;
             }
             // i have no clue why but i cannot for the life of me get it to hash these strings and properly read them
-            void calculateEffects(const std::string effectType, float effectPotency) {
-
-              const std::array<unsigned short, 5> hashedEffects{hash("accuracy"), hash("width"), hash("range"), hash("useTime"), hash("brightness")};
+            void calculateEffects(unsigned short effectType, float effectPotency) {
               
-              switch(hash(effectType)) {
-                case hashedEffects.at(0): {
+              switch(effectType) {
+                case 1: {
                   this -> accuracy = this -> accuracy * effectPotency;
                 }
-                case hashedEffects.at(1): {
+                case 2: {
                   this -> width = this -> width * effectPotency;
                 }
-                case hashedEffects.at(2): {
+                case 3: {
                   this -> range = this -> range * effectPotency;
                 }
-                case hashedEffects.at(3): {
+                case 4: {
                   if(effectPotency - (short)effectPotency == 0)
                   {
                     this -> useTime = this -> useTime + effectPotency;
@@ -170,7 +168,7 @@ namespace N
                     this -> useTime = this -> useTime * effectPotency;
                   }
                 }
-                case hashedEffects.at(4): {
+                case 5: {
                   this -> brightness = this -> brightness * effectPotency;
                 }
                 default: {
