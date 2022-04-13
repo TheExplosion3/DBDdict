@@ -66,7 +66,7 @@ namespace N
                 this -> useTime = useTime;
             }
             virtual ~Flashlight() {
-              delete[] addOns;
+              delete addOns;
             }
             Flashlight(const Flashlight& other) {
               this -> rarity = other.getRarity();
@@ -134,7 +134,7 @@ namespace N
             Addons getAddOn(unsigned short index) const {
               return addOns[index];
             }
-            void setAddOns(std::array<Addons> addOns) {
+            void setAddOns(std::array<Addons, 2> addOns) {
               this -> addOns = addOns;
             }
             std::array<Addons, 2> getAddOns() {

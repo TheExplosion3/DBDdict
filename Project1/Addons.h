@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <string>
 #include <vector>
@@ -5,35 +6,14 @@
 #include <fstream>
 #include <nlohmann/json.hpp>
 
-const unsigned short hash(const std::string s) {
-  std::size_t h1 = std::hash<std::string>{}(s);
-  return h1;
-}
-
 // finds the index of an addon, by iterating through an array;
 unsigned short addOnIndexFinder(std::string name) {
-  unsigned short ctr = 0;
-  nlohmann::json aL;
-  for(const auto& item : aL.items()) {
-    ctr = 0;
-    for(auto it = item.begin(); it = item..end(); it++) {
-      if(name == item.at(it))
-      {
-        return ctr;
-      }
-      ctr++;
-    }
-  delete aL;
   return 0;
-  }
 }
 
 // converts json arrays into c++ vectors
 const std::vector<float> jsonConverter(nlohmann::json& j, unsigned short loc) {
   const std::vector<float> returnVar;
-  for (auto it = j.at(4).begin(); it = j.at(4).end(); it++) {
-    returnVar.push_back(it);
-  }
   return returnVar;
 }
 
@@ -48,7 +28,6 @@ namespace N
             std::string effects;
             std::vector<float> effectPotency;
         public:
-            nlohmann::json AddonList;
             
 // base constructor
             Addons()
@@ -68,55 +47,7 @@ namespace N
                 this -> effects = effects;
                 this -> effectPotency = effectPotency;
             }
-// constructor based upon the JSON file, instead of directly defining the addons
-            Addons(std::string name, unsigned short forItem)
-            {
-              nlohmann::json AddonList;
-              unsigned short addonIndex = addOnIndexFinder(name);
-                
-              this -> name = name;
-              switch(forItem) {
-                case 1: {
-                  this -> rarity = AddonList.at(0).at(addonIndex).at(1);
-                  this -> forItem = AddonList.at(0).at(addonIndex).at(2);
-                  this -> effects = AddonList.at(0).at(addonIndex).at(3);
-                  this -> effectPotency = jsonConverter(AddonList.at(0).at(addonIndex).at(4));
-                  break;
-                }
-                case 2: {
-                  this -> rarity = AddonList.at(1).at(addonIndex).at(1);
-                  this -> forItem = AddonList.at(1).at(addonIndex).at(2);
-                  this -> effects = AddonList.at(1).at(addonIndex).at(3);
-                  this -> effectPotency = jsonConverter(AddonList.at(1).at(addonIndex).at(4));
-                  break;
-                }
-                case 3: {
-                  this -> rarity = AddonList.at(2).at(addonIndex).at(1);
-                  this -> forItem = AddonList.at(2).at(addonIndex).at(2);
-                  this -> effects = AddonList.at(2).at(addonIndex).at(3);
-                  this -> effectPotency = jsonConverter(AddonList.at(2).at(addonIndex).at(4));
-                  break;
-                }
-                case 4: {
-                  this -> rarity = AddonList.at(3).at(addonIndex).at(1);
-                  this -> forItem = AddonList.at(3).at(addonIndex).at(2);
-                  this -> effects = AddonList.at(3).at(addonIndex).at(3);
-                  this -> effectPotency = jsonConverter(AddonList.at(3).at(addonIndex).at(4));
-                  break;
-                }
-                case 5: {
-                  this -> rarity = AddonList.at(4).at(addonIndex).at(1);
-                  this -> forItem = AddonList.at(4).at(addonIndex).at(2);
-                  this -> effects = AddonList.at(4).at(addonIndex).at(3);
-                  this -> effectPotency = jsonConverter(AddonList.at(4).at(addonIndex).at(4));
-                  break;
-                }
-                default: {
-                  break;
-                }
-              }
-              AddonList.close();
-            }
+// copy constructor
             Addons(const N::Addons& other) {
               this -> name = other.getName();
               this -> rarity = other.getRarity();
@@ -157,69 +88,69 @@ namespace N
             }
 
             // defines addon via method, reassigning mainly the default constructor as that is the primary one.
-            void defineAddon(unsigned short itemType, std::string name)
-            {
+            void defineAddon(unsigned short itemType, std::string name) {
+              unsigned short idx = 0;  
               nlohmann::json addonList;
-              bool vAddonListidity = false;
-
-              for(const auto& item : AddonList.items()) {
-                for(const auto& addonItem : item.items()) {
-                  if(item == name) {
-                  vAddonListidity = true;
-                  break;
-                  }
-                }
-              }
-              if(vAddonListidity = false) {
+              
+              if(!(addonList.at(itemType - 1).contains(name))) {
                 return;
               }
+
+              for(auto it = addonList.begin(); it != addonList.end(); ++it) {
+                for(auto et = it.value().begin(); et != it.value().end(); ++et) {
+                  if(name == et.key()) {
+                    break;
+                  }
+                  idx++;
+                }
+              }
+            
               
               switch(itemType) {
                 case 1: {
-                  this -> name = AddonList["flashlight addons"][name]["name"];
-                  this -> rarity = AddonList["flashlight addons"][name]["rarity"];
-                  this -> forItem = AddonList["flashlight addons"][name]["forItem"];
-                  this -> effects = AddonList["flashlight addons"][name]["effects"];
-                  this -> effectPotency = AddonList["flashlight addons"][name]["effectPotency"];
+                  this -> name = addonList.at(0).at(idx);
+                  this -> rarity = addonList.at(0).at(idx);
+                  this -> forItem = addonList.at(0).at(idx);
+                  this -> effects = addonList.at(0).at(idx);
+                  this -> effectPotency = addonList.at(0).at(idx).get<std::vector<float>>();
                   break;
                 }
                 case 2: {
-                  this -> name = AddonList["key addons"][name]["name"];
-                  this -> rarity = AddonList["key addons"][name]["rarity"];
-                  this -> forItem = AddonList["key addons"][name]["forItem"];
-                  this -> effects = AddonList["key addons"][name]["effects"];
-                  this -> effectPotency = AddonList["key addons"][name]["effectPotency"];
+                  this -> name = addonList.at(1).at(idx);
+                  this -> rarity = addonList.at(1).at(idx);
+                  this -> forItem = addonList.at(1).at(idx);
+                  this -> effects = addonList.at(1).at(idx);
+                  this -> effectPotency = addonList.at(0).at(idx).get<std::vector<float>>();
                   break;
                 }
                 case 3: {
-                  this -> name = AddonList["map addons"][name]["name"];
-                  this -> rarity = AddonList["map addons"][name]["rarity"];
-                  this -> forItem = AddonList["map addons"][name]["forItem"];
-                  this -> effects = AddonList["map addons"][name]["effects"];
-                  this -> effectPotency = AddonList["map addons"][name]["effectPotency"];
+                  this -> name = addonList.at(2).at(idx);
+                  this -> rarity = addonList.at(2).at(idx);
+                  this -> forItem = addonList.at(2).at(idx);
+                  this -> effects = addonList.at(2).at(idx);
+                  this -> effectPotency = addonList.at(0).at(idx).get<std::vector<float>>();
                   break;
                 }
                 case 4: {
-                  this -> name = AddonList["medkit addons"][name]["name"];
-                  this -> rarity = AddonList["medkit addons"][name]["rarity"];
-                  this -> forItem = AddonList["medkit addons"][name]["forItem"];
-                  this -> effects = AddonList["medkit addons"][name]["effects"];
-                  this -> effectPotency = AddonList["medkit addons"][name]["effectPotency"];
+                  this -> name = addonList.at(3).at(idx);
+                  this -> rarity = addonList.at(3).at(idx);
+                  this -> forItem = addonList.at(3).at(idx);
+                  this -> effects = addonList.at(3).at(idx);
+                  this -> effectPotency = addonList.at(0).at(idx).get<std::vector<float>>();
                   break;
                 }
                 case 5: {
-                  this -> name = AddonList["toolbox addons"][name]["name"];
-                  this -> rarity = AddonList["toolbox addons"][name]["rarity"];
-                  this -> forItem = AddonList["toolbox addons"][name]["forItem"];
-                  this -> effects = AddonList["toolbox addons"][name]["effects"];
-                  this -> effectPotency = AddonList["toolbox addons"][name]["effectPotency"];
+                  this -> name = addonList.at(4).at(idx);
+                  this -> rarity = addonList.at(4).at(idx);
+                  this -> forItem = addonList.at(4).at(idx);
+                  this -> effects = addonList.at(4).at(idx);
+                  this -> effectPotency = addonList.at(0).at(idx).get<std::vector<float>>();
                   break;
                 }
                 default: {
                   break;
                 }
               }
-              delete addonList;
             }
     };
 }
