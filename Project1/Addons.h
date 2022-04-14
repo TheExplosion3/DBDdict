@@ -30,8 +30,7 @@ namespace N
         public:
             
 // base constructor
-            Addons()
-            {
+            Addons() {
                 name = "";
                 rarity = "";
                 forItem = "";
@@ -39,8 +38,7 @@ namespace N
                 effectPotency = {0};
             }
 // controlled param constructor
-            Addons(std::string name, std::string rarity, std::string forItem, std::string effects, std::vector<float> effectPotency)
-            {
+            Addons(std::string name, std::string rarity, std::string forItem, std::string effects, std::vector<float> effectPotency) {
                 this -> name = name;
                 this -> rarity = rarity;
                 this -> forItem = forItem;
