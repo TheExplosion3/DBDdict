@@ -7,7 +7,7 @@
 #include <vector>
 #include <nlohmann/json.hpp>
 
-int main() {
-  
+int main()  {
+  std::cout << "built successfully!" << std::endl;
 }
 

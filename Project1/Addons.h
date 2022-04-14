@@ -21,7 +21,7 @@ namespace N
 {
     class Addons {
 
-        private:
+        protected:
             std::string name;
             std::string rarity;
             std::string forItem;

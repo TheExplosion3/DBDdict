@@ -8,7 +8,7 @@ namespace N
 {
     class Flashlight
     {
-        private:
+        protected:
             std::string rarity;
             std::string name;
             std::vector<std::string> otherEffects;
@@ -65,9 +65,7 @@ namespace N
                 this -> brightness = brightness;
                 this -> useTime = useTime;
             }
-            virtual ~Flashlight() {
-              delete addOns;
-            }
+            virtual ~Flashlight() {}
             Flashlight(const Flashlight& other) {
               this -> rarity = other.getRarity();
               this -> name = other.getName();
@@ -219,7 +217,7 @@ namespace N
                   setWidth(100);
                   setBlindnessDuration(100);
                   setUseTime(8);
-                  addOtherEffects("More friendly ghosts in your life");
+                  otherEffects.push_back("More friendly ghosts in your life");
                   break;
                 }
                 case 5: {
@@ -230,7 +228,7 @@ namespace N
                   setWidth(100);
                   setBlindnessDuration(100);
                   setUseTime(8);
-                  addOtherEffects("Explodes with confetti upon blinding a killer");
+                  otherEffects.push_back("Explodes with confetti upon blinding a killer");
                   break;
                 }
                 default: {
@@ -238,11 +236,10 @@ namespace N
                 }
               }
             }
-            void addOtherEffects(std::string altEffect) {
-              this -> otherEffects.push_back(altEffect);
-            }
+          void addOtherEffects(std::string altEffect) {
+            this -> otherEffects.push_back(altEffect);
+          }
   
 
-            
-    };
-}
+  };
+};
