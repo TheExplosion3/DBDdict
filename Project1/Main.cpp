@@ -51,8 +51,7 @@ int main()  {
         fObject.O::Flashlight::flashlightTypeSetter(userInputUS);
 
         std::cout << "If there is an addon, what is it's name? If there is not one, then type N/A" << std::endl;
-        std::cin.clear();
-        std::cin.sync();
+        F::inputResetSync();
         std::getline(std::cin, userInputS);
         bool addonsPresent;
         

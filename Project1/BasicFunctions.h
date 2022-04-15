@@ -6,8 +6,14 @@
 namespace F {
   // Resets the input stream
   void inputReset() {
-  std::cin.ignore(10000, 'n');
+  std::cin.ignore(10000, '\n');
   std::cin.clear();
+  }
+
+  // Clears input stream, syncs as well
+  void inputResetSync() {
+    std::cin.clear();
+    std::cin.sync();
   }
 
 // User input verifiers
@@ -69,8 +75,7 @@ namespace F {
       }
       else {
         std::cout << "Make sure you typed the addon's name correctly, or type N/A to skip this step." << '\n';
-        std::cin.clear();
-        std::cin.sync();
+        inputResetSync();
         std::getline(std::cin , name);
       }
     }
