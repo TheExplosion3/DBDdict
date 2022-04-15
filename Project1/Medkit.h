@@ -3,7 +3,7 @@
 #include <vector>
 #include "Addons.h"
 
-namespace N
+namespace O
 {
     class Medkit
     {

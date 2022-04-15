@@ -17,7 +17,7 @@ const std::vector<float> jsonConverter(nlohmann::json& j, unsigned short loc) {
   return returnVar;
 }
 
-namespace N
+namespace O
 {
     class Addons {
 
@@ -46,7 +46,7 @@ namespace N
                 this -> effectPotency = effectPotency;
             }
 // copy constructor
-            Addons(const N::Addons& other) {
+            Addons(const O::Addons& other) {
               this -> name = other.getName();
               this -> rarity = other.getRarity();
               this -> forItem = other.getForItem();

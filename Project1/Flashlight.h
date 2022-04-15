@@ -4,7 +4,7 @@
 #include <array>
 #include "Addons.h"
 
-namespace N
+namespace O
 {
     class Flashlight
     {
@@ -43,7 +43,7 @@ namespace N
                 addOns[0] = addOnOne;
                 addOns[1] = addOnTwo;
             }
-            Flashlight(std::string rarity, std::string name, std::vector<std::string> otherEffects, unsigned short accuracy, unsigned short width, unsigned short range, unsigned short brightness, float useTime, unsigned short blindnessDuration, N::Addons addOnOne) {
+            Flashlight(std::string rarity, std::string name, std::vector<std::string> otherEffects, unsigned short accuracy, unsigned short width, unsigned short range, unsigned short brightness, float useTime, unsigned short blindnessDuration, Addons addOnOne) {
                 this -> rarity = rarity;
                 this -> name = name;
                 this -> otherEffects = otherEffects;
