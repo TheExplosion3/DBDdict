@@ -77,7 +77,7 @@ namespace O
               this -> useTime = other.getUseTime();
             }
 
-            // why does OOP have to use so many getters and setters lmao
+            // getters and setters
             void setName(std::string name) {
               this -> name = name;
             }
@@ -144,9 +144,8 @@ namespace O
             unsigned short getBlindnessDuration() const {
               return blindnessDuration;
             }
-            // i have no clue why but i cannot for the life of me get it to hash these strings and properly read them
+            // calculates the effects that an addon has on a flashlight, via input of the effect potency and effect type as parameters.
             void calculateEffects(unsigned short effectType, float effectPotency) {
-              
               switch(effectType) {
                 case 1: {
                   this -> accuracy = this -> accuracy * effectPotency;
@@ -175,7 +174,7 @@ namespace O
                 }
               }
             }
-
+            // Sets the flashlight's base stats via its rarity, inputted as an unsigned short which increases/decreases based upon rarity.
             void flashlightTypeSetter(unsigned short type) {
               switch(type) {
                 case 1: {
@@ -236,6 +235,7 @@ namespace O
                 }
               }
             }
+          // Adds another miscellaneous effect to the otherEffects vector
           void addOtherEffects(std::string altEffect) {
             this -> otherEffects.push_back(altEffect);
           }

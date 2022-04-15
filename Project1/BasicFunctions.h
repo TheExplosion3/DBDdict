@@ -3,14 +3,14 @@
 #include <limits>
 
 namespace F {
-  // resets the input stream
+  // Resets the input stream
   void inputReset() {
   std::cin.ignore(10000, 'n');
   std::cin.clear();
   }
 
-// user input verifiers
-  // for unsigned shorts
+// User input verifiers
+  // For unsigned shorts
   void userInputVerify(unsigned short var) {
     while(true) {
       if(std::cin.fail()) {
@@ -24,7 +24,7 @@ namespace F {
       }
     }
   }
-  // for strings
+  // For strings
   void userInputVerify(std::string var) {
     while(true) {
       if(std::cin.fail()) {
@@ -38,7 +38,7 @@ namespace F {
       }
     }
   }
-  // for booleans
+  // For booleans
   void userInputVerify(bool var) {
     while(true) {
       if(std::cin.fail()) {
