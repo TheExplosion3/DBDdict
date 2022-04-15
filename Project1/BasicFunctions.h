@@ -63,7 +63,9 @@ namespace F {
   // Adds an addon with the name under the parameter, to the target object parameter.
   bool addonAdder(std::string name, O::Flashlight& addonTarget) {
     while(true) {
-      if(!(addOnIndexFinder(name) == -1 && name == "N/A")) {
+      std::transform(name.begin(), name.end(), name.begin(),
+    [](unsigned char c){ return std::tolower(c); });
+      if(addOnIndexFinder(name) != -1 && name != "N/A") {
         O::Addons newAddon;
         newAddon.defineAddon("flashlight", name);
         addonTarget.setAddOn(0, newAddon);
@@ -74,8 +76,8 @@ namespace F {
         break;
       }
       else {
-        std::cout << "Make sure you typed the addon's name correctly, or type N/A to skip this step." << '\n';
-        inputResetSync();
+        std::cout << "Make sure you typed the addon's name correctly, or type N/A to skip this step." << std::endl;
+        std::cin.ignore(std::numeric_limits<int>::max(), '\n');
         std::getline(std::cin , name);
       }
     }
