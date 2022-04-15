@@ -40,6 +40,7 @@ int main()  {
         while(true) {
           if(!(userInputUS > 0 && userInputUS < 6)) {
             std::cout << "Please only input valid numerical inputs between 1 and 5.\n" << std::endl;
+            std::cin.ignore(10000, '\n');
             std::cin >> userInputUS;
           }
           else {
@@ -48,6 +49,14 @@ int main()  {
         }
         
         fObject.O::Flashlight::flashlightTypeSetter(userInputUS);
+
+        std::cout << "If there is an addon, what is it's name? If there is not one, then type N/A" << std::endl;
+        std::cin.clear();
+        std::cin.sync();
+        std::getline(std::cin, userInputS);
+        bool addonsPresent;
+        
+        addonsPresent = F::addonAdder(userInputS, fObject);
 
         userInputUS = 0;
         std::cout << '\n';

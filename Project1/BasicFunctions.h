@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string.h>
 #include <limits>
+#include "Addons.h"
 
 namespace F {
   // Resets the input stream
@@ -51,5 +52,28 @@ namespace F {
         break;
       }
     }
+  }
+// Addon adders
+  // Adds an addon with the name under the parameter, to the target object parameter.
+  bool addonAdder(std::string name, O::Flashlight& addonTarget) {
+    while(true) {
+      if(!(addOnIndexFinder(name) == -1 && name == "N/A")) {
+        O::Addons newAddon;
+        newAddon.defineAddon("flashlight", name);
+        addonTarget.setAddOn(0, newAddon);
+        return true;
+      }
+      else if(name == "N/A") {
+        return false;
+        break;
+      }
+      else {
+        std::cout << "Make sure you typed the addon's name correctly, or type N/A to skip this step." << '\n';
+        std::cin.clear();
+        std::cin.sync();
+        std::getline(std::cin , name);
+      }
+    }
+    return false;
   }
 }
