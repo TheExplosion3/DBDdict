@@ -6,33 +6,29 @@
 #include <fstream>
 #include <nlohmann/json.hpp>
 
+// very botched case changer
+std::string lowercaseString(std::string str) {
+  std::transform(str.begin(), str.end(), str.begin(), [](unsigned char c){return std::tolower(c);});
+  return str;
+}
 
-
-// finds the index of an addon, by iterating through an array;
+// finds the index of an addon, by iterating through an array. binary search is overrated (even though i probably should be using it)
 short addOnIndexFinder(std::string name) {
   std::ifstream i("Project1/AddonList.json");
   nlohmann::json AddonList;
   i >> AddonList;
+
   unsigned short idx;
   std::string temp;
+
   for(auto& it : AddonList.items()) {
-    temp = it.key();
-    
-    std::transform(temp.begin(), temp.end(), temp.begin(),
-    [](unsigned char c){ return std::tolower(c); });
-    
+    temp = lowercaseString(it.key());
     if(name.compare(temp) == 0) {
       return idx;
     }
     idx++;
   }
   return -1;
-}
-
-// converts json arrays into c++ vectors
-const std::vector<float> jsonConverter(nlohmann::json& j) {
-  const std::vector<float> returnVar;
-  return returnVar;
 }
 
 namespace O
@@ -113,12 +109,12 @@ namespace O
               if(!(AddonList.contains(name))) {
                 return;
               }
-            
-              this -> name = AddonList["name"];
-              this -> rarity = AddonList["rarity"];
-              this -> forItem = AddonList["forItem"];
-              this -> effects = AddonList["effects"];
-              this -> effectPotency = jsonConverter(AddonList["effectPotency"]);
+              
+              this -> name = AddonList[name]["name"];
+              this -> rarity = AddonList[name]["rarity"];
+              this -> forItem = AddonList[name]["forItem"];
+              this -> effects = AddonList[name]["effects"];
+              this -> effectPotency = (std::vector<float>)AddonList[name]["effectPotency"];
             }
     };
 }

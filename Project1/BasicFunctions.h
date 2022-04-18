@@ -64,8 +64,7 @@ namespace F {
   bool addonAdder(std::string name, O::Flashlight& addonTarget, unsigned short targetIndex) {
     while(true) {
       
-      std::transform(name.begin(), name.end(), name.begin(),
-    [](unsigned char c){ return std::tolower(c); });
+      name = lowercaseString(name);
       
       if(addOnIndexFinder(name) != -1 && name != "N/A") {
         O::Addons newAddon;
@@ -94,8 +93,7 @@ namespace F {
             temp += et;
           }
           else {
-            std::transform(temp.begin(), temp.end(), temp.begin(),
-        [](unsigned char c){ return std::tolower(c); });
+            temp = lowercaseString(temp);
             if(temp.compare("accuracy") == 0) {
               target.calculateEffects(1, target.getAccuracy());
             }
