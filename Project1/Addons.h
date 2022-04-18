@@ -10,16 +10,21 @@
 
 // finds the index of an addon, by iterating through an array;
 short addOnIndexFinder(std::string name) {
+  std::ifstream i("Project1/AddonList.json");
   nlohmann::json AddonList;
+  i >> AddonList;
   unsigned short idx;
-  for(auto& it : AddonList) {
-    idx = 0;
-    for(auto& et : it) {
-      if(name == et["name"]) {
-        return idx;
-      }
-      idx++;
+  std::string temp;
+  for(auto& it : AddonList.items()) {
+    temp = it.key();
+    
+    std::transform(temp.begin(), temp.end(), temp.begin(),
+    [](unsigned char c){ return std::tolower(c); });
+    
+    if(name.compare(temp) == 0) {
+      return idx;
     }
+    idx++;
   }
   return -1;
 }
@@ -99,74 +104,21 @@ namespace O
             }
 
             // defines addon via method, reassigning mainly the default constructor as that is the primary one.
-            void defineAddon(std::string type, std::string name) {              
-              unsigned short itemType;  
-              // determines which type it is for the switch case
-              if(type == "flashlight") {
-                itemType = 1;
-              }
-              else if(type == "medkit") {
-                itemType = 2;
-              }
-              else if(type == "key") {
-                itemType = 3;
-              }
-              else if(type == "map") {
-                itemType = 4;
-              }
-              else if(type == "toolbox"){
-                itemType = 5;
-              }
-              // verifies that the item is actually present
+            void defineAddon(std::string type, std::string name) {   
+              std::ifstream i("Project1/AddonList.json");
               nlohmann::json AddonList;
-              type += " addons";
-              if(!(AddonList[type].contains(name))) {
+              i >> AddonList;
+
+              // verifies addon is actually in list
+              if(!(AddonList.contains(name))) {
                 return;
               }
             
-              // actual addon definition
-              switch(itemType) {
-                case 1: {
-                  this -> name = AddonList["flashlight addons"]["name"];
-                  this -> rarity = AddonList["flashlight addons"]["rarity"];
-                  this -> forItem = AddonList["flashlight addons"]["forItem"];
-                  this -> effects = AddonList["flashlight addons"]["effects"];
-                  this -> effectPotency = jsonConverter(AddonList["flashlight addons"]["effectPotency"]);
-                  break;
-                }
-                case 2: {
-                  this -> name = AddonList["medkit addons"]["name"];
-                  this -> rarity = AddonList["medkit addons"]["rarity"];
-                  this -> forItem = AddonList["medkit addons"]["forItem"];
-                  this -> effects = AddonList["medkit addons"]["effects"];
-                  this -> effectPotency = jsonConverter(AddonList["medkit addons"]["effectPotency"]);
-                  break;
-                }
-                case 3: {
-                  this -> name = AddonList["key addons"]["name"];
-                  this -> rarity = AddonList["key addons"]["rarity"];
-                  this -> forItem = AddonList["key addons"]["forItem"];
-                  this -> effects = AddonList["key addons"]["effects"];
-                  this -> effectPotency = jsonConverter(AddonList["key addons"]["effectPotency"]);
-                  break;
-                }
-                case 4: {
-                  this -> name = AddonList["map addons"]["name"];
-                  this -> rarity = AddonList["map addons"]["rarity"];
-                  this -> forItem = AddonList["map addons"]["forItem"];
-                  this -> effects = AddonList["map addons"]["effects"];
-                  this -> effectPotency = jsonConverter(AddonList["map addons"]["effectPotency"]);
-                  break;
-                }
-                case 5: {
-                  this -> name = AddonList["map addons"]["name"];
-                  this -> rarity = AddonList["map addons"]["rarity"];
-                  this -> forItem = AddonList["map addons"]["forItem"];
-                  this -> effects = AddonList["map addons"]["effects"];
-                  this -> effectPotency = jsonConverter(AddonList["map addons"]["effectPotency"]);
-                  break;
-                }
-              }
+              this -> name = AddonList["name"];
+              this -> rarity = AddonList["rarity"];
+              this -> forItem = AddonList["forItem"];
+              this -> effects = AddonList["effects"];
+              this -> effectPotency = jsonConverter(AddonList["effectPotency"]);
             }
     };
 }

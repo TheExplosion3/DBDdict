@@ -169,6 +169,9 @@ namespace O
                 case 5: {
                   this -> brightness = this -> brightness * effectPotency;
                 }
+                case 6: {
+                  this -> blindnessDuration = this -> blindnessDuration * effectPotency;
+                }
                 default: {
                   break;
                 }
