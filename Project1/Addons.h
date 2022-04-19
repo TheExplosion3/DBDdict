@@ -114,7 +114,7 @@ namespace O
               this -> rarity = AddonList[name]["rarity"];
               this -> forItem = AddonList[name]["forItem"];
               this -> effects = AddonList[name]["effects"];
-              this -> effectPotency = (std::vector<float>)AddonList[name]["effectPotency"];
+              this -> effectPotency = AddonList[name]["effectPotency"].get<std::vector<float>>();
             }
     };
 }
