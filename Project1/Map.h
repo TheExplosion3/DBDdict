@@ -3,10 +3,8 @@
 #include <vector>
 #include "Addons.h"
 
-namespace O
-{
-    class Map
-    {
-      
-    };
+namespace O {
+  class Map {
+    
+  };
 }

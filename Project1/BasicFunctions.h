@@ -63,10 +63,9 @@ namespace F {
   // Adds an addon with the name under the parameter, to the target object parameter.
   bool addonAdder(std::string name, O::Flashlight& addonTarget, unsigned short targetIndex) {
     while(true) {
+      std::string tempName = lowercaseString(name);
       
-      name = lowercaseString(name);
-      
-      if(addOnIndexFinder(name) != -1 && name != "N/A") {
+      if(addOnIndexFinder(tempName) != -1 && name != "N/A") {
         O::Addons newAddon;
         newAddon.defineAddon("flashlight", name);
         addonTarget.setAddOn(targetIndex, newAddon);

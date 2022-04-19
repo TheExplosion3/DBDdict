@@ -3,10 +3,8 @@
 #include <vector>
 #include "Addons.h"
 
-namespace O
-{
-    class Toolbox
-    {
+namespace O {
+  class Toolbox {
 
-    };
+  };
 }

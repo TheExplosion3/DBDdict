@@ -12,6 +12,19 @@ std::string lowercaseString(std::string str) {
   return str;
 }
 
+std::string vectorPrinter(std::vector<std::string> vec) {
+  unsigned short ctr = 0;
+  for(std::string str : vec) {
+    if(ctr == vec.size()) {
+      std::cout << str << std::endl;
+    }
+    else {
+      std::cout << str << ", ";
+    }
+    ctr++;
+  }
+}
+
 // finds the index of an addon, by iterating through an array. binary search is overrated (even though i probably should be using it)
 short addOnIndexFinder(std::string name) {
   std::ifstream i("Project1/AddonList.json");
@@ -100,13 +113,13 @@ namespace O
             }
 
             // defines addon via method, reassigning mainly the default constructor as that is the primary one.
-            void defineAddon(std::string type, std::string name) {   
+            void defineAddon(std::string type, std::string name) {  
               std::ifstream i("Project1/AddonList.json");
               nlohmann::json AddonList;
-              i >> AddonList;
-
+              i >> AddonList; 
+              
               // verifies addon is actually in list
-              if(!(AddonList.contains(name))) {
+              if(!AddonList.contains(name)) {
                 return;
               }
               

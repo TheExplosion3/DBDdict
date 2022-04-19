@@ -21,49 +21,50 @@ namespace O
             std::array<Addons, 2> addOns;
         public:
             Flashlight() {
-                rarity = "";
-                name = "Flashlight";
-                accuracy = 100;
-                width = 100;
-                range = 100;
-                brightness = 100;
-                useTime = 0;
-                otherEffects = std::vector<std::string>{""};
+              rarity = "";
+              name = "Flashlight";
+              accuracy = 100;
+              width = 100;
+              range = 100;
+              brightness = 100;
+              useTime = 0;
+              otherEffects = std::vector<std::string>{""};
             }
             Flashlight(std::string rarity, std::string name, std::vector<std::string> otherEffects, unsigned short accuracy, unsigned short width, unsigned short range, unsigned short brightness, float useTime, unsigned short blindnessDuration, Addons addOnOne, Addons addOnTwo) {
-                this -> rarity = rarity;
-                this -> name = name;
-                this -> otherEffects = otherEffects;
-                this -> accuracy = accuracy;
-                this -> width = width;
-                this -> range = range;
-                this -> brightness = brightness;
-                this -> useTime = useTime;
-                this -> blindnessDuration = blindnessDuration;
-                addOns[0] = addOnOne;
-                addOns[1] = addOnTwo;
+              this -> rarity = rarity;
+              this -> name = name;
+              this -> otherEffects = otherEffects;
+              this -> accuracy = accuracy;
+              this -> width = width;
+              this -> range = range;
+              this -> brightness = brightness;
+              this -> useTime = useTime;
+              this -> blindnessDuration = blindnessDuration;
+              addOns[0] = addOnOne;
+              addOns[1] = addOnTwo;
             }
             Flashlight(std::string rarity, std::string name, std::vector<std::string> otherEffects, unsigned short accuracy, unsigned short width, unsigned short range, unsigned short brightness, float useTime, unsigned short blindnessDuration, Addons addOnOne) {
-                this -> rarity = rarity;
-                this -> name = name;
-                this -> otherEffects = otherEffects;
-                this -> accuracy = accuracy;
-                this -> width = width;
-                this -> range = range;
-                this -> brightness = brightness;
-                this -> useTime = useTime;
-                this -> blindnessDuration = blindnessDuration;
-                addOns[0] = addOnOne;
+              this -> rarity = rarity;
+              this -> name = name;
+              this -> otherEffects = otherEffects;
+              this -> accuracy = accuracy;
+              this -> width = width;
+              this -> range = range;
+              this -> brightness = brightness;
+              this -> useTime = useTime;
+              this -> blindnessDuration = blindnessDuration;
+              addOns[0] = addOnOne;
             }
-            Flashlight(std::string rarity, std::string name, std::vector<std::string> otherEffects, unsigned short accuracy, unsigned short width, unsigned short range, unsigned short brightness, float useTime) {
-                this -> rarity = rarity;
-                this -> name = name;
-                this -> otherEffects = otherEffects;
-                this -> accuracy = accuracy;
-                this -> width = width;
-                this -> range = range;
-                this -> brightness = brightness;
-                this -> useTime = useTime;
+            Flashlight(std::string rarity, std::string name, std::vector<std::string> otherEffects, unsigned short accuracy, unsigned short width, unsigned short blindnessDuration, unsigned short range, unsigned short brightness, float useTime) {
+              this -> rarity = rarity;
+              this -> name = name;
+              this -> otherEffects = otherEffects;
+              this -> accuracy = accuracy;
+              this -> width = width;
+              this -> range = range;
+              this -> brightness = brightness;
+              this -> useTime = useTime;
+              this -> blindnessDuration = blindnessDuration;
             }
             virtual ~Flashlight() {}
             Flashlight(const Flashlight& other) {
@@ -75,6 +76,7 @@ namespace O
               this -> range = other.getRange();
               this -> brightness = other.getBrightness();
               this -> useTime = other.getUseTime();
+              this -> blindnessDuration = other.getBlindnessDuration();
             }
 
             // getters and setters
@@ -241,6 +243,14 @@ namespace O
           // Adds another miscellaneous effect to the otherEffects vector
           void addOtherEffects(std::string altEffect) {
             this -> otherEffects.push_back(altEffect);
+          }
+          // prints the primary flashlight object
+          void printFLO(O::Flashlight obj) {
+            std::cout << obj.getName() << '\n' << "Rarity: " << obj.getRarity() << '\n' << "Accuracy: " << obj.getAccuracy() << '\n' << "Width: " << obj.getWidth() << '\n' << "Range: " << obj.getRange() << '\n' << "Brightness: " << obj.getBrightness() << '\n' << "Use Time: " << obj.getUseTime() << '\n' << "Other Effects: " << vectorPrinter(obj.getOtherEffects()) << std::endl;
+          }
+          // prints the flashlight's addons
+          void printFLA(O::Flashlight obj) {
+            std::cout << "placeholder" << std::endl;
           }
   
 

@@ -42,7 +42,7 @@ int main() {
         while(true) {
           if(!(userInputUS > 0 && userInputUS < 6)) {
             std::cout << "Please only input valid numerical inputs between 1 and 5.\n" << std::endl;
-            std::cin.ignore(10000, '\n');
+            F::inputReset();
             std::cin >> userInputUS;
           }
           else {
@@ -55,7 +55,15 @@ int main() {
         std::cout << "If there is an addon, what is it's name? If there is not one, then type N/A" << std::endl;
         std::cin.clear();
         std::getline(std::cin >> std::ws, userInputS);
-        addonsPresent = F::addonAdder(userInputS, fObject, 0);
+        if(userInputS.compare("N/A") == 0) {
+          fObject.O::Flashlight::printFLO(fObject);
+          userInputUS = 0;
+          continue;
+        }
+        else {
+          addonsPresent = F::addonAdder(userInputS, fObject, 0);
+        }
+
 
         // same as previous comment
         if(addonsPresent == true) {
@@ -64,16 +72,18 @@ int main() {
           std::getline(std::cin >> std::ws, userInputS);
           // verifies addon is not the same, and if it is then it will proceed to alert the user about it, otherwise it continues.
           
-          std::transform(userInputS.begin(), userInputS.end(), userInputS.begin(),
-    [](unsigned char c){ return std::tolower(c); });
+          userInputS = lowercaseString(userInputS);;
           
-          std::string adName = fObject.getAddOn(0).getName();
-          
-          std::transform(adName.begin(), adName.end(), adName.begin(),
-    [](unsigned char c){ return std::tolower(c); });
+          if(userInputS.compare("N/A") == 0) {
+            fObject.O::Flashlight::printFLO(fObject);
+            fObject.O::Flashlight::printFLA(fObject);
+            userInputUS = 0;
+            continue;
+          }
           
           while(true) {
-            if(adName == userInputS) {
+           
+            if(lowercaseString(fObject.getAddOn(0).getName()).compare(userInputS) == 0) {
               std::cout << "You can't have 2 of the same addons, type a different one or type N/A to exit." << std::endl;
               std::cin.clear();
               std::getline(std::cin >> std::ws, userInputS);
