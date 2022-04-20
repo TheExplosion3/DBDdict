@@ -73,7 +73,6 @@ namespace F {
       }
       else if(name == "N/A") {
         return false;
-        break;
       }
       else {
         std::cout << "Make sure you typed the addon's name correctly, or type N/A to skip this step." << std::endl;
@@ -86,30 +85,43 @@ namespace F {
   
   void effectCalculator(short addonCount, O::Flashlight& target) {
     std::string temp;
-    for(auto& it : target.getAddOns()) {
-      for(auto &et : it.getEffects()) {
+    unsigned short ctr = 0;
+    for(int i = 0; i < addonCount; i++) {
+      for(auto &it : target.getAddOns()) {
+        for(auto &et : it.getEffects()) {
           if(et != ' ') {
             temp += et;
           }
           else {
             temp = lowercaseString(temp);
             if(temp.compare("accuracy") == 0) {
-              target.calculateEffects(1, target.getAccuracy());
+              
+              target.calculateEffects(1, it.getEffectPotency().at(ctr));
+              ctr++;
             }
             else if(temp.compare("width") == 0) {
-              target.calculateEffects(2, target.getWidth());
+              target.calculateEffects(2, it.getEffectPotency().at(ctr));
+              ctr++;
             }
             else if(temp.compare("range") == 0) {
-              target.calculateEffects(3, target.getRange());
+              target.calculateEffects(3, it.getEffectPotency().at(ctr));
+              ctr++;
             }
             else if(temp.compare("use") == 0) {
-              target.calculateEffects(4, target.getUseTime());
+              target.calculateEffects(4, it.getEffectPotency().at(ctr));
+              ctr++;
             }
             else if(temp.compare("brightness") == 0) {
-              target.calculateEffects(5, target.getBrightness());
+              target.calculateEffects(5, it.getEffectPotency().at(ctr));
+              ctr++;
             }
             else if(temp.compare("duration") == 0) {
-              target.calculateEffects(6, target.getBlindnessDuration());
+              target.calculateEffects(6, it.getEffectPotency().at(ctr));
+              ctr++;
+            }
+            else if(temp.compare("by") == 0 || temp.compare("increases") == 0 || temp.compare(",") == 0 || temp.compare(" , ") == 0 || temp.compare(" ,") == 0 || temp.compare(", ") == 0) {
+              temp = "";
+              continue;
             }
             else {
               target.addOtherEffects(temp);
@@ -118,5 +130,6 @@ namespace F {
           }
         }
       }
-    }
+    } 
+  }
 }

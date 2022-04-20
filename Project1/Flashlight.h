@@ -12,11 +12,11 @@ namespace O
             std::string rarity;
             std::string name;
             std::vector<std::string> otherEffects;
-            unsigned mutable short accuracy;
-            unsigned mutable short width;
-            unsigned mutable short range;
-            unsigned mutable short brightness;
-            unsigned mutable short blindnessDuration;
+            mutable float accuracy;
+            mutable float width;
+            mutable float range;
+            mutable float brightness;
+            mutable float blindnessDuration;
             float useTime;
             std::array<Addons, 2> addOns;
         public:
@@ -30,7 +30,7 @@ namespace O
               useTime = 0;
               otherEffects = std::vector<std::string>{""};
             }
-            Flashlight(std::string rarity, std::string name, std::vector<std::string> otherEffects, unsigned short accuracy, unsigned short width, unsigned short range, unsigned short brightness, float useTime, unsigned short blindnessDuration, Addons addOnOne, Addons addOnTwo) {
+            Flashlight(std::string rarity, std::string name, std::vector<std::string> otherEffects, float accuracy, float width, float range, float brightness, float useTime, float blindnessDuration, Addons addOnOne, Addons addOnTwo) {
               this -> rarity = rarity;
               this -> name = name;
               this -> otherEffects = otherEffects;
@@ -43,7 +43,7 @@ namespace O
               addOns[0] = addOnOne;
               addOns[1] = addOnTwo;
             }
-            Flashlight(std::string rarity, std::string name, std::vector<std::string> otherEffects, unsigned short accuracy, unsigned short width, unsigned short range, unsigned short brightness, float useTime, unsigned short blindnessDuration, Addons addOnOne) {
+            Flashlight(std::string rarity, std::string name, std::vector<std::string> otherEffects, float accuracy, float width, float range, float brightness, float useTime, float blindnessDuration, Addons addOnOne) {
               this -> rarity = rarity;
               this -> name = name;
               this -> otherEffects = otherEffects;
@@ -55,7 +55,7 @@ namespace O
               this -> blindnessDuration = blindnessDuration;
               addOns[0] = addOnOne;
             }
-            Flashlight(std::string rarity, std::string name, std::vector<std::string> otherEffects, unsigned short accuracy, unsigned short width, unsigned short blindnessDuration, unsigned short range, unsigned short brightness, float useTime) {
+            Flashlight(std::string rarity, std::string name, std::vector<std::string> otherEffects, float accuracy, float width, float blindnessDuration, float range, float brightness, float useTime) {
               this -> rarity = rarity;
               this -> name = name;
               this -> otherEffects = otherEffects;
@@ -98,28 +98,28 @@ namespace O
             std::vector<std::string> getOtherEffects() const {
               return otherEffects;
             }
-            void setAccuracy(unsigned short accuracy) {
+            void setAccuracy(float accuracy) {
               this -> accuracy = accuracy;
             }
-            unsigned short getAccuracy() const {
+            float getAccuracy() const {
               return accuracy;
             }
-            void setWidth(unsigned short width) {
+            void setWidth(float width) {
               this -> width = width;
             }
-            unsigned short getWidth() const {
+            float getWidth() const {
               return width;
             }
-            void setRange(unsigned short range) {
+            void setRange(float range) {
               this -> range = range;
             }
-            unsigned short getRange() const {
+            float getRange() const {
               return range;
             }
-            void setBrightness(unsigned short Brightness) {
+            void setBrightness(float Brightness) {
               this -> brightness = brightness;
             }
-            unsigned short getBrightness() const {
+            float getBrightness() const {
               return brightness;
             }
             void setUseTime(float useTime) {
@@ -128,10 +128,10 @@ namespace O
             float getUseTime() const {
               return useTime;
             }
-            void setAddOn(unsigned short index, Addons addon) {
+            void setAddOn(float index, Addons addon) {
               this -> addOns[index] = addon;
             }
-            Addons getAddOn(unsigned short index) const {
+            Addons getAddOn(float index) const {
               return addOns[index];
             }
             void setAddOns(std::array<Addons, 2> addOns) {
@@ -140,10 +140,10 @@ namespace O
             std::array<Addons, 2> getAddOns() {
               return addOns;
             }
-            void setBlindnessDuration(unsigned short blindnessDuration) {
+            void setBlindnessDuration(float blindnessDuration) {
               this -> blindnessDuration = blindnessDuration;
             }
-            unsigned short getBlindnessDuration() const {
+            float getBlindnessDuration() const {
               return blindnessDuration;
             }
             // calculates the effects that an addon has on a flashlight, via input of the effect potency and effect type as parameters.
@@ -151,12 +151,15 @@ namespace O
               switch(effectType) {
                 case 1: {
                   this -> accuracy = this -> accuracy * effectPotency;
+                  break;
                 }
                 case 2: {
                   this -> width = this -> width * effectPotency;
+                  break;
                 }
                 case 3: {
                   this -> range = this -> range * effectPotency;
+                  break;
                 }
                 case 4: {
                   if(effectPotency - (short)effectPotency == 0)
@@ -167,19 +170,22 @@ namespace O
                   {
                     this -> useTime = this -> useTime * effectPotency;
                   }
+                  break;
                 }
                 case 5: {
                   this -> brightness = this -> brightness * effectPotency;
+                  break;
                 }
                 case 6: {
                   this -> blindnessDuration = this -> blindnessDuration * effectPotency;
+                  break;
                 }
                 default: {
                   break;
                 }
               }
             }
-            // Sets the flashlight's base stats via its rarity, inputted as an unsigned short which increases/decreases based upon rarity.
+            // Sets the flashlight's base stats via its rarity, inputted as an float which increases/decreases based upon rarity.
             void flashlightTypeSetter(unsigned short type) {
               switch(type) {
                 case 1: {
@@ -245,12 +251,13 @@ namespace O
             this -> otherEffects.push_back(altEffect);
           }
           // prints the primary flashlight object
-          void printFLO(O::Flashlight obj) {
-            std::cout << obj.getName() << '\n' << "Rarity: " << obj.getRarity() << '\n' << "Accuracy: " << obj.getAccuracy() << '\n' << "Width: " << obj.getWidth() << '\n' << "Range: " << obj.getRange() << '\n' << "Brightness: " << obj.getBrightness() << '\n' << "Use Time: " << obj.getUseTime() << '\n' << "Other Effects: " << vectorPrinter(obj.getOtherEffects()) << std::endl;
+          void printFLO() {
+            std::cout << this -> name << '\n' << "Rarity: " << this -> rarity << '\n' << "Accuracy: " << this -> accuracy << '\n' << "Width: " << this -> width << '\n' << "Range: " << this -> range << '\n' << "Brightness: " << this -> brightness << '\n' << "Use Time: " << this -> useTime << '\n' << "Other Effects: " << vectorPrinter(this -> otherEffects) << std::endl;
           }
-          // prints the flashlight's addons
-          void printFLA(O::Flashlight obj) {
-            std::cout << "placeholder" << std::endl;
+          // prints an addon for the flashlight, specified via unsigned short idx.
+          void printFLA(unsigned short idx) {
+            Addons* ptr = &addOns.at(idx);
+            std::cout << "Name: " << ptr->getName() << '\n' << "Rarity: " << ptr->getRarity() << '\n' << "Effects: " << ptr->getEffects() << std::endl;
           }
   
 

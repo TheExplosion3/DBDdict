@@ -12,17 +12,34 @@ std::string lowercaseString(std::string str) {
   return str;
 }
 
+// prints out vectors, separated by spaces
 std::string vectorPrinter(std::vector<std::string> vec) {
   unsigned short ctr = 0;
+  std::string returnVal = "";
   for(std::string str : vec) {
-    if(ctr == vec.size()) {
-      std::cout << str << std::endl;
+    if(ctr == vec.size() - 1) {
+      returnVal += str + '\n';
     }
     else {
-      std::cout << str << ", ";
+      returnVal += str + ", ";
     }
     ctr++;
   }
+  return returnVal;
+}
+std::string vectorPrinter(std::vector<float> vec) {
+  unsigned short ctr = 0;
+  std::string returnVal = "";
+  for(float f : vec) {
+    if(ctr == vec.size() - 1) {
+      returnVal += f + '\n';
+    }
+    else {
+      returnVal += std::to_string(f) + ", ";
+    }
+    ctr++;
+  }
+  return returnVal;
 }
 
 // finds the index of an addon, by iterating through an array. binary search is overrated (even though i probably should be using it)
@@ -44,8 +61,7 @@ short addOnIndexFinder(std::string name) {
   return -1;
 }
 
-namespace O
-{
+namespace O {
     class Addons {
 
         protected:

@@ -40,7 +40,7 @@ int main() {
         F::userInputVerify(userInputUS);
         // verifies that the number is in bounds for the cases within the flashlight function
         while(true) {
-          if(!(userInputUS > 0 && userInputUS < 6)) {
+          if(userInputUS < 0 && userInputUS > 6) {
             std::cout << "Please only input valid numerical inputs between 1 and 5.\n" << std::endl;
             F::inputReset();
             std::cin >> userInputUS;
@@ -56,7 +56,7 @@ int main() {
         std::cin.clear();
         std::getline(std::cin >> std::ws, userInputS);
         if(userInputS.compare("N/A") == 0) {
-          fObject.O::Flashlight::printFLO(fObject);
+          fObject.O::Flashlight::printFLO();
           userInputUS = 0;
           continue;
         }
@@ -67,16 +67,16 @@ int main() {
 
         // same as previous comment
         if(addonsPresent == true) {
-          std::cout << "If there is a second addon, what is it's name? If there is not one, then type N/A" << std::endl;
+          std::cout << "If there is a second addon, what is it's name? If there is not one, then type N/A\n" << std::endl;
           std::cin.clear();
           std::getline(std::cin >> std::ws, userInputS);
           // verifies addon is not the same, and if it is then it will proceed to alert the user about it, otherwise it continues.
           
-          userInputS = lowercaseString(userInputS);;
+          userInputS = lowercaseString(userInputS);
           
           if(userInputS.compare("N/A") == 0) {
-            fObject.O::Flashlight::printFLO(fObject);
-            fObject.O::Flashlight::printFLA(fObject);
+            fObject.O::Flashlight::printFLO();
+            fObject.O::Flashlight::printFLA(0);
             userInputUS = 0;
             continue;
           }
@@ -87,6 +87,12 @@ int main() {
               std::cout << "You can't have 2 of the same addons, type a different one or type N/A to exit." << std::endl;
               std::cin.clear();
               std::getline(std::cin >> std::ws, userInputS);
+
+              if(userInputS.compare("N/A") == 0) {
+                fObject.O::Flashlight::printFLO();
+                fObject.O::Flashlight::printFLA(0);
+              }
+              
             }
             else {
               break;
@@ -96,7 +102,7 @@ int main() {
         }
         
         if(addonsPresent == true) {
-          if(fObject.getAddOns().size() == 1) {
+          if(fObject.getAddOns()[1].getName().compare(" ") == 0) {
             F::effectCalculator(0, fObject);
           }
           else {
@@ -105,8 +111,12 @@ int main() {
           }
         }
         
-
-        std::cout << "placeholder" << std::endl;
+        fObject.O::Flashlight::printFLO();
+        std::cout << '\n';
+        fObject.O::Flashlight::printFLA(0);
+        std::cout << '\n';
+        fObject.O::Flashlight::printFLA(1);
+        
         userInputUS = 0;
         std::cout << '\n';
         continue;
