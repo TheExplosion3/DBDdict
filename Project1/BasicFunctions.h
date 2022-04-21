@@ -59,6 +59,20 @@ namespace F {
       }
     }
   }
+
+  void camelCase(std::string str) {
+    str[0] = toupper(str[0]);
+ 
+    int len = str.length();
+    
+    for (int i = 0; i < len; i++) {
+      if (str[i - 1] == ' ') {
+        str[i] = toupper(str[i]);
+      }
+    }
+    return str;
+  }
+
 // Addon adders
   // Adds an addon with the name under the parameter, to the target object parameter.
   bool addonAdder(std::string name, O::Flashlight& addonTarget, unsigned short targetIndex) {
