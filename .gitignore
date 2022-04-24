@@ -7,10 +7,10 @@ cmake_install.cmake
 .vs
 .vscode
 x64
-Project1.sln
-Project1/Project1.vcxproj
-Project1/Project1.vcxproj.filters
-Project1/Project1.vcxproj.user
+Project1/DBDdict.sln
+Project1/DBDdict.vcxproj
+Project1/DBDdict.vcxproj.filters
+Project1/DBDdict.vcxproj.user
 Project1/x64
 DBDdict
 include

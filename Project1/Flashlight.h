@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <string>
 #include <vector>
@@ -263,6 +264,7 @@ namespace O
           void printFLA(unsigned short idx) {
             Addons* ptr = &addOns.at(idx);
             std::cout << "Name: " << ptr->getName() << '\n' << "Rarity: " << ptr->getRarity() << '\n' << "Effects: " << ptr->getEffects() << std::endl;
+            delete ptr;
           }
   
 

@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <string.h>
 #include <limits>
@@ -75,7 +76,8 @@ namespace F {
 
 // Addon adders
   // Adds an addon with the name under the parameter, to the target object parameter.
-  bool addonAdder(std::string name, O::Flashlight& addonTarget, unsigned short targetIndex) {
+  template <typename T>
+  bool addonAdder(std::string name, T& addonTarget, unsigned short targetIndex) {
     while(true) {
       std::string tempName = lowercaseString(name);
       
