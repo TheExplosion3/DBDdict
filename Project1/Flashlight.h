@@ -30,6 +30,7 @@ namespace O
               useTime = 0;
               otherEffects = std::vector<std::string>{""};
             }
+            
             Flashlight(std::string rarity, std::string name, std::vector<std::string> otherEffects, float accuracy, float width, float range, float brightness, float useTime, float blindnessDuration, Addons addOnOne, Addons addOnTwo) {
               this -> rarity = rarity;
               this -> name = name;
@@ -43,6 +44,7 @@ namespace O
               addOns[0] = addOnOne;
               addOns[1] = addOnTwo;
             }
+
             Flashlight(std::string rarity, std::string name, std::vector<std::string> otherEffects, float accuracy, float width, float range, float brightness, float useTime, float blindnessDuration, Addons addOnOne) {
               this -> rarity = rarity;
               this -> name = name;
@@ -55,6 +57,7 @@ namespace O
               this -> blindnessDuration = blindnessDuration;
               addOns[0] = addOnOne;
             }
+
             Flashlight(std::string rarity, std::string name, std::vector<std::string> otherEffects, float accuracy, float width, float blindnessDuration, float range, float brightness, float useTime) {
               this -> rarity = rarity;
               this -> name = name;
@@ -66,7 +69,9 @@ namespace O
               this -> useTime = useTime;
               this -> blindnessDuration = blindnessDuration;
             }
+
             virtual ~Flashlight() {}
+
             Flashlight(const Flashlight& other) {
               this -> rarity = other.getRarity();
               this -> name = other.getName();

@@ -5,6 +5,6 @@
 
 namespace O {
   class Key {
-
+  
   };
 }
