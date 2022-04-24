@@ -129,21 +129,24 @@ namespace O {
             }
 
             // defines addon via method, reassigning mainly the default constructor as that is the primary one.
-            void defineAddon(std::string type, std::string name) {  
+            void defineAddon(std::string name) {  
               std::ifstream i("Project1/AddonList.json");
               nlohmann::json AddonList;
               i >> AddonList; 
               
               // verifies addon is actually in list
-              if(!AddonList.contains(name)) {
+              if(AddonList.contains(name)) {
+                this -> name = AddonList[name]["name"];
+                this -> rarity = AddonList[name]["rarity"];
+                this -> forItem = AddonList[name]["forItem"];
+                this -> effects = AddonList[name]["effects"];
+                this -> effectPotency = AddonList[name]["effectPotency"].get<std::vector<float>>();
+              }
+              else {
                 return;
               }
               
-              this -> name = AddonList[name]["name"];
-              this -> rarity = AddonList[name]["rarity"];
-              this -> forItem = AddonList[name]["forItem"];
-              this -> effects = AddonList[name]["effects"];
-              this -> effectPotency = AddonList[name]["effectPotency"].get<std::vector<float>>();
+              
             }
     };
 }

@@ -1,5 +1,4 @@
-{
-  
+{ 
   "Wide Lens" : {
     "name" : "Wide Lens",
     "rarity" : "Common",
@@ -84,7 +83,7 @@
     "name" : "Intense Halogen",
     "rarity" : "Rare",
     "forItem" : "Flashlight",
-    "effects" : "Increases brightness by 40%, inreases blindness duration by 20%",
+    "effects" : "Increases brightness by 40%, increases blindness duration by 20%",
     "effectPotency" : [1.4, 1.2]
   },
 
