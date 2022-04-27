@@ -6,6 +6,8 @@
 #include <fstream>
 #include <nlohmann/json.hpp>
 
+// yes, these methods should be in basicfunctions, but they are needed there and here, so to prevent circular imports i have placed them here.
+
 // very botched case changer
 std::string lowercaseString(std::string str) {
   std::transform(str.begin(), str.end(), str.begin(), [](unsigned char c){return std::tolower(c);});
@@ -54,10 +56,12 @@ short addOnIndexFinder(std::string name) {
   for(auto& it : AddonList.items()) {
     temp = lowercaseString(it.key());
     if(name.compare(temp) == 0) {
+      i.close();
       return idx;
     }
     idx++;
   }
+  i.close();
   return -1;
 }
 
@@ -141,8 +145,10 @@ namespace O {
                 this -> forItem = AddonList[name]["forItem"];
                 this -> effects = AddonList[name]["effects"];
                 this -> effectPotency = AddonList[name]["effectPotency"].get<std::vector<float>>();
+                i.close();
               }
               else {
+                i.close();
                 return;
               }
               
