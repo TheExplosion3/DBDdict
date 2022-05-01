@@ -121,7 +121,7 @@ int main() {
         std::cout << '\n';
         fObject.O::Flashlight::printFLA(1);
         
-        // return to main statement
+        // return to main switch statement
         userInputUS = 0;
         std::cout << '\n';
         continue;
