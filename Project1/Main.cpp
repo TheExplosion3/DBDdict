@@ -73,9 +73,12 @@ int main() {
           
           userInputS = lowercaseString(userInputS);
           
+          // if N/A is found, prints the object and the first addon, and returns to the main program.
           if(userInputS.compare("N/A") == 0) {
+            F::effectCalculator(0, fObject);
             fObject.O::Flashlight::printFLO();
             fObject.O::Flashlight::printFLA(0);
+
             userInputUS = 0;
             continue;
           }
@@ -100,6 +103,7 @@ int main() {
           F::addonAdder(userInputS, fObject, 1);  
         }
         
+        // checks if one addon is present, or two
         if(addonsPresent == true) {
           if(fObject.getAddOns()[1].getName().compare(" ") == 0) {
             F::effectCalculator(0, fObject);
@@ -110,12 +114,14 @@ int main() {
           }
         }
         
+        // prints flashlight object and both addons, with spaces inbetween each addon and the flashlight itself
         fObject.O::Flashlight::printFLO();
         std::cout << '\n';
         fObject.O::Flashlight::printFLA(0);
         std::cout << '\n';
         fObject.O::Flashlight::printFLA(1);
         
+        // return to main statement
         userInputUS = 0;
         std::cout << '\n';
         continue;
