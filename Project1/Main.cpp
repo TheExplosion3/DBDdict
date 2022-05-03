@@ -81,6 +81,7 @@ int main() {
             userInputUS = 0;
             continue;
           }
+          
           // verifies that user input for the addon isnt the same as the first addon already entered
           while(true) {
            
