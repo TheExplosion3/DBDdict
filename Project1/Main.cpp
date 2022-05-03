@@ -1,4 +1,4 @@
-f #include <iostream>
+#include <iostream>
 #include "Flashlight.h"
 #include "Addons.h"
 #include "BasicFunctions.h"
@@ -10,7 +10,7 @@ f #include <iostream>
 unsigned short userInputUS;
 std::string userInputS;
 bool userInputB;
-
+ssh-keygen -t ed25519 -C "your_email@example.com"
 int main() {
   // gets initial user input for switch statement
   std::cout << "Hello! Which item would you like to use?\n\n1 | Flashlight\n2 | Medkit\n3 | Key\n4 | Map\n5 | Toolbox\n6 | Exit\n" << std::endl;
