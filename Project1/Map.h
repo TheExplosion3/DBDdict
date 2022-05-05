@@ -59,18 +59,7 @@ namespace O {
       }
 
       void calculateEffects(unsigned short effectType, float effectPotency) {
-        switch(effectType) {
-          case 1: {
-            if(effectPotency - (short)effectPotency != 0) {
-              this -> range += effectPotency;
-            }
-            else {
-              this -> range *= effectPotency;
-            }
-          }
-          case 2: {}
-          
-        }
+        
       }
     
   };

@@ -1,10 +1,10 @@
 #include <iostream>
-#include "Flashlight.h"
-#include "Addons.h"
-#include "BasicFunctions.h"
 #include <string.h>
 #include <algorithm>
 #include <nlohmann/json.hpp>
+#include "Flashlight.h"
+#include "Addons.h"
+#include "BasicFunctions.h"
 
 // user input variables, will get reused
 unsigned short userInputUS;
@@ -14,7 +14,7 @@ bool userInputB;
 int main() {
   // gets initial user input for switch statement
   std::cout << "Hello! Which item would you like to use?\n\n1 | Flashlight\n2 | Medkit\n3 | Key\n4 | Map\n5 | Toolbox\n6 | Exit\n" << std::endl;
-  std::cin >> userInputUS;
+  std::cin >> userInputUS; 
   std::cout << '\n';
   F::userInputVerify(userInputUS);
 
