@@ -14,6 +14,28 @@ std::string lowercaseString(std::string str) {
   return str;
 }
 
+std::string camelCase(std::string str) {
+  str[0] = toupper(str[0]);
+
+  int len = str.length();
+  
+  for (int i = 0; i < len; i++) { 
+    if (str[i + 1] == ' ') {
+      str[i + 2] = toupper(str[i + 2]);
+      if(i + 1 >= len) {
+        break;
+      }
+      else {
+        i += 2;
+      }
+    }
+    else if (isupper(str[i]) > 0 && i > 0 && str[i - 1] != ' ') {
+      str[i] = tolower(str[i]);
+    }
+  }
+  return str;
+}
+
 // prints out vectors, separated by spaces
 std::string vectorPrinter(std::vector<std::string> vec) {
   unsigned short ctr = 0;
@@ -136,10 +158,9 @@ namespace O {
             void defineAddon(std::string name) {  
               std::ifstream i("Project1/AddonList.json");
               nlohmann::json AddonList;
-              i >> AddonList; 
-              
+              i >> AddonList;
               // verifies addon is actually in list
-              if(AddonList.contains(name)) {
+              if(AddonList.contains(camelCase(name))) {
                 this -> name = AddonList[name]["name"];
                 this -> rarity = AddonList[name]["rarity"];
                 this -> forItem = AddonList[name]["forItem"];
@@ -151,8 +172,6 @@ namespace O {
                 i.close();
                 return;
               }
-              
-              
             }
     };
 }

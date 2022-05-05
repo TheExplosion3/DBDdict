@@ -32,6 +32,7 @@ namespace F {
       }
     }
   }
+
   // For strings
   void userInputVerify(std::string var) {
     while(true) {
@@ -61,19 +62,6 @@ namespace F {
     }
   }
 
-  std::string camelCase(std::string str) {
-    str[0] = toupper(str[0]);
-  
-    int len = str.length();
-    
-    for (int i = 0; i < len; i++) {
-      if (str[i - 1] == ' ') {
-        str[i] = toupper(str[i]);
-      }
-    }
-    return str;
-  }
-
 // Addon adders
   // Adds an addon with the name under the parameter, to the target object parameter.
   template <typename T>
@@ -81,13 +69,13 @@ namespace F {
     while(true) {
       std::string tempName = lowercaseString(name);
       
-      if(addOnIndexFinder(tempName) != -1 && name != "N/A") {
+      if(addOnIndexFinder(tempName) != -1 && name != "n/a") {
         O::Addons newAddon;
-        newAddon.defineAddon(name);
+        newAddon.defineAddon(camelCase(name));
         addonTarget.setAddOn(targetIndex, newAddon);
         return true;
       }
-      else if(name == "N/A") {
+      else if(name == "n/a") {
         return false;
       }
       else {
@@ -119,6 +107,7 @@ namespace F {
             else {
               temp = lowercaseString(temp);
               if(temp.compare("accuracy") == 0) {
+                std::cout << "entered";
                 target.calculateEffects(1, it.getEffectPotency().at(ctr));
                 ctr++;
               }

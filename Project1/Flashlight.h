@@ -18,7 +18,7 @@ namespace O
             mutable float range;
             mutable float brightness;
             mutable float blindnessDuration;
-            float useTime;
+            mutable float useTime;
             std::array<Addons, 2> addOns;
         public:
             Flashlight() {
@@ -156,34 +156,37 @@ namespace O
             void calculateEffects(unsigned short effectType, float effectPotency) {
               switch(effectType) {
                 case 1: {
-                  this -> accuracy = this -> accuracy * effectPotency;
+                  this -> accuracy *= effectPotency;
                   break;
+                  std::cout << this->accuracy << std::endl;
                 }
                 case 2: {
-                  this -> width = this -> width * effectPotency;
+                  this -> width *= effectPotency;
+                  std::cout << this->width << std::endl;
                   break;
                 }
                 case 3: {
-                  this -> range = this -> range * effectPotency;
+                  this -> range *= effectPotency;
                   break;
+                  std::cout << this->range << std::endl;
                 }
                 case 4: {
                   if(effectPotency - (short)effectPotency == 0)
                   {
-                    this -> useTime = this -> useTime + effectPotency;
+                    this -> useTime += effectPotency;
                   }
                   else
                   {
-                    this -> useTime = this -> useTime * effectPotency;
+                    this -> useTime += effectPotency;
                   }
                   break;
                 }
                 case 5: {
-                  this -> brightness = this -> brightness * effectPotency;
+                  this -> brightness *= effectPotency;
                   break;
                 }
                 case 6: {
-                  this -> blindnessDuration = this -> blindnessDuration * effectPotency;
+                  this -> blindnessDuration *= effectPotency;
                   break;
                 }
                 default: {
@@ -264,7 +267,6 @@ namespace O
           void printFLA(unsigned short idx) {
             Addons* ptr = &addOns.at(idx);
             std::cout << "Name: " << ptr->getName() << '\n' << "Rarity: " << ptr->getRarity() << '\n' << "Effects: " << ptr->getEffects() << std::endl;
-            delete ptr;
           }
   
 

@@ -10,6 +10,7 @@
 unsigned short userInputUS;
 std::string userInputS;
 bool userInputB;
+
 int main() {
   // gets initial user input for switch statement
   std::cout << "Hello! Which item would you like to use?\n\n1 | Flashlight\n2 | Medkit\n3 | Key\n4 | Map\n5 | Toolbox\n6 | Exit\n" << std::endl;
@@ -68,12 +69,13 @@ int main() {
           std::cout << "If there is a second addon, what is it's name? If there is not one, then type N/A\n" << std::endl;
           std::cin.clear();
           std::getline(std::cin >> std::ws, userInputS);
+          std::cout << '\n';
           // verifies addon is not the same, and if it is then it will proceed to alert the user about it, otherwise it continues.
           
           userInputS = lowercaseString(userInputS);
           
           // if N/A is found, prints the object and the first addon, and returns to the main program.
-          if(userInputS.compare("N/A") == 0) {
+          if(userInputS.compare("n/a") == 0) {
             F::effectCalculator(0, fObject);
             fObject.O::Flashlight::printFLO();
             fObject.O::Flashlight::printFLA(0);
@@ -91,6 +93,7 @@ int main() {
               std::getline(std::cin >> std::ws, userInputS);
 
               if(userInputS.compare("N/A") == 0) {
+                std::cout << '\n' << std::endl;
                 fObject.O::Flashlight::printFLO();
                 fObject.O::Flashlight::printFLA(0);
               }
@@ -100,7 +103,7 @@ int main() {
               break;
             }
           }
-          F::addonAdder(userInputS, fObject, 1);  
+          F::addonAdder(userInputS, fObject, 1);
         }
         
         // checks if one addon is present, or two
