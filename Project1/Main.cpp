@@ -85,7 +85,7 @@ int main() {
             continue;
           }
           
-          // verifies that user input for the addon isnt the same as the first addon already entered cause yeah
+          // verifies that user input for the addon isnt the same as the first addon already entered
           while(true) {
            
             if(lowercaseString(fObject.getAddOn(0).getName()).compare(userInputS) == 0) {
