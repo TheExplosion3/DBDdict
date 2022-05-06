@@ -104,45 +104,84 @@ namespace F {
             else if(et != ',') {
               cont = false;
             }
-            else {
-              temp = lowercaseString(temp);
-              if(temp.compare("accuracy") == 0) {
-                std::cout << "entered";
+            temp = lowercaseString(temp);
+            if(temp.length() > 2) {
+              if(temp.substr(1, temp.length()).compare("accuracy") == 0) {
+                std::cout << "entered" << std::endl;
                 target.calculateEffects(1, it.getEffectPotency().at(ctr));
-                ctr++;
+                if(it.getEffectPotency().size() < ctr + 1) {
+                  break;
+                }
+                else
+                {     
+                  ctr++;
+                }
               }
-              else if(temp.compare("width") == 0) {
+              else if(temp.substr(1, temp.length()).compare("width") == 0) {
                 target.calculateEffects(2, it.getEffectPotency().at(ctr));
-                ctr++;
+                if(it.getEffectPotency().size() < ctr + 1) {
+                  break;
+                }
+                else
+                {     
+                  ctr++;
+                }
               }
-              else if(temp.compare("range") == 0) {
+              else if(temp.substr(1, temp.length()).compare("range") == 0) {
                 target.calculateEffects(3, it.getEffectPotency().at(ctr));
-                ctr++;
+                if(it.getEffectPotency().size() < ctr + 1) {
+                  break;
+                }
+                else
+                {     
+                  ctr++;
+                }
               }
-              else if(temp.compare("use") == 0) {
+              else if(temp.substr(1, temp.length()).compare("use") == 0 || temp.substr(1, temp.length()).compare("depletion") == 0) {
                 target.calculateEffects(4, it.getEffectPotency().at(ctr));
-                ctr++;
+                if(it.getEffectPotency().size() < ctr + 1) {
+                  break;
+                }
+                else
+                {     
+                  ctr++;
+                }
               }
-              else if(temp.compare("brightness") == 0) {
+              else if(temp.substr(1, temp.length()).compare("brightness") == 0) {
                 target.calculateEffects(5, it.getEffectPotency().at(ctr));
-                ctr++;
+                if(it.getEffectPotency().size() < ctr + 1) {
+                  return;
+                }
+                else
+                {     
+                  ctr++;
+                }
               }
-              else if(temp.compare("duration") == 0) {
+              else if(temp.substr(1, temp.length()).compare("duration") == 0) {
                 target.calculateEffects(6, it.getEffectPotency().at(ctr));
-                ctr++;
+                if(it.getEffectPotency().size() < ctr + 1) {
+                  return;
+                }
+                else
+                {     
+                  ctr++;
+                }
               }
                 // yes i know this is scuffed shut up
-              else if(temp.compare("by") == 0 || temp.compare("increases") == 0 || temp.compare(",") == 0 || temp.compare(" , ") == 0 || temp.compare(" ,") == 0 || temp.compare(", ") == 0 || temp.compare("40%,") == 0 || temp.compare("blindness") == 0) {
+              else if(temp[0] != '&' || et == ' ') {
                 temp = "";
                 continue;
               }
-              else {
-                target.addOtherEffects(temp);
-              }
-              temp = "";
             }
+            if(!it.getEffects().find("accuracy") || !it.getEffects().find("width") || !it.getEffects().find("range") || !it.getEffects().find("use") || !it.getEffects().find("brightness") || !it.getEffects().find("depletion") || !it.getEffects().find("duration")) {
+              target.addOtherEffects(temp);
+            }                
+            std::cout << i << " | " << temp << " | " << std::endl;
           }
-          
+          if(addonCount > target.getAddOns().size()) {
+            std::cout << "entered" << std::endl;
+            return;
+          }
           if(cont == false) {
             break;
           }

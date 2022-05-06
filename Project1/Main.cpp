@@ -75,8 +75,9 @@ int main() {
           userInputS = lowercaseString(userInputS);
           
           // if N/A is found, prints the object and the first addon, and returns to the main program.
+          std::cout << fObject.getAddOns()[1].getName();
           if(userInputS.compare("n/a") == 0) {
-            F::effectCalculator(0, fObject);
+            F::effectCalculator(1, fObject);
             fObject.O::Flashlight::printFLO();
             fObject.O::Flashlight::printFLA(0);
 
@@ -106,14 +107,13 @@ int main() {
           F::addonAdder(userInputS, fObject, 1);
         }
         
-        // checks if one addon is present, or two
+        // checks if one addon is present, or two, single addon check is for safety and fallback measures
         if(addonsPresent == true) {
           if(fObject.getAddOns()[1].getName().compare(" ") == 0) {
-            F::effectCalculator(0, fObject);
+            F::effectCalculator(1, fObject);
           }
           else {
-            F::effectCalculator(0, fObject);
-            F::effectCalculator(1, fObject);
+            F::effectCalculator(2, fObject);
           }
         }
         

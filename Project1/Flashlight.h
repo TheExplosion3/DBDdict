@@ -265,8 +265,15 @@ namespace O
           }
           // prints an addon for the flashlight, specified via unsigned short idx.
           void printFLA(unsigned short idx) {
+            std::string temp = "";
             Addons* ptr = &addOns.at(idx);
-            std::cout << "Name: " << ptr->getName() << '\n' << "Rarity: " << ptr->getRarity() << '\n' << "Effects: " << ptr->getEffects() << std::endl;
+            
+            for(char &i : ptr->getEffects()) {
+              if(i != '&') {
+                temp += i;
+              }
+            }
+            std::cout << "Name: " << ptr->getName() << '\n' << "Rarity: " << ptr->getRarity() << '\n' << "Effects: " << temp << std::endl;
           }
   
 
