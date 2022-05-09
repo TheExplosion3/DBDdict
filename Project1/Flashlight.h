@@ -122,7 +122,7 @@ namespace O
             float getRange() const {
               return range;
             }
-            void setBrightness(float Brightness) {
+            void setBrightness(float brightness) {
               this -> brightness = brightness;
             }
             float getBrightness() const {
