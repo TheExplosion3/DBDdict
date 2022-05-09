@@ -158,17 +158,14 @@ namespace O
                 case 1: {
                   this -> accuracy *= effectPotency;
                   break;
-                  std::cout << this->accuracy << std::endl;
                 }
                 case 2: {
                   this -> width *= effectPotency;
-                  std::cout << this->width << std::endl;
                   break;
                 }
                 case 3: {
                   this -> range *= effectPotency;
                   break;
-                  std::cout << this->range << std::endl;
                 }
                 case 4: {
                   if(effectPotency - (short)effectPotency == 0)
@@ -261,7 +258,7 @@ namespace O
           }
           // prints the primary flashlight object
           void printFLO() {
-            std::cout << this -> name << '\n' << "Rarity: " << this -> rarity << '\n' << "Accuracy: " << this -> accuracy << '\n' << "Width: " << this -> width << '\n' << "Range: " << this -> range << '\n' << "Brightness: " << this -> brightness << '\n' << "Use Time: " << this -> useTime << '\n' << "Other Effects: " << vectorPrinter(this -> otherEffects) << std::endl;
+            std::cout << this -> name << '\n' << "Rarity: " << this -> rarity << '\n' << "Accuracy: " << this -> accuracy << '\n' << "Width: " << this -> width << '\n' << "Range: " << this -> range << '\n' << "Brightness: " << this -> brightness << '\n' << "Blindness Duration: " << this -> blindnessDuration << '\n' << "Use Time: " << this -> useTime << '\n' << "Other Effects: " << vectorPrinter(this -> otherEffects) << std::endl;
           }
           // prints an addon for the flashlight, specified via unsigned short idx.
           void printFLA(unsigned short idx) {

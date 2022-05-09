@@ -87,8 +87,8 @@
     "effectPotency" : [1.4, 1.2]
   },
 
-  "High-End Sapphire Lens" : {
-    "name" : "High-End Sapphire Lens",
+  "High End Sapphire Lens" : {
+    "name" : "High End Sapphire Lens",
     "rarity" : "Very Rare",
     "forItem" : "Flashlight",
     "effects" : "Increases &range by 25%, increases &brightness by 30%, increases &blindness duration by 15%, increases &width by 25%",
@@ -207,7 +207,7 @@
     "effectPotency" : [8]
   },
 
-  "Anti-Hemmhoragic Syringe" : {
+  "Anti Hemmhoragic Syringe" : {
     "name" : "Anti-Hemorrhagic Syringe",
     "rarity" : "Ultra Rare",
     "forItem" : "Medkit",

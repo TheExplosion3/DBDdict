@@ -92,6 +92,7 @@ namespace F {
     std::string temp;
     unsigned short ctr = 0;
     unsigned short idx = 0;
+    unsigned short fallback = 0;
     bool cont;
 
     // iterate through addons
@@ -100,6 +101,7 @@ namespace F {
       ctr = 0;
       // iterate through string until break is called
       while(true) {
+        fallback++;
         // iterate through effects string
         for(auto &et : it.getEffects()) {
           idx++;
@@ -111,7 +113,10 @@ namespace F {
           if(et != ' ') {
             temp += et;
           }
-          else if(it.getEffects().find(",") != std::string::npos) {
+          else {
+            temp = "";
+          }
+          if(it.getEffects().find(",") != std::string::npos) {
             if(it.getEffects().find(",") < idx) {
               cont == false;
             }
@@ -197,7 +202,7 @@ namespace F {
           if(!it.getEffects().find("accuracy") || !it.getEffects().find("width") || !it.getEffects().find("range") || !it.getEffects().find("use") || !it.getEffects().find("brightness") || !it.getEffects().find("depletion") || !it.getEffects().find("duration")) {
             target.addOtherEffects(temp);
           }                
-          std::cout << et << " | " << temp << " | " << ctr << " | " << it.getEffectPotency().size() << " | " << idx << " | " << it.getEffects().find(',') << std::endl;
+          std::cout << et << " | " << temp << " | " << ctr << " | " << it.getEffectPotency().size() << " | " << idx << " | " << it.getEffects().find(',') << " | " << fallback << std::endl;
         }
         // i dont know why i put this here
         if(addonCount > target.getAddOns().size()) {
@@ -205,6 +210,9 @@ namespace F {
         }
         if(cont == false) {
           break;
+        }
+        else if(fallback >= 3) {
+          return;
         }
       }
     }

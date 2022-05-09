@@ -18,6 +18,10 @@ std::string camelCase(std::string str) {
   str[0] = toupper(str[0]);
 
   int len = str.length();
+
+  if(str == "TIR Optic") {
+    return "TIR Optic";
+  }
   
   for (int i = 0; i < len; i++) { 
     if (str[i + 1] == ' ') {

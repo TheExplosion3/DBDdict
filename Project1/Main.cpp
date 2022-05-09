@@ -2,6 +2,7 @@
 #include <string.h>
 #include <algorithm>
 #include <nlohmann/json.hpp>
+#include "Medkit.h"
 #include "Flashlight.h"
 #include "Addons.h"
 #include "BasicFunctions.h"
@@ -62,6 +63,26 @@ int main() {
         else {
           addonsPresent = F::addonAdder(userInputS, fObject, 0);
         }
+        if(fObject.getAddOn(0).getForItem() != "Flashlight") {
+          while(true) {
+            std::cout << "\nPlease only input addons for Flashlights.\n" << std::endl;
+            std::cin.clear();
+            std::getline(std::cin >> std::ws, userInputS);
+            F::addonAdder(userInputS,fObject, 0);
+            if(fObject.getAddOn(0).getForItem() == "Flashlight") {
+              break;
+            }
+            else if(lowercaseString(userInputS).compare("n/a") == 0) {
+              std::cout << '\n' << std::endl;
+              F::effectCalculator(1, fObject);
+              fObject.O::Flashlight::printFLO();
+              fObject.O::Flashlight::printFLA(0);
+              std::cout << '\n' << std::endl;
+              userInputUS = 0;
+              continue;
+            }
+          }
+        }
 
 
         // same as previous comment
@@ -80,7 +101,7 @@ int main() {
             F::effectCalculator(1, fObject);
             fObject.O::Flashlight::printFLO();
             fObject.O::Flashlight::printFLA(0);
-
+            std::cout << '\n' << std::endl;
             userInputUS = 0;
             continue;
           }
@@ -93,11 +114,19 @@ int main() {
               std::cin.clear();
               std::getline(std::cin >> std::ws, userInputS);
 
-              if(userInputS.compare("N/A") == 0) {
+              if(lowercaseString(fObject.getAddOn(0).getName()).compare(userInputS) != 0) {
+                break;
+              }
+              else if(lowercaseString(userInputS).compare("n/a") == 0) {
                 std::cout << '\n' << std::endl;
+                F::effecCalculator(1, fObject);
                 fObject.O::Flashlight::printFLO();
                 fObject.O::Flashlight::printFLA(0);
+                std::cout << '\n' << std::endl;
+                userInputUS = 0;
+                continue;
               }
+              
               
             }
             else {
@@ -105,6 +134,26 @@ int main() {
             }
           }
           F::addonAdder(userInputS, fObject, 1);
+          if(fObject.getAddOn(1).getForItem() != "Flashlight") {
+            while(true) {
+              std::cout << "Please only input addons for Flashlights.\n" << std::endl;
+              std::cin.clear();
+              std::getline(std::cin >> std::ws, userInputS);
+              F::addonAdder(userInputS,fObject, 1);
+              if(fObject.getAddOn(1).getForItem() == "Flashlight") {
+                break;
+              }
+              else if(lowercaseString(userInputS).compare("n/a") == 0) {
+                std::cout << '\n' << std::endl;
+                F::effectCalculator(1, fObject);
+                fObject.O::Flashlight::printFLO();
+                fObject.O::Flashlight::printFLA(0);
+                std::cout << '\n' << std::endl;
+                userInputUS = 0;
+                continue;
+              }
+            }
+          }
         }
         
         // checks if one addon is present, or two, single addon check is for safety and fallback measures
