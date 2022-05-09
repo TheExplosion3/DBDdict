@@ -3,7 +3,7 @@
     "name" : "Wide Lens",
     "rarity" : "Common",
     "forItem" : "Flashlight",
-    "effects" : "Increases &width of beam by 15%, decreases beam&range by 25%",
+    "effects" : "Increases &width of beam by 15%, decreases beam &range by 25%",
     "effectPotency" : [1.15, 0.75]
   },
    

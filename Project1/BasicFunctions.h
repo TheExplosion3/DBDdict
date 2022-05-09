@@ -86,107 +86,127 @@ namespace F {
     }
     return false;
   }
-  
+
+  // calculates an addon's effects on the main flashlight
   void effectCalculator(short addonCount, O::Flashlight& target) {
     std::string temp;
     unsigned short ctr = 0;
+    unsigned short idx = 0;
     bool cont;
-    for(int i = 0; i < addonCount; i++) {
-      for(auto &it : target.getAddOns()) {
-        while(true) {
-          for(auto &et : it.getEffects()) {
-            if(et != ' ') {
-              temp += et;
-            }
-            else if(et == ',') {
-              cont = true;
-            }
-            else if(et != ',') {
-              cont = false;
-            }
-            temp = lowercaseString(temp);
-            if(temp.length() > 2) {
-              if(temp.substr(1, temp.length()).compare("accuracy") == 0) {
-                std::cout << "entered" << std::endl;
-                target.calculateEffects(1, it.getEffectPotency().at(ctr));
-                if(it.getEffectPotency().size() < ctr + 1) {
-                  break;
-                }
-                else
-                {     
-                  ctr++;
-                }
-              }
-              else if(temp.substr(1, temp.length()).compare("width") == 0) {
-                target.calculateEffects(2, it.getEffectPotency().at(ctr));
-                if(it.getEffectPotency().size() < ctr + 1) {
-                  break;
-                }
-                else
-                {     
-                  ctr++;
-                }
-              }
-              else if(temp.substr(1, temp.length()).compare("range") == 0) {
-                target.calculateEffects(3, it.getEffectPotency().at(ctr));
-                if(it.getEffectPotency().size() < ctr + 1) {
-                  break;
-                }
-                else
-                {     
-                  ctr++;
-                }
-              }
-              else if(temp.substr(1, temp.length()).compare("use") == 0 || temp.substr(1, temp.length()).compare("depletion") == 0) {
-                target.calculateEffects(4, it.getEffectPotency().at(ctr));
-                if(it.getEffectPotency().size() < ctr + 1) {
-                  break;
-                }
-                else
-                {     
-                  ctr++;
-                }
-              }
-              else if(temp.substr(1, temp.length()).compare("brightness") == 0) {
-                target.calculateEffects(5, it.getEffectPotency().at(ctr));
-                if(it.getEffectPotency().size() < ctr + 1) {
-                  return;
-                }
-                else
-                {     
-                  ctr++;
-                }
-              }
-              else if(temp.substr(1, temp.length()).compare("duration") == 0) {
-                target.calculateEffects(6, it.getEffectPotency().at(ctr));
-                if(it.getEffectPotency().size() < ctr + 1) {
-                  return;
-                }
-                else
-                {     
-                  ctr++;
-                }
-              }
-                // yes i know this is scuffed shut up
-              else if(temp[0] != '&' || et == ' ') {
-                temp = "";
-                continue;
-              }
-            }
-            if(!it.getEffects().find("accuracy") || !it.getEffects().find("width") || !it.getEffects().find("range") || !it.getEffects().find("use") || !it.getEffects().find("brightness") || !it.getEffects().find("depletion") || !it.getEffects().find("duration")) {
-              target.addOtherEffects(temp);
-            }                
-            std::cout << i << " | " << temp << " | " << std::endl;
-          }
-          if(addonCount > target.getAddOns().size()) {
-            std::cout << "entered" << std::endl;
-            return;
-          }
-          if(cont == false) {
+
+    // iterate through addons
+    for(auto &it : target.getAddOns()) {
+      // reset counter before going to a new addon
+      ctr = 0;
+      // iterate through string until break is called
+      while(true) {
+        // iterate through effects string
+        for(auto &et : it.getEffects()) {
+          idx++;
+          // check if ctr is larger or equal to size of effectpotency vector, break if true.
+          if(ctr >= it.getEffectPotency().size()) {
             break;
           }
+          // next 3 if statements are to append to temp str, and to check whether or not it should keep appending to said string.
+          if(et != ' ') {
+            temp += et;
+          }
+          else if(it.getEffects().find(",") != std::string::npos) {
+            if(it.getEffects().find(",") < idx) {
+              cont == false;
+            }
+            else {
+              cont = true;
+            }
+          }
+          else if(et != ',') {
+            cont = false;
+          }
+          
+          temp = lowercaseString(temp);
+          // if temp is larger than 2, it will begin checking for effects.
+          if(temp.length() > 2) {
+            if(temp.substr(1, temp.length()).compare("accuracy") == 0) {
+              target.calculateEffects(1, it.getEffectPotency().at(ctr));
+              // this is more of a fallback; if ctr + 1 is larger than effect potency's size it will break.
+              if(it.getEffectPotency().size() < ctr + 1) {
+                break;
+              }
+              else
+              {     
+                ctr++;
+              }
+            }
+            else if(temp.substr(1, temp.length()).compare("width") == 0) {
+              target.calculateEffects(2, it.getEffectPotency().at(ctr));
+              if(it.getEffectPotency().size() < ctr + 1) {
+                break;
+              }
+              else
+              {     
+                ctr++;
+              }
+            }
+            else if(temp.substr(1, temp.length()).compare("range") == 0) {
+              target.calculateEffects(3, it.getEffectPotency().at(ctr));
+              if(it.getEffectPotency().size() < ctr + 1) {
+                break;
+              }
+              else
+              {     
+                ctr++;
+              }
+            }
+            else if(temp.substr(1, temp.length()).compare("use") == 0 || temp.substr(1, temp.length()).compare("depletion") == 0) {
+              target.calculateEffects(4, it.getEffectPotency().at(ctr));
+              if(it.getEffectPotency().size() < ctr + 1) {
+                break;
+              }
+              else
+              {     
+                ctr++;
+              }
+            }
+            else if(temp.substr(1, temp.length()).compare("brightness") == 0) {
+              target.calculateEffects(5, it.getEffectPotency().at(ctr));
+              if(it.getEffectPotency().size() < ctr + 1) {
+                return;
+              }
+              else
+              {     
+                ctr++;
+              }
+            }
+            else if(temp.substr(1, temp.length()).compare("duration") == 0) {
+              target.calculateEffects(6, it.getEffectPotency().at(ctr));
+              if(it.getEffectPotency().size() < ctr + 1) {
+                return;
+              }
+              else
+              {     
+                ctr++;
+              }
+            }
+              // verifies if temp is equal to & to make sure string isnt cluttered
+            else if(temp[0] != '&' || et == ' ') {
+              temp = "";
+              continue;
+            }
+          }
+          // for alternate effects
+          if(!it.getEffects().find("accuracy") || !it.getEffects().find("width") || !it.getEffects().find("range") || !it.getEffects().find("use") || !it.getEffects().find("brightness") || !it.getEffects().find("depletion") || !it.getEffects().find("duration")) {
+            target.addOtherEffects(temp);
+          }                
+          std::cout << et << " | " << temp << " | " << ctr << " | " << it.getEffectPotency().size() << " | " << idx << " | " << it.getEffects().find(',') << std::endl;
+        }
+        // i dont know why i put this here
+        if(addonCount > target.getAddOns().size()) {
+          return;
+        }
+        if(cont == false) {
+          break;
         }
       }
-    } 
+    }
   }
 }

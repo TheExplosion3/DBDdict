@@ -19,7 +19,7 @@ int main() {
   F::userInputVerify(userInputUS);
 
   while(true) {
-      switch(userInputUS) {
+    switch(userInputUS) {
       case 0: {
         // gets user input if input was invalid, or after a previous segment executes.
         std::cout << "Hello! Which item would you like to use?\n\n1 | Flashlight\n2 | Medkit\n3 | Key\n4 | Map\n5 | Toolbox\n6 | Exit\n" << std::endl;
