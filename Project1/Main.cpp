@@ -65,8 +65,8 @@ int main() {
         }
         if(fObject.getAddOn(0).getForItem() != "Flashlight") {
           while(true) {
+            F::addonAdder("Placeholder", fObject, 0);
             std::cout << "\nPlease only input addons for Flashlights.\n" << std::endl;
-            std::cin.clear();
             std::getline(std::cin >> std::ws, userInputS);
             F::addonAdder(userInputS,fObject, 0);
             if(fObject.getAddOn(0).getForItem() == "Flashlight") {
@@ -96,7 +96,7 @@ int main() {
           userInputS = lowercaseString(userInputS);
           
           // if N/A is found, prints the object and the first addon, and returns to the main program.
-          std::cout << fObject.getAddOns()[1].getName();
+          std::cout << fObject.getAddOn(1).getName();
           if(userInputS.compare("n/a") == 0) {
             F::effectCalculator(1, fObject);
             fObject.O::Flashlight::printFLO();
@@ -110,16 +110,17 @@ int main() {
           while(true) {
            
             if(lowercaseString(fObject.getAddOn(0).getName()).compare(userInputS) == 0) {
-              std::cout << "You can't have 2 of the same addons, type a different one or type N/A to exit." << std::endl;
+              F::addonAdder("Placeholder", fObject, 1);
+              std::cout << "You can't have 2 of the same addon, type a different one or type N/A to exit." << std::endl;
               std::cin.clear();
               std::getline(std::cin >> std::ws, userInputS);
 
               if(lowercaseString(fObject.getAddOn(0).getName()).compare(userInputS) != 0) {
                 break;
               }
-              else if(lowercaseString(userInputS).compare("n/a") == 0) {
+              else if(lowercaseString(userInputS).compare("n/a") == 0 && lowercaseString(fObject.getAddOn(0).getName()) != "placeholder") {
                 std::cout << '\n' << std::endl;
-                F::effecCalculator(1, fObject);
+                F::effectCalculator(1, fObject);
                 fObject.O::Flashlight::printFLO();
                 fObject.O::Flashlight::printFLA(0);
                 std::cout << '\n' << std::endl;
@@ -136,6 +137,7 @@ int main() {
           F::addonAdder(userInputS, fObject, 1);
           if(fObject.getAddOn(1).getForItem() != "Flashlight") {
             while(true) {
+              F::addonAdder("Placeholder", fObject, 1);
               std::cout << "Please only input addons for Flashlights.\n" << std::endl;
               std::cin.clear();
               std::getline(std::cin >> std::ws, userInputS);
@@ -143,7 +145,7 @@ int main() {
               if(fObject.getAddOn(1).getForItem() == "Flashlight") {
                 break;
               }
-              else if(lowercaseString(userInputS).compare("n/a") == 0) {
+              else if(lowercaseString(userInputS).compare("n/a") == 0 && lowercaseString(fObject.getAddOn(1).getName()) != "placeholder") {
                 std::cout << '\n' << std::endl;
                 F::effectCalculator(1, fObject);
                 fObject.O::Flashlight::printFLO();
@@ -158,7 +160,7 @@ int main() {
         
         // checks if one addon is present, or two, single addon check is for safety and fallback measures
         if(addonsPresent == true) {
-          if(fObject.getAddOns()[1].getName().compare(" ") == 0) {
+          if(fObject.getAddOn(1).getName().compare(" ") == 0) {
             F::effectCalculator(1, fObject);
           }
           else {

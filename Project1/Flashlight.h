@@ -134,10 +134,10 @@ namespace O
             float getUseTime() const {
               return useTime;
             }
-            void setAddOn(float index, Addons addon) {
+            void setAddOn(unsigned short index, Addons addon) {
               this -> addOns[index] = addon;
             }
-            Addons getAddOn(float index) const {
+            Addons getAddOn(unsigned short index) const {
               return addOns[index];
             }
             void setAddOns(std::array<Addons, 2> addOns) {

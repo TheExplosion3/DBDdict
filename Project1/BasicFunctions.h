@@ -89,6 +89,12 @@ namespace F {
 
   // calculates an addon's effects on the main flashlight
   void effectCalculator(short addonCount, O::Flashlight& target) {
+    if(target.getAddOn(0).getName() == "placeholder") {
+      return;
+    }
+    if(target.getAddOn(1).getName() == "placeholder") {
+      return;
+    }
     std::string temp;
     unsigned short ctr = 0;
     unsigned short idx = 0;
@@ -202,7 +208,6 @@ namespace F {
           if(!it.getEffects().find("accuracy") || !it.getEffects().find("width") || !it.getEffects().find("range") || !it.getEffects().find("use") || !it.getEffects().find("brightness") || !it.getEffects().find("depletion") || !it.getEffects().find("duration")) {
             target.addOtherEffects(temp);
           }                
-          std::cout << et << " | " << temp << " | " << ctr << " | " << it.getEffectPotency().size() << " | " << idx << " | " << it.getEffects().find(',') << " | " << fallback << std::endl;
         }
         // i dont know why i put this here
         if(addonCount > target.getAddOns().size()) {
