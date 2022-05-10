@@ -2,18 +2,14 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "Items.h"
 #include "Addons.h"
 
 namespace O {
-  class Map {
+  class Map : protected Item {
     protected:
-      std::string name;
-      std::string rarity;
-      std::vector<std::string> otherEffects;
-      mutable float useTime;
       mutable float range;
       unsigned short totalObjectsTracked;
-      std::array<Addons, 2> addOns;
     public:
 
       Map() {

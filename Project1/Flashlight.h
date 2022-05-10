@@ -7,19 +7,14 @@
 
 namespace O
 {
-    class Flashlight
+    class Flashlight : protected Item
     {
         protected:
-          std::string rarity;
-          std::string name;
-          std::vector<std::string> otherEffects;
           mutable float accuracy;
           mutable float width;
           mutable float range;
           mutable float brightness;
           mutable float blindnessDuration;
-          mutable float useTime;
-          std::array<Addons, 2> addOns;
         public:
           Flashlight() {
             rarity = "";
@@ -36,35 +31,18 @@ namespace O
 
           Flashlight(const Flashlight& other) {
             this -> rarity = other.getRarity();
-            this -> name = other.getName();
-            this -> otherEffects = other.getOtherEffects();
-            this -> accuracy = other.getAccuracy();
+            this -> name = other.Item::getName();
+            this -> otherEffects = other.Item::getOtherEffects();
+            this -> accuracy = other.Item::getAccuracy();
             this -> width = other.getWidth();
             this -> range = other.getRange();
             this -> brightness = other.getBrightness();
-            this -> useTime = other.getUseTime();
+            this -> useTime = other.Item::getUseTime();
             this -> blindnessDuration = other.getBlindnessDuration();
           }
 
           // getters and setters
-          void setName(std::string name) {
-            this -> name = name;
-          }
-          std::string getName() const{
-            return name;
-          }
-          void setRarity(std::string rarity) {
-            this -> rarity = rarity;
-          }
-          std::string getRarity() const {
-            return rarity;
-          }
-          void setOtherEffects(std::vector<std::string> otherEffects) {
-            this -> otherEffects = otherEffects;
-          }
-          std::vector<std::string> getOtherEffects() const {
-            return otherEffects;
-          }
+          
           void setAccuracy(float accuracy) {
             this -> accuracy = accuracy;
           }
@@ -94,18 +72,6 @@ namespace O
           }
           float getUseTime() const {
             return useTime;
-          }
-          void setAddOn(unsigned short index, Addons addon) {
-            this -> addOns[index] = addon;
-          }
-          Addons getAddOn(unsigned short index) const {
-            return addOns[index];
-          }
-          void setAddOns(std::array<Addons, 2> addOns) {
-            this -> addOns = addOns;
-          }
-          std::array<Addons, 2> getAddOns() {
-            return addOns;
           }
           void setBlindnessDuration(float blindnessDuration) {
             this -> blindnessDuration = blindnessDuration;
