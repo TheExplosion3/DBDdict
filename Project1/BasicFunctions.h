@@ -209,7 +209,7 @@ namespace F {
             target.addOtherEffects(temp);
           }                
         }
-        // i dont know why i put this here
+        // i dont know why i put this here but im leaving it just so i dont break it.
         if(addonCount > target.getAddOns().size()) {
           return;
         }

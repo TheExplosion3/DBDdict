@@ -27,10 +27,10 @@ namespace O {
       virtual ~Map() {}
 
       Map(const &Map other) {
-        this->name = other.getName();
-        this->rarity = other.getRarity();
-        this->otherEffects = other.getOtherEffects();
-        this->range = other.getRange();
+        this -> name = other.getName();
+        this -> rarity = other.getRarity();
+        this -> otherEffects = other.getOtherEffects();
+        this -> range = other.getRange();
       }
 
       void setName(std::string name) {
@@ -59,8 +59,27 @@ namespace O {
       }
 
       void calculateEffects(unsigned short effectType, float effectPotency) {
-        
+        switch(effectType) {
+          case 1: {
+            if(effectPotency - (short)effectPotency == 0) {
+              this -> range += effectPotency;
+            }
+            else {
+              this -> range *= effectPotency;
+            }
+          }
+          
+        }
       }
+      void addOtherEffects(std::string altEffect) {
+        if(otherEffects.size() == 0) {
+          otherEffects.clear();
+          otherEffects.push_back(altEffect);
+          return;
+        }
+        this -> otherEffects.push_back(altEffect);
+      }
+      
     
   };
 }

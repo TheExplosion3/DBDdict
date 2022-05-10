@@ -33,6 +33,7 @@ int main() {
       case 1: {
         // defines the flashlight object, and then its rarity immediately afterwards via user input
         O::Flashlight fObject;
+        
         bool addonsPresent;
         std::cout << "Which rarity is it?\n\n1 | Uncommon\n2 | Rare\n3 | Very Rare\n4 | Event (Will O' Wisp)\n5 | Event (Anniversary Flashlight)\n" << std::endl;
         std::cin >> userInputUS;
@@ -51,11 +52,12 @@ int main() {
         }
         
         fObject.O::Flashlight::flashlightTypeSetter(userInputUS);
-        // checks for if therse an addon or not, then adds it if present. if there is no addon, it bypasses this step and the next one as well
+        // checks for if therse an addon or not, then adds it if present. if there is no addon, it bypasses this step and the next one as well. it also checks to make sure the addon is a valid flashlight addon, and if it isnt then it will bypass to the end of this segment of the program, and return to the main menu. this set of commands happens a lot, but too complicated to throw into a function.
         std::cout << "If there is an addon, what is it's name? If there is not one, then type N/A\n" << std::endl;
         std::cin.clear();
         std::getline(std::cin >> std::ws, userInputS);
-        if(userInputS.compare("N/A") == 0) {
+        if(lowercaseString(userInputS).compare("n/a") == 0) {
+          std::cout << '\n';
           fObject.O::Flashlight::printFLO();
           userInputUS = 0;
           continue;
@@ -100,7 +102,7 @@ int main() {
             goto bypass;
           }
           
-          // verifies that user input for the addon isnt the same as the first addon already entered
+          // verifies that user input for the addon isnt the same as the first addon already entered. if it is, then user can either add a new one, or exit to the main menu.
           while(true) {
             if(lowercaseString(fObject.getAddOn(0).getName()).compare(lowercaseString(userInputS)) == 0) {
               F::addonAdder("Placeholder", fObject, 1);
@@ -131,7 +133,7 @@ int main() {
             }
           }
           F::addonAdder(userInputS, fObject, 1);
-          
+          // checks if the add on is under the name flashlight, and if it isn't then it makes the user either print without a new addon, or enter a new one.
           if(fObject.getAddOn(1).getForItem() != "Flashlight") {
             while(true) {
               F::addonAdder("Placeholder", fObject, 1);
