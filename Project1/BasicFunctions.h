@@ -75,7 +75,7 @@ namespace F {
         addonTarget.setAddOn(targetIndex, newAddon);
         return true;
       }
-      else if(name == "n/a") {
+      else if(tempName == "n/a") {
         return false;
       }
       else {

@@ -18,7 +18,7 @@ int main() {
   std::cin >> userInputUS; 
   std::cout << '\n';
   F::userInputVerify(userInputUS);
-
+  
   while(true) {
     switch(userInputUS) {
       case 0: {
@@ -52,7 +52,7 @@ int main() {
         
         fObject.O::Flashlight::flashlightTypeSetter(userInputUS);
         // checks for if therse an addon or not, then adds it if present. if there is no addon, it bypasses this step and the next one as well
-        std::cout << "If there is an addon, what is it's name? If there is not one, then type N/A" << std::endl;
+        std::cout << "If there is an addon, what is it's name? If there is not one, then type N/A\n" << std::endl;
         std::cin.clear();
         std::getline(std::cin >> std::ws, userInputS);
         if(userInputS.compare("N/A") == 0) {
@@ -66,20 +66,16 @@ int main() {
         if(fObject.getAddOn(0).getForItem() != "Flashlight") {
           while(true) {
             F::addonAdder("Placeholder", fObject, 0);
-            std::cout << "\nPlease only input addons for Flashlights.\n" << std::endl;
+            std::cout << "\nPlease only input addons for Flashlights. Alternatively, type N/A to exit.\n" << std::endl;
             std::getline(std::cin >> std::ws, userInputS);
-            F::addonAdder(userInputS,fObject, 0);
+            F::addonAdder(userInputS, fObject, 0);
             if(fObject.getAddOn(0).getForItem() == "Flashlight") {
               break;
             }
             else if(lowercaseString(userInputS).compare("n/a") == 0) {
-              std::cout << '\n' << std::endl;
               F::effectCalculator(1, fObject);
               fObject.O::Flashlight::printFLO();
-              fObject.O::Flashlight::printFLA(0);
-              std::cout << '\n' << std::endl;
-              userInputUS = 0;
-              continue;
+              goto bypass;
             }
           }
         }
@@ -96,63 +92,70 @@ int main() {
           userInputS = lowercaseString(userInputS);
           
           // if N/A is found, prints the object and the first addon, and returns to the main program.
-          std::cout << fObject.getAddOn(1).getName();
-          if(userInputS.compare("n/a") == 0) {
+          
+          if(lowercaseString(userInputS).compare("n/a") == 0) {
             F::effectCalculator(1, fObject);
             fObject.O::Flashlight::printFLO();
             fObject.O::Flashlight::printFLA(0);
-            std::cout << '\n' << std::endl;
-            userInputUS = 0;
-            continue;
+            goto bypass;
           }
           
           // verifies that user input for the addon isnt the same as the first addon already entered
           while(true) {
-           
-            if(lowercaseString(fObject.getAddOn(0).getName()).compare(userInputS) == 0) {
+            if(lowercaseString(fObject.getAddOn(0).getName()).compare(lowercaseString(userInputS)) == 0) {
               F::addonAdder("Placeholder", fObject, 1);
               std::cout << "You can't have 2 of the same addon, type a different one or type N/A to exit." << std::endl;
               std::cin.clear();
               std::getline(std::cin >> std::ws, userInputS);
-
-              if(lowercaseString(fObject.getAddOn(0).getName()).compare(userInputS) != 0) {
-                break;
-              }
-              else if(lowercaseString(userInputS).compare("n/a") == 0 && lowercaseString(fObject.getAddOn(0).getName()) != "placeholder") {
+              bool temp = F::addonAdder(userInputS, fObject, 1);
+              if(temp != true) {
                 std::cout << '\n' << std::endl;
                 F::effectCalculator(1, fObject);
                 fObject.O::Flashlight::printFLO();
                 fObject.O::Flashlight::printFLA(0);
-                std::cout << '\n' << std::endl;
-                userInputUS = 0;
-                continue;
+                goto bypass;
               }
-              
-              
+              if(lowercaseString(fObject.getAddOn(0).getName()).compare(lowercaseString(userInputS)) != 0) {
+                break;
+              }
+              else if(lowercaseString(userInputS).compare("n/a") == 0) {
+                std::cout << '\n' << std::endl;
+                F::effectCalculator(1, fObject);
+                fObject.O::Flashlight::printFLO();
+                fObject.O::Flashlight::printFLA(0);
+                goto bypass;
+              }
             }
             else {
               break;
             }
           }
           F::addonAdder(userInputS, fObject, 1);
+          
           if(fObject.getAddOn(1).getForItem() != "Flashlight") {
             while(true) {
               F::addonAdder("Placeholder", fObject, 1);
-              std::cout << "Please only input addons for Flashlights.\n" << std::endl;
-              std::cin.clear();
+              std::cout << "Please only input addons for Flashlights. Alternatively, type N/A to exit.\n" << std::endl;
               std::getline(std::cin >> std::ws, userInputS);
-              F::addonAdder(userInputS,fObject, 1);
-              if(fObject.getAddOn(1).getForItem() == "Flashlight") {
-                break;
-              }
-              else if(lowercaseString(userInputS).compare("n/a") == 0 && lowercaseString(fObject.getAddOn(1).getName()) != "placeholder") {
+              
+              bool temp = F::addonAdder(userInputS, fObject, 1);
+              
+              if(temp != true) {
                 std::cout << '\n' << std::endl;
                 F::effectCalculator(1, fObject);
                 fObject.O::Flashlight::printFLO();
                 fObject.O::Flashlight::printFLA(0);
+                goto bypass;
+              }
+              if(fObject.getAddOn(1).getForItem() == "Flashlight") {
+                break;
+              }
+              else if(lowercaseString(userInputS).compare("n/a") == 0) {
                 std::cout << '\n' << std::endl;
-                userInputUS = 0;
-                continue;
+                F::effectCalculator(1, fObject);
+                fObject.O::Flashlight::printFLO();
+                fObject.O::Flashlight::printFLA(0);
+                goto bypass;
               }
             }
           }
@@ -174,6 +177,12 @@ int main() {
         fObject.O::Flashlight::printFLA(0);
         std::cout << '\n';
         fObject.O::Flashlight::printFLA(1);
+        std::cout << '\n';
+
+        // label for goto statements, needs to have something in it so i just replicated what was there before
+        bypass:
+          userInputUS = 0;
+          continue;
         
         userInputUS = 0;
         std::cout << '\n';
@@ -215,6 +224,5 @@ int main() {
       }
     }
     break;
-  }
-  
+  }  
 }
