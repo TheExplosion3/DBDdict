@@ -2,11 +2,11 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "Items.h"
+#include "Item.h"
 #include "Addons.h"
 
 namespace O {
-  class Map : protected Item {
+  class Map : public Item {
     protected:
       mutable float range;
       unsigned short totalObjectsTracked;
@@ -57,14 +57,17 @@ namespace O {
       void calculateEffects(unsigned short effectType, float effectPotency) {
         switch(effectType) {
           case 1: {
+            this -> range += effectPotency;
+          }
+          case 2: {
             if(effectPotency - (short)effectPotency == 0) {
-              this -> range += effectPotency;
+              this -> useTime += effectPotency;
             }
             else {
-              this -> range *= effectPotency;
+              this -> useTime *= effectPotency;
             }
           }
-          
+    
         }
       }
       void addOtherEffects(std::string altEffect) {

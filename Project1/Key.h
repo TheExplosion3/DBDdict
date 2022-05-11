@@ -2,9 +2,10 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "Item.h"
 #include "Addons.h"
 
-namespace O {
+namespace O : public Item {
   class Key {
   
   };

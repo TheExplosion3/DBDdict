@@ -3,11 +3,12 @@
 #include <string>
 #include <vector>
 #include <array>
+#include "Item.h"
 #include "Addons.h"
 
 namespace O
 {
-    class Flashlight : protected Item
+    class Flashlight : public Item
     {
         protected:
           mutable float accuracy;
@@ -33,11 +34,11 @@ namespace O
             this -> rarity = other.getRarity();
             this -> name = other.Item::getName();
             this -> otherEffects = other.Item::getOtherEffects();
-            this -> accuracy = other.Item::getAccuracy();
+            this -> accuracy = other.getAccuracy();
             this -> width = other.getWidth();
             this -> range = other.getRange();
             this -> brightness = other.getBrightness();
-            this -> useTime = other.Item::getUseTime();
+            this -> useTime = other.getUseTime();
             this -> blindnessDuration = other.getBlindnessDuration();
           }
 
@@ -67,12 +68,6 @@ namespace O
           float getBrightness() const {
             return brightness;
           }
-          void setUseTime(float useTime) {
-            this -> useTime = useTime;
-          }
-          float getUseTime() const {
-            return useTime;
-          }
           void setBlindnessDuration(float blindnessDuration) {
             this -> blindnessDuration = blindnessDuration;
           }
@@ -95,12 +90,10 @@ namespace O
                 break;
               }
               case 4: {
-                if(effectPotency - (short)effectPotency == 0)
-                {
+                if(effectPotency - (short)effectPotency == 0) {
                   this -> useTime += effectPotency;
                 }
-                else
-                {
+                else {
                   this -> useTime += effectPotency;
                 }
                 break;
@@ -160,7 +153,7 @@ namespace O
                 setWidth(100);
                 setBlindnessDuration(100);
                 setUseTime(8);
-                otherEffects.clear()
+                otherEffects.clear();
                 otherEffects.push_back("More friendly ghosts in your life");
                 break;
               }
@@ -183,7 +176,7 @@ namespace O
           }
         // Adds another miscellaneous effect to the otherEffects vector
           void addOtherEffects(std::string altEffect) {
-            if(otherEffects.size() == 0) {
+            if(otherEffects.at(0) == "") {
               otherEffects.clear();
               otherEffects.push_back(altEffect);
               return;
@@ -191,20 +184,10 @@ namespace O
             this -> otherEffects.push_back(altEffect);
           }
           // prints the primary flashlight object
-          void printFLO() {
-            std::cout << this -> name << '\n' << "Rarity: " << this -> rarity << '\n' << "Accuracy: " << this -> accuracy << '\n' << "Width: " << this -> width << '\n' << "Range: " << this -> range << '\n' << "Brightness: " << this -> brightness << '\n' << "Blindness Duration: " << this -> blindnessDuration << '\n' << "Use Time: " << this -> useTime << '\n' << "Other Effects: " << vectorPrinter(this -> otherEffects) << std::endl;
+          virtual void printObj() override {
+            O::Item::printObj();
+            std::cout << "Accuracy: " << this->accuracy << "\nWidth: " << this->width << "\nRange: " << this->range << "\nBrightness: " << this->brightness << "\nBlindness Duration: " << this->blindnessDuration << '\n' << std::endl;
           }
           // prints an addon for the flashlight, specified via unsigned short idx.
-          void printFLA(unsigned short idx) {
-            std::string temp = "";
-            Addons* ptr = &addOns.at(idx);
-            
-            for(char &i : ptr->getEffects()) {
-              if(i != '&') {
-                temp += i;
-              }
-            }
-            std::cout << "Name: " << ptr->getName() << '\n' << "Rarity: " << ptr->getRarity() << '\n' << "Effects: " << temp << std::endl;
-          }
   };
 };

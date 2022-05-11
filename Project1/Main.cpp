@@ -2,6 +2,7 @@
 #include <string.h>
 #include <algorithm>
 #include <nlohmann/json.hpp>
+#include "Item.h"
 #include "Medkit.h"
 #include "Flashlight.h"
 #include "Addons.h"
@@ -22,6 +23,13 @@ int main() {
   while(true) {
     switch(userInputUS) {
       case 0: {
+        // label for goto statements, needs to have something in it so i just replicated what was there before
+        if(false) {  
+          bypass:
+            userInputUS = 0;
+            continue;
+        }
+        
         // gets user input if input was invalid, or after a previous segment executes.
         std::cout << "Hello! Which item would you like to use?\n\n1 | Flashlight\n2 | Medkit\n3 | Key\n4 | Map\n5 | Toolbox\n6 | Exit\n" << std::endl;
         std::cin >> userInputUS;
@@ -58,14 +66,14 @@ int main() {
         std::getline(std::cin >> std::ws, userInputS);
         if(lowercaseString(userInputS).compare("n/a") == 0) {
           std::cout << '\n';
-          fObject.O::Flashlight::printFLO();
+          fObject.O::Flashlight::printObj();
           userInputUS = 0;
           continue;
         }
         else {
           addonsPresent = F::addonAdder(userInputS, fObject, 0);
         }
-        if(fObject.getAddOn(0).getForItem() != "Flashlight") {
+        if(fObject.Item::getAddOn(0).getForItem() != "Flashlight") {
           while(true) {
             F::addonAdder("Placeholder", fObject, 0);
             std::cout << "\nPlease only input addons for Flashlights. Alternatively, type N/A to exit.\n" << std::endl;
@@ -75,8 +83,7 @@ int main() {
               break;
             }
             else if(lowercaseString(userInputS).compare("n/a") == 0) {
-              F::effectCalculator(1, fObject);
-              fObject.O::Flashlight::printFLO();
+              fObject.O::Flashlight::printObj();
               goto bypass;
             }
           }
@@ -85,7 +92,7 @@ int main() {
 
         // same as previous comment
         if(addonsPresent == true) {
-          std::cout << "If there is a second addon, what is it's name? If there is not one, then type N/A\n" << std::endl;
+          std::cout << "\nIf there is a second addon, what is it's name? If there is not one, then type N/A\n" << std::endl;
           std::cin.clear();
           std::getline(std::cin >> std::ws, userInputS);
           std::cout << '\n';
@@ -96,35 +103,27 @@ int main() {
           // if N/A is found, prints the object and the first addon, and returns to the main program.
           
           if(lowercaseString(userInputS).compare("n/a") == 0) {
-            F::effectCalculator(1, fObject);
-            fObject.O::Flashlight::printFLO();
-            fObject.O::Flashlight::printFLA(0);
+            F::printAll(fObject, 1);
             goto bypass;
           }
           
           // verifies that user input for the addon isnt the same as the first addon already entered. if it is, then user can either add a new one, or exit to the main menu.
           while(true) {
-            if(lowercaseString(fObject.getAddOn(0).getName()).compare(lowercaseString(userInputS)) == 0) {
+            if(lowercaseString(fObject.Item::getAddOn(0).getName()).compare(lowercaseString(userInputS)) == 0) {
               F::addonAdder("Placeholder", fObject, 1);
-              std::cout << "You can't have 2 of the same addon, type a different one or type N/A to exit." << std::endl;
+              std::cout << "You can't have 2 of the same addon, type a different one or type N/A to exit.\n" << std::endl;
               std::cin.clear();
               std::getline(std::cin >> std::ws, userInputS);
               bool temp = F::addonAdder(userInputS, fObject, 1);
               if(temp != true) {
-                std::cout << '\n' << std::endl;
-                F::effectCalculator(1, fObject);
-                fObject.O::Flashlight::printFLO();
-                fObject.O::Flashlight::printFLA(0);
+                F::printAll(fObject, 1);
                 goto bypass;
               }
               if(lowercaseString(fObject.getAddOn(0).getName()).compare(lowercaseString(userInputS)) != 0) {
                 break;
               }
               else if(lowercaseString(userInputS).compare("n/a") == 0) {
-                std::cout << '\n' << std::endl;
-                F::effectCalculator(1, fObject);
-                fObject.O::Flashlight::printFLO();
-                fObject.O::Flashlight::printFLA(0);
+                F::printAll(fObject, 1);
                 goto bypass;
               }
             }
@@ -143,20 +142,14 @@ int main() {
               bool temp = F::addonAdder(userInputS, fObject, 1);
               
               if(temp != true) {
-                std::cout << '\n' << std::endl;
-                F::effectCalculator(1, fObject);
-                fObject.O::Flashlight::printFLO();
-                fObject.O::Flashlight::printFLA(0);
+                F::printAll(fObject, 1);
                 goto bypass;
               }
               if(fObject.getAddOn(1).getForItem() == "Flashlight") {
                 break;
               }
               else if(lowercaseString(userInputS).compare("n/a") == 0) {
-                std::cout << '\n' << std::endl;
-                F::effectCalculator(1, fObject);
-                fObject.O::Flashlight::printFLO();
-                fObject.O::Flashlight::printFLA(0);
+                F::printAll(fObject, 1);
                 goto bypass;
               }
             }
@@ -174,17 +167,12 @@ int main() {
         }
         
         // prints flashlight object and both addons, with spaces inbetween each addon and the flashlight itself
-        fObject.O::Flashlight::printFLO();
+        fObject.O::Flashlight::printObj();
+        fObject.O::Item::printA(0);
         std::cout << '\n';
-        fObject.O::Flashlight::printFLA(0);
-        std::cout << '\n';
-        fObject.O::Flashlight::printFLA(1);
+        fObject.O::Item::printA(1);
         std::cout << '\n';
 
-        // label for goto statements, needs to have something in it so i just replicated what was there before
-        bypass:
-          userInputUS = 0;
-          continue;
         
         userInputUS = 0;
         std::cout << '\n';

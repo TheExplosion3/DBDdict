@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <fstream>
 #include <nlohmann/json.hpp>
+#include "Item.h"
 
 // yes, these methods should be in basicfunctions, but they are needed there and here, so to prevent circular imports i have placed them here.
 

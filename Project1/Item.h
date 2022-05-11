@@ -3,17 +3,16 @@
 #include <string>
 #include <vector>
 #include <array>
-#include "Items.h"
 #include "Addons.h"
 
 namespace O {
   class Item {
-    protected:
+    public:
       std::string name;
       std::string rarity;
       std::array<Addons, 2> addOns;
       std::vector<std::string> otherEffects;
-      unsigned short useTime;
+      float useTime;
     public:
       Item() {
         name = "";
@@ -21,11 +20,10 @@ namespace O {
         useTime = 0;
       }
 
-      Item(const &Item other) {
+      Item(const Item& other) {
         this -> name = other.getName();
         this -> rarity = other.getRarity();
         this -> otherEffects = other.getOtherEffects();
-        this -> addOns = other.getAddOns();
         this -> useTime = other.getUseTime();
       }
 
@@ -43,6 +41,12 @@ namespace O {
       }
       std::string getRarity() const {
         return rarity;
+      }
+      void setUseTime(float useTime) {
+        this -> useTime = useTime;
+      }
+      float getUseTime() const {
+        return useTime;
       }
       void setOtherEffects(std::vector<std::string> otherEffects) {
         this -> otherEffects = otherEffects;
@@ -62,5 +66,20 @@ namespace O {
       std::array<Addons, 2> getAddOns() {
         return addOns;
       }
+
+      virtual void printObj() {
+        std::cout << "Name: " << this->name << "\nRarity: " << this->rarity << "\nUse Time: " << useTime << "\nOther Effects: " << vectorPrinter(this->otherEffects);
+      }
+      void printA(unsigned short idx) {
+            std::string temp = "";
+            Addons* ptr = &addOns.at(idx);
+            
+            for(char &i : ptr->getEffects()) {
+              if(i != '&') {
+                temp += i;
+              }
+            }
+            std::cout << "Name: " << ptr->getName() << '\n' << "Rarity: " << ptr->getRarity() << '\n' << "Effects: " << temp << std::endl;
+          }
   };
-}
+};
