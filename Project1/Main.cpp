@@ -5,6 +5,8 @@
 #include "Item.h"
 #include "Medkit.h"
 #include "Flashlight.h"
+#include "Map.h"
+#include "Key.h"
 #include "Addons.h"
 #include "BasicFunctions.h"
 
@@ -157,6 +159,7 @@ int main() {
         }
         
         // checks if one addon is present, or two, single addon check is for safety and fallback measures
+        
         if(addonsPresent == true) {
           if(fObject.getAddOn(1).getName().compare(" ") == 0) {
             F::effectCalculator(1, fObject);

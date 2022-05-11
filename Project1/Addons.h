@@ -102,8 +102,7 @@ namespace O {
             std::string effects;
             std::vector<float> effectPotency;
         public:
-            
-// base constructor
+            // base constructor
             Addons() {
                 name = "";
                 rarity = "";
@@ -111,7 +110,7 @@ namespace O {
                 effects = "";
                 effectPotency = {0};
             }
-// controlled param constructor
+            // controlled param constructor
             Addons(std::string name, std::string rarity, std::string forItem, std::string effects, std::vector<float> effectPotency) {
                 this -> name = name;
                 this -> rarity = rarity;
@@ -119,7 +118,7 @@ namespace O {
                 this -> effects = effects;
                 this -> effectPotency = effectPotency;
             }
-// copy constructor
+            // copy constructor
             Addons(const O::Addons& other) {
               this -> name = other.getName();
               this -> rarity = other.getRarity();

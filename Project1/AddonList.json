@@ -251,7 +251,7 @@
     "name" : "Eroded Token",
     "rarity" : "Uncommon",
     "forItem" : "Key",
-    "effects" : "Unlocks Aura reading ability to see all survivors within 24m",
+    "effects" : "&Unlocks Aura reading ability to see all survivors within 24m",
     "effectPotency" : [24]
   },
 
@@ -259,7 +259,7 @@
     "name" : "Gold Token",
     "rarity" : "Rare",
     "forItem" : "Key",
-    "effects" : "Unlocks Aura reading ability to see all survivors within 48m",
+    "effects" : "&Unlocks Aura reading ability to see all survivors within 48m",
     "effectPotency" : [48]
   },
 
@@ -283,7 +283,7 @@
     "name" : "Blood Amber",
     "rarity" : "Very Rare",
     "forItem" : "Key",
-    "effects" : "Unlocks Aura reading ability to see the killer within 32m, increases &depletion rate by 100%",
+    "effects" : "&Unlocks Aura reading ability to see the killer within 32m, increases &depletion rate by 100%",
     "effectPotency" : [32, 100]
   },
 
@@ -291,7 +291,7 @@
     "name" : "Unique Wedding Ring",
     "rarity" : "Very Rare",
     "forItem" : "Key",
-    "effects" : "Unlocks Aura reading ability to see the Obsession within 32m, lowers odds of becoming the obsession by 100%",
+    "effects" : "&Unlocks Aura reading ability to see the Obsession within 32m, lowers odds of becoming the obsession by 100%",
     "effectPotency" : [32, 100]
   },
 

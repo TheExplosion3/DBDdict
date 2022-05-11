@@ -18,6 +18,7 @@ namespace O {
         name = "";
         rarity = "";
         useTime = 0;
+        
       }
 
       Item(const Item& other) {
@@ -65,6 +66,16 @@ namespace O {
       }
       std::array<Addons, 2> getAddOns() {
         return addOns;
+      }
+  
+    // Adds another miscellaneous effect to the otherEffects vector
+      void addOtherEffects(std::string altEffect) {
+        if(otherEffects.at(0) == "") {
+          otherEffects.clear();
+          otherEffects.push_back(altEffect);
+          return;
+        }
+        this -> otherEffects.push_back(altEffect);
       }
 
       virtual void printObj() {

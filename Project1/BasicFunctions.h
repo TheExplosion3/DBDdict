@@ -93,10 +93,10 @@ namespace F {
   // note: dont even try to read this code it is a certified mess
   void effectCalculator(short addonCount, O::Flashlight& target) {
     if(lowercaseString(target.getAddOn(0).getName()) == "broken bulb") {
-      target.addOtherEffects("Flashlight flickers, increased spookiness");
+      target.O::Item::addOtherEffects("Flashlight flickers, increased spookiness");
     }
     if(lowercaseString(target.getAddOn(1).getName()) == "broken bulb") {
-      target.addOtherEffects("Flashlight flickers, increased spookiness");
+      target.O::Item::addOtherEffects("Flashlight flickers, increased spookiness");
     }
     if(target.getAddOn(0).getName() == "placeholder") {
       return;
@@ -107,39 +107,25 @@ namespace F {
     std::string temp;
     unsigned short ctr = 0;
     unsigned short idx = 0;
-    bool cont;
-
     // iterate through addons
     for(auto &it : target.getAddOns()) {
       // reset counter before going to a new addon
       ctr = 0;
       // iterate through effects string
       for(auto &et : it.getEffects()) {
+        std::cout << et << std::endl;
         idx++;
         // check if ctr is larger or equal to size of effectpotency vector, break if true.
         if(ctr >= it.getEffectPotency().size()) {
           break;
         }
-        // next 3 if statements are to append to temp str, and to check whether or not it should keep appending to said string.
+        // checks whether or not to keep appending string, sets string in all lowercase.
         if(et != ' ') {
           temp += et;
         }
         else {
           temp = "";
         }
-        if(idx < it.getEffects().length()) {
-          if(it.getEffects().substr(idx, it.getEffects().length() - 1).find(",") != std::string::npos) {
-            cont = true;
-          }
-        }
-        
-        else if(et != ',') {
-          cont = false;
-        }
-        else {
-          cont = false;
-        }
-        
         temp = lowercaseString(temp);
         // if temp is larger than 2, it will begin checking for effects.
         if(temp.length() > 2) {
@@ -198,16 +184,15 @@ namespace F {
               ctr++;
             }
           }
+          
           // verifies if temp is equal to & to make sure string isnt cluttered
           else if(temp[0] != '&' || et == ' ') {
             temp = "";
             continue;
           }
+          std::cout << et << " | " << ctr << " | " << it.getEffectPotency().size() << " | " << temp << std::endl;
         }
-      }
-      if(cont == false) {
-        break;
-      }
+      }  
     }
   }
   const void printAll(O::Flashlight& inputObject, unsigned short addonCount) {

@@ -22,7 +22,7 @@ namespace O {
 
       virtual ~Map() {}
 
-      Map(const &Map other) {
+      Map(const Map& other) {
         this -> name = other.getName();
         this -> rarity = other.getRarity();
         this -> otherEffects = other.getOtherEffects();
@@ -58,16 +58,18 @@ namespace O {
         switch(effectType) {
           case 1: {
             this -> range += effectPotency;
+            break;
           }
           case 2: {
             if(effectPotency - (short)effectPotency == 0) {
               this -> useTime += effectPotency;
+              break;
             }
             else {
               this -> useTime *= effectPotency;
+              break;
             }
           }
-    
         }
       }
       void addOtherEffects(std::string altEffect) {
@@ -78,7 +80,5 @@ namespace O {
         }
         this -> otherEffects.push_back(altEffect);
       }
-      
-    
   };
 }
