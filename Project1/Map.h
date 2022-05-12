@@ -15,8 +15,8 @@ namespace O {
       Map() {
         name = "";
         rarity = "";
-        range = 8;
-        useTime = 20;
+        range = 0;
+        useTime = 0;
         totalObjectsTracked = 0;
       }
 
@@ -29,29 +29,40 @@ namespace O {
         this -> range = other.getRange();
       }
 
-      void setName(std::string name) {
-        this -> name = name;
-      }
-      std::string getName() const{
-        return name;
-      }
-      void setRarity(std::string rarity) {
-        this -> rarity = rarity;
-      }
-      std::string getRarity() const {
-        return rarity;
-      }
-      void setOtherEffects(std::vector<std::string> otherEffects) {
-        this -> otherEffects = otherEffects;
-      }
-      std::vector<std::string> getOtherEffects() const {
-        return otherEffects;
-      }
       void setRange(float range) {
         this -> range = range;
       }
       float getRange() const {
         return range;
+      }
+      void setObjectsTracked(unsigned short totalObjectsTracked) {
+        this -> totalObjectsTracked = totalObjectsTracked;
+      }
+      unsigned short getObjectsTracked() const {
+        return totalObjectsTracked;
+      }
+      
+      void mapTypeSetter(unsigned short type) {
+        switch(type) {
+          case 1: {
+            setName("Map");
+            setRarity("Rare");
+            setUseTime(20);
+            setRange(8);
+            setObjectsTracked(1);
+            otherEffects.push_back("Can track generators");
+            break;
+          }
+          case 2: {
+            setName("Rainbow Map");
+            setRarity("Ultra Rare");
+            setUseTime(20);
+            setRange(8);
+            setObjectsTracked(3);
+            otherEffects.push_back("Can track exit gates, generators, the hatch, killer belongings, as well as chests and totems tracked by Detective's Hunch.");
+            break;
+          }
+        }
       }
 
       void calculateEffects(unsigned short effectType, float effectPotency) {
@@ -70,15 +81,19 @@ namespace O {
               break;
             }
           }
+          case 3: {
+            totalObjectsTracked++;
+            break;
+          }
+          default: {
+            break;
+          }
         }
       }
-      void addOtherEffects(std::string altEffect) {
-        if(otherEffects.size() == 0) {
-          otherEffects.clear();
-          otherEffects.push_back(altEffect);
-          return;
-        }
-        this -> otherEffects.push_back(altEffect);
+
+      virtual void printObj() override {
+        O::Item::printObj();
+        std::cout << "Range: " << range << "\nTotal Items Tracked: " << std::endl;
       }
   };
 }

@@ -10,11 +10,13 @@ namespace O {
     protected:
       float range;
       float obsessionChance;
+      bool canOpenHatch;
     public:
 
     Key() {
       name = "";
       rarity = "";
+      useTime = 0;
       range = 0;
       obsessionChance = 100;
     }
@@ -41,16 +43,49 @@ namespace O {
     float getObsessionChance() const {
       return obsessionChance;
     }
+    void setHatch(bool canOpenHatch) {
+      this -> canOpenHatch = canOpenHatch;
+    }
+    bool getHatch() const {
+      return canOpenHatch;
+    }
+
+    void keyTypeSetter(unsigned short type) {
+      switch(type) {
+        case 1: {
+          setName("Broken Key");
+          setRarity("Rare");
+          setHatch(false);
+          setUseTime(10);
+          break;
+        }
+        case 2: {
+          setName("Dull Key");
+          setRarity("Very Rare");
+          setHatch(true);
+          setUseTime(5);
+          break;
+        }
+        case 3: {
+          setName("Skeleton Key");
+          setRarity("Ultra Rare");
+          setHatch(true);
+          setUseTime(20);
+          break;
+        }
+      }
+    }
 
     void calculateEffects(unsigned short effectType, float effectPotency) {
       switch(effectType) {
         case 1: {
-          if(useTime - (short)useTime == 0) {
+          if(effectPotency - (short)effectPotency == 0) {
             this -> useTime += effectPotency;
           }
           else {
-            this -> useTIme *= effectPotency;
+            this -> useTime *= effectPotency;
           }
+          break;
         }
         case 2: {
           if(effectPotency == 12) {     
@@ -61,11 +96,21 @@ namespace O {
               this -> range = effectPotency;
             }
           }
+          break;
         }
         case 3: {
           obsessionChance = 0;
+          break;
+        }
+        default: {
+          break;
         }
       }
+    }
+
+    virtual void printObj() override {
+      O::Item::printObj();
+      std::cout << "Range: " << range << "\nObsession Chance" << obsessionChance << std::endl;
     }
   };
 }

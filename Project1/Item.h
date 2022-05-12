@@ -82,15 +82,15 @@ namespace O {
         std::cout << "Name: " << this->name << "\nRarity: " << this->rarity << "\nUse Time: " << useTime << "\nOther Effects: " << vectorPrinter(this->otherEffects);
       }
       void printA(unsigned short idx) {
-            std::string temp = "";
-            Addons* ptr = &addOns.at(idx);
-            
-            for(char &i : ptr->getEffects()) {
-              if(i != '&') {
-                temp += i;
-              }
-            }
-            std::cout << "Name: " << ptr->getName() << '\n' << "Rarity: " << ptr->getRarity() << '\n' << "Effects: " << temp << std::endl;
+        std::string temp = "";
+        Addons* ptr = &addOns.at(idx);
+        
+        for(char &i : ptr->getEffects()) {
+          if(i != '&') {
+            temp += i;
           }
+        }
+        std::cout << "Name: " << ptr->getName() << '\n' << "Rarity: " << ptr->getRarity() << '\n' << "Effects: " << temp << std::endl;
+      }
   };
 };
