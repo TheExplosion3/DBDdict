@@ -1,6 +1,6 @@
 <h1>DBDdict</h1>
 <h5>this is my first project in C++, it isn't too big but it's an attempt.</h5>
-<h2>hello i hate C++</h2>
+<hr></hr>
 
 <p>
   This is supposed to be a dictionary for Dead By Daylight's survivor items and addons, and it shows their effects on said items and addons.
