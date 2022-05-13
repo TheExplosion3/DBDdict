@@ -19,5 +19,5 @@
 <h3>Note about Header Files</h3>
 <hr></hr>
 <p>
-  All header files rely on Item.h, and Addons.h, except for those files themselves. Item.h also relies on Addons.h, and most of the files are primarily the same, with Flashlight.h being the most commented. If you want any information about thec ode itself, its best to open that file and view its comments, as most of (if not all of) the functions are just overloads and should be easy to understand with a quick read of the non overloaded variant.
+  All header files rely on <ins><strong>Item.h</strong></ins>, and <ins><strong>Addons.h</strong></ins>, except for those files themselves. <ins><strong>Item.h</strong></ins> also relies on <ins><strong>Addons.h</strong></ins>, and most of the files are primarily the same, with <ins><strong>Flashlight.h</strong></ins> being the most commented. If you want any information about the code itself, its best to open that file and view its comments, as most of (if not all of) the functions are just overloads and should be easy to understand with a quick read of the non overloaded variant.
 </p>
