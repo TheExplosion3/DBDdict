@@ -72,6 +72,7 @@ namespace O {
       float getBlindnessDuration() const {
         return blindnessDuration;
       }
+
       // calculates the effects that an addon has on a flashlight, via input of the effect potency and effect type as parameters.
       void calculateEffects(unsigned short effectType, float effectPotency) {
         switch(effectType) {
@@ -109,6 +110,7 @@ namespace O {
           }
         }
       }
+
       // Sets the flashlight's base stats via its rarity, inputted as an float which increases/decreases based upon rarity.
       void flashlightTypeSetter(unsigned short type) {
         switch(type) {
@@ -172,6 +174,7 @@ namespace O {
           }
         }
       }
+
       // prints the primary flashlight object
       virtual void printObj() override {
         O::Item::printObj();

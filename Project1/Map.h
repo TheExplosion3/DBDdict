@@ -11,7 +11,6 @@ namespace O {
       mutable float range;
       unsigned short totalObjectsTracked;
     public:
-
       Map() {
         name = "";
         rarity = "";

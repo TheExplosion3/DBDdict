@@ -68,7 +68,7 @@ namespace O {
         return addOns;
       }
   
-    // Adds another miscellaneous effect to the otherEffects vector
+      // Adds another miscellaneous effect to the otherEffects vector
       void addOtherEffects(std::string altEffect) {
         if(otherEffects.at(0) == "") {
           otherEffects.clear();
@@ -78,9 +78,12 @@ namespace O {
         this -> otherEffects.push_back(altEffect);
       }
 
+      // Prints out the item obj, mainly used as a base function for the actual items.
       virtual void printObj() {
         std::cout << "Name: " << this->name << "\nRarity: " << this->rarity << "\nUse Time: " << useTime << "\nOther Effects: " << vectorPrinter(this->otherEffects);
       }
+
+      // Prints out an addon, at the index idx.
       void printA(unsigned short idx) {
         std::string temp = "";
         Addons* ptr = &addOns.at(idx);
@@ -90,7 +93,7 @@ namespace O {
             temp += i;
           }
         }
-        std::cout << "Name: " << ptr->getName() << '\n' << "Rarity: " << ptr->getRarity() << '\n' << "Effects: " << temp << std::endl;
+        std::cout << "Name: " << ptr -> getName() << '\n' << "Rarity: " << ptr -> getRarity() << '\n' << "Effects: " << temp << std::endl;
       }
   };
 };
