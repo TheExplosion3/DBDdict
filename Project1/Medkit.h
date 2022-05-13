@@ -223,7 +223,7 @@ namespace O {
         if(addOns[0].getName() == "Anti Hemmhoragic Syringe" || addOns[0].getName() == "Anti Hemmhoragic Syringe") {
           std::cout << "Heal Time: " << healTime << std::endl;
         }
-        std::cout << "Great Skillcheck Progression Bonus: " << skillcheckProgression << "\nGood Skillcheck Zone Size: " << goodSkillcheckSize << "\nGreat Skillcheck Zone Size: " << greatSkillcheckSize << std::endl;
+        std::cout << "Great Skillcheck Progression Bonus: " << skillcheckProgression << "\nGood Skillcheck Zone Size: " << goodSkillcheckSize << "\nGreat Skillcheck Zone Size: " << greatSkillcheckSize << '\n' << std::endl;
       }
   };
 }

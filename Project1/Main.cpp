@@ -17,7 +17,7 @@ std::string userInputS = "";
 
 int main() {
   // gets initial user input for switch statement
-  std::cout << "Hello! Which item would you like to use?\n\n1 | Flashlight\n2 | Medkit\n3 | Key\n4 | Map\n5 | Toolbox\n6 | Exit\n" << std::endl;
+  std::cout << "Hello! Which item would you like to use?\n\n1 | Flashlight\n2 | Map\n3 | Key\n4 | Medkit\n5 | Toolbox\n6 | Exit\n" << std::endl;
   std::cin >> userInputUS; 
   std::cout << '\n';
   F::userInputVerify(userInputUS);
@@ -33,7 +33,7 @@ int main() {
         }
         
         // gets user input if input was invalid, or after a previous segment executes.
-        std::cout << "Hello! Which item would you like to use?\n\n1 | Flashlight\n2 | Medkit\n3 | Key\n4 | Map\n5 | Toolbox\n6 | Exit\n" << std::endl;
+        std::cout << "Hello! Which item would you like to use?\n\n1 | Flashlight\n2 | Map\n3 | Key\n4 | Medkit\n5 | Toolbox\n6 | Exit\n" << std::endl;
         std::cin >> userInputUS;
         std::cout << '\n';
         F::userInputVerify(userInputUS);
@@ -44,7 +44,7 @@ int main() {
         // defines the flashlight object, and then its rarity immediately afterwards via user input
         O::Flashlight fObject;
         
-        bool addonsPresent;
+        bool addonsPresent = false;
         std::cout << "Which rarity is it?\n\n1 | Uncommon\n2 | Rare\n3 | Very Rare\n4 | Event (Will O' Wisp)\n5 | Event (Anniversary Flashlight)\n" << std::endl;
         std::cin >> userInputUS;
         std::cout << '\n';
@@ -62,15 +62,14 @@ int main() {
         }
         
         fObject.O::Flashlight::flashlightTypeSetter(userInputUS);
-        // checks for if therse an addon or not, then adds it if present. if there is no addon, it bypasses this step and the next one as well. it also checks to make sure the addon is a valid flashlight addon, and if it isnt then it will bypass to the end of this segment of the program, and return to the main menu. this set of commands happens a lot, but too complicated to throw into a function.
+        // checks for if theres an addon or not, then adds it if present. if there is no addon, it bypasses this step and the next one as well. it also checks to make sure the addon is a valid flashlight addon, and if it isnt then it will bypass to the end of this segment of the program, and return to the main menu. this set of commands happens a lot, but too complicated to throw into a function.
         std::cout << "If there is an addon, what is it's name? If there is not one, then type N/A\n" << std::endl;
         std::cin.clear();
         std::getline(std::cin >> std::ws, userInputS);
         if(lowercaseString(userInputS).compare("n/a") == 0) {
           std::cout << '\n';
-          fObject.O::Flashlight::printObj();
-          userInputUS = 0;
-          continue;
+          F::printAll(fObject);
+          goto bypass;
         }
         else {
           addonsPresent = F::addonAdder(userInputS, fObject, 0);
@@ -85,7 +84,7 @@ int main() {
               break;
             }
             else if(lowercaseString(userInputS).compare("n/a") == 0) {
-              fObject.O::Flashlight::printObj();
+              F::printAll(fObject);
               goto bypass;
             }
           }
@@ -170,19 +169,62 @@ int main() {
         }
         
         // prints flashlight object and both addons, with spaces inbetween each addon and the flashlight itself
-        fObject.O::Flashlight::printObj();
-        fObject.O::Item::printA(0);
-        std::cout << '\n';
-        fObject.O::Item::printA(1);
-        std::cout << '\n';
-
+        F::printAll(fObject, 2);
         
         userInputUS = 0;
         std::cout << '\n';
         continue;
       }
       case 2: {
-        std::cout << "test" << std::endl;
+        O::Map mapObject;
+        
+        bool addonsPresent = false;
+        std::cout << "Which rarity is it?\n\n1 | Rare \n2 | Ultra Rare" << std::endl;
+        std::cin >> userInputUS;
+        std::cout << '\n';
+        F::userInputVerify(userInputUS);
+        // verifies that the number is in bounds for the cases within the flashlight function
+        while(true) {
+          if(userInputUS < 0 && userInputUS > 2) {
+            std::cout << "Please only input either 1 or 2.\n" << std::endl;
+            F::inputReset();
+            std::cin >> userInputUS;
+          }
+          else {
+            break;
+          }
+        }
+        
+        mapObject.O::Map::mapTypeSetter(userInputUS);
+
+        std::cout << "If there is an addon, what is it's name? If there is not one, then type N/A\n" << std::endl;
+        std::cin.clear();
+        std::getline(std::cin >> std::ws, userInputS);
+        if(lowercaseString(userInputS).compare("n/a") == 0) {
+          std::cout << '\n';
+          F::printAll(mapObject);
+          goto bypass;
+        }
+        else {
+          addonsPresent = F::addonAdder(userInputS, mapObject, 0);
+        }
+        if(mapObject.Item::getAddOn(0).getForItem() != "Map") {
+          while(true) {
+            F::addonAdder("Placeholder", mapObject, 0);
+            std::cout << "\nPlease only input addons for Maps. Alternatively, type N/A to exit.\n" << std::endl;
+            std::getline(std::cin >> std::ws, userInputS);
+            F::addonAdder(userInputS, mapObject, 0);
+            if(mapObject.getAddOn(0).getForItem() == "Map") {
+              break;
+            }
+            else if(lowercaseString(userInputS).compare("n/a") == 0) {
+              std::cout << '\n';
+              F::printAll(mapObject);
+              goto bypass;
+            }
+          }
+        }
+        
         userInputUS = 0;
         std::cout << '\n';
         continue;

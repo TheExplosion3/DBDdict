@@ -90,7 +90,7 @@ namespace F {
     if(lowercaseString(target.getAddOn(1).getName()) == "broken bulb") {
       target.O::Item::addOtherEffects("Flashlight flickers, increased spookiness");
     }
-    if(lowercaseString(target.getAddOn(0).getName()) == "placeholder" || lowercaseString(target.getAddOn(1).getName == "placeholder")) {
+    if(lowercaseString(target.getAddOn(0).getName()) == "placeholder" || lowercaseString(target.getAddOn(1).getName()) == "placeholder") {
       return;
     }
     std::string temp = "";
@@ -186,7 +186,7 @@ namespace F {
   }
 
   // for Toolboxes
-  void effectCalculator(short addonCounter O::Toolbox& target) {
+  void effectCalculator(short addonCounter, O::Toolbox& target) {
     if(lowercaseString(target.getAddOn(0).getName()) == "brand new part") {
       target.O::Item::addOtherEffects("Brand New Part: Takes 5 seconds to install, adds 15% to generator progression. Triggers 2 difficult skillchecks during installation process, successful completion adds 5% extra progression up to a total of 25% progression");
     }
@@ -211,7 +211,7 @@ namespace F {
       for(auto &et : it.getEffects()) {
         idx++;
 
-        if(ctr >= it.effectPotency.size()) {
+        if(ctr >= it.getEffectPotency().size()) {
           break;
         }
         if(et != ' ') {
@@ -286,5 +286,10 @@ namespace F {
         inputObject.T::printA(1);
       }
     }
+  }
+  template <typename T>
+  const void printAll(T& inputObject) {
+    std::cout << '\n' << std::endl;
+    inputObject.T::printObj();
   }
 }
