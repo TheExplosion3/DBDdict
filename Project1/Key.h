@@ -73,6 +73,9 @@ namespace O {
           setUseTime(20);
           break;
         }
+        default: {
+          break;
+        }
       }
     }
 

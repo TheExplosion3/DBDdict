@@ -11,7 +11,7 @@ namespace O {
       float pHealSpeed;
       float aHealSpeed;
       float healTime;
-      float bonusBP
+      float bonusBP;
       float goodSkillcheckSize;
       float greatSkillcheckSize;
       float skillcheckProgression;
@@ -20,7 +20,7 @@ namespace O {
         name = "";
         rarity = "";
         goodSkillcheckSize = 0;
-        greatSkillCheckSize = 0;
+        greatSkillcheckSize = 0;
         bonusBP = 0;
         useTime = 0;
         pHealSpeed = 0;
@@ -33,12 +33,13 @@ namespace O {
         this -> name = other.getName();
         this -> rarity = other.getRarity();
         this -> useTime = other.getUseTime();
-        this -> phealSpeed = other.getPHealSpeed();
+        this -> pHealSpeed = other.getPHealSpeed();
         this -> aHealSpeed = other.getAHealSpeed();
         this -> healTime = other.getHealTime();
         this -> goodSkillcheckSize = other.getGoodSkillcheckSize();
         this -> greatSkillcheckSize = other.getGreatSkillcheckSize();
-        this -> skillcheckProgress = other.getSkillcheckProgression();
+        this -> skillcheckProgression = other.getSkillcheckProgression();
+        this -> otherEffects = other.getOtherEffects();
       }
 
       virtual ~Medkit() {}
@@ -47,7 +48,7 @@ namespace O {
         this -> pHealSpeed = pHealSpeed;
       }
       float getPHealSpeed() const {
-        return pHealSpeed();
+        return pHealSpeed;
       }
       void setAHealSpeed(float aHealSpeed) {
         this -> aHealSpeed = aHealSpeed;
@@ -74,10 +75,16 @@ namespace O {
         return greatSkillcheckSize;
       }
       void setSkillcheckProgression(float skillcheckProgression) {
-        this -> skillcheckProgression = skillcheckProgression);
+        this -> skillcheckProgression = skillcheckProgression;
       }
       float getSkillcheckProgression() const {
         return skillcheckProgression;
+      }
+      void setBonusBP(float bonusBP) {
+        this -> bonusBP = bonusBP;
+      }
+      float getBonusBP() const {
+        return bonusBP;
       }
 
       void medkitTypeSetter(unsigned short type) {
@@ -102,7 +109,7 @@ namespace O {
             setAHealSpeed(135);      
             setBonusBP(0);
             setGoodSkillcheckSize(100);
-            setGreatSkilcheckSize(100);
+            setGreatSkillcheckSize(100);
             setSkillcheckProgression(0.05);
             break;
           }
@@ -138,8 +145,9 @@ namespace O {
             setAHealSpeed(135);      
             setBonusBP(0);
             setGoodSkillcheckSize(100);
-            setGreatSkilcheckSize(100);
+            setGreatSkillcheckSize(100);
             setSkillcheckProgression(0.05);
+            otherEffects.clear();
             otherEffects.push_back("Makes you more visible");
             break;
           }
@@ -151,9 +159,13 @@ namespace O {
             setAHealSpeed(135);      
             setBonusBP(0);
             setGoodSkillcheckSize(100);
-            setGreatSkilcheckSize(100);
+            setGreatSkillcheckSize(100);
             setSkillcheckProgression(0.05);
+            otherEffects.clear();
             otherEffects.push_back("Explodes with confetti upon fully healing a survivor.");
+            break;
+          }
+          default: {
             break;
           }
         }

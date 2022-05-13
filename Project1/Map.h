@@ -50,6 +50,7 @@ namespace O {
             setUseTime(20);
             setRange(8);
             setObjectsTracked(1);
+            otherEffects.clear();
             otherEffects.push_back("Can track generators");
             break;
           }
@@ -59,7 +60,11 @@ namespace O {
             setUseTime(20);
             setRange(8);
             setObjectsTracked(3);
+            otherEffects.clear();
             otherEffects.push_back("Can track exit gates, generators, the hatch, killer belongings, as well as chests and totems tracked by Detective's Hunch.");
+            break;
+          }
+          default: {
             break;
           }
         }

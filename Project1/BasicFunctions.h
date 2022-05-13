@@ -5,6 +5,10 @@
 #include "Item.h"
 #include "Addons.h"
 #include "Flashlight.h"
+#include "Key.h"
+#include "Map.h"
+#include "Medkit.h"
+#include "Toolbox.h"
 
 namespace F {
   // Resets the input stream
@@ -49,20 +53,8 @@ namespace F {
       }
     }
   }
-  // For booleans
-  void userInputVerify(bool var) {
-    while(true) {
-      if(std::cin.fail()) {
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "Please only enter true/false.\n" << std::endl;
-        std::cin >> var;
-      }
-      if(!std::cin.fail()) {
-        break;
-      }
-    }
-  }
+
+  
 
 // Addon adders
   // Adds an addon with the name under the parameter, to the target object parameter.
@@ -98,13 +90,10 @@ namespace F {
     if(lowercaseString(target.getAddOn(1).getName()) == "broken bulb") {
       target.O::Item::addOtherEffects("Flashlight flickers, increased spookiness");
     }
-    if(target.getAddOn(0).getName() == "placeholder") {
+    if(lowercaseString(target.getAddOn(0).getName()) == "placeholder" || lowercaseString(target.getAddOn(1).getName == "placeholder")) {
       return;
     }
-    if(target.getAddOn(1).getName() == "placeholder") {
-      return;
-    }
-    std::string temp;
+    std::string temp = "";
     unsigned short ctr = 0;
     unsigned short idx = 0;
     // iterate through addons
@@ -113,7 +102,6 @@ namespace F {
       ctr = 0;
       // iterate through effects string
       for(auto &et : it.getEffects()) {
-        std::cout << et << std::endl;
         idx++;
         // check if ctr is larger or equal to size of effectpotency vector, break if true.
         if(ctr >= it.getEffectPotency().size()) {
@@ -190,19 +178,112 @@ namespace F {
             temp = "";
             continue;
           }
-          std::cout << et << " | " << ctr << " | " << it.getEffectPotency().size() << " | " << temp << std::endl;
+          // debugging statement below vvvvvvvvvvvvvvv
+          // std::cout << et << " | " << ctr << " | " << it.getEffectPotency().size() << " | " << temp << std::endl;
         }
       }  
     }
   }
-  const void printAll(O::Flashlight& inputObject, unsigned short addonCount) {
+
+  // for Toolboxes
+  void effectCalculator(short addonCounter O::Toolbox& target) {
+    if(lowercaseString(target.getAddOn(0).getName()) == "brand new part") {
+      target.O::Item::addOtherEffects("Brand New Part: Takes 5 seconds to install, adds 15% to generator progression. Triggers 2 difficult skillchecks during installation process, successful completion adds 5% extra progression up to a total of 25% progression");
+    }
+    if(lowercaseString(target.getAddOn(1).getName()) == "brand new part") {
+      target.O::Item::addOtherEffects("Brand New Part: Takes 5 seconds to install, adds 15% to generator progression. Triggers 2 difficult skillchecks during installation process, successful completion adds 5% extra progression up to a total of 25% progression");      
+    }
+    if(lowercaseString(target.getAddOn(0).getName()) == "instructtions" || lowercaseString(target.getAddOn(1).getName()) == "instructions") {
+      target.O::Item::addOtherEffects("No normal Skill Checks are present.");
+    }
+    if(target.getAddOn(0).getName() == "placeholder" || target.getAddOn(1).getName() == "placeholder") {
+      return;
+    }
+    std::string temp = "";
+    unsigned short ctr = 0;
+    unsigned short idx = 0;
+
+    // iterate through addons
+    for(auto &it : target.getAddOns()) {
+      // reset counter before going to a new addon
+      ctr = 0;
+      // iterate through effects string
+      for(auto &et : it.getEffects()) {
+        idx++;
+
+        if(ctr >= it.effectPotency.size()) {
+          break;
+        }
+        if(et != ' ') {
+          temp += et;
+        }
+        else {
+          temp = "";
+        }
+        temp = lowercaseString(temp);
+
+        // if temp is larger than 2, it will begin checking for effects.
+        if(temp.length() > 2) {
+          if(temp.substr(1, temp.length()).compare("charges") == 0 || temp.substr(1, temp.length()).compare("use") == 0) {
+            target.calculateEffects(1, it.getEffectPotency().at(ctr));
+            if(it.getEffectPotency().size() < ctr + 1) {
+              break;
+            }
+            else {     
+              ctr++;
+            }
+          }
+          else if(temp.substr(1, temp.length()).compare("speed") == 0) {
+            target.calculateEffects(2, it.getEffectPotency().at(ctr));
+            // this is more of a fallback; if ctr + 1 is larger than effect potency's size it will break.
+            if(it.getEffectPotency().size() < ctr + 1) {
+              break;
+            }
+            else {     
+              ctr++;
+            }
+          }
+          else if(temp.substr(1, temp.length()).compare("sabotage") == 0) {
+            target.calculateEffects(3, it.getEffectPotency().at(ctr));
+            if(it.getEffectPotency().size() < ctr + 1) {
+              break;
+            }
+            else {     
+              ctr++;
+            }
+          }
+          else if(temp.substr(1, temp.length()).compare("timer") == 0) {
+            target.calculateEffects(4, it.getEffectPotency().at(ctr));
+            if(it.getEffectPotency().size() < ctr + 1) {
+              break;
+            }
+            else {     
+              ctr++;
+            }
+          }
+          
+          // verifies if temp is equal to & to make sure string isnt cluttered
+          else if(temp[0] != '&' || et == ' ') {
+            temp = "";
+            continue;
+          }
+        }
+      }
+    }
+  }
+  
+  // prints both addons and prinary object
+  template <typename T>
+  const void printAll(T& inputObject, unsigned short addonCount) {
     std::cout << '\n' << std::endl;
     effectCalculator(addonCount, inputObject);
-    inputObject.O::Flashlight::printObj();
+    
+    inputObject.T::printObj();
+    
     if(addonCount > 0) {
-      inputObject.O::Flashlight::printA(0);
+      inputObject.T::printA(0);
       if(addonCount == 2) {
-        inputObject.O::Flashlight::printA(1);
+        inputObject.T::printA(1);
       }
     }
   }

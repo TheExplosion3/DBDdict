@@ -3,17 +3,17 @@
 #include <algorithm>
 #include <nlohmann/json.hpp>
 #include "Item.h"
+#include "Addons.h"
+#include "BasicFunctions.h"
 #include "Medkit.h"
 #include "Flashlight.h"
 #include "Map.h"
 #include "Key.h"
-#include "Addons.h"
-#include "BasicFunctions.h"
+#include "Toolbox.h"
 
 // user input variables, will get reused
-unsigned short userInputUS;
-std::string userInputS;
-bool userInputB;
+unsigned short userInputUS = 0;
+std::string userInputS = "";
 
 int main() {
   // gets initial user input for switch statement
@@ -25,7 +25,7 @@ int main() {
   while(true) {
     switch(userInputUS) {
       case 0: {
-        // label for goto statements, needs to have something in it so i just replicated what was there before
+        // label for goto statements, needs to have something in it so i just replicated what was there before. On top of that, I set it up in a false block that will never be true, so it doesn't interfere with the functionality of the primary program.;
         if(false) {  
           bypass:
             userInputUS = 0;
