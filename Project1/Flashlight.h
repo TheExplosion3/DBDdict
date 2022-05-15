@@ -41,7 +41,6 @@ namespace O {
       }
 
       // getters and setters
-      
       void setAccuracy(float accuracy) {
         this -> accuracy = accuracy;
       }
@@ -174,7 +173,7 @@ namespace O {
           }
         }
       }
-
+      
       // prints the primary flashlight object
       virtual void printObj() override {
         O::Item::printObj();

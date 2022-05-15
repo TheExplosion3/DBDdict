@@ -82,7 +82,7 @@ namespace O {
       virtual void printObj() {
         std::cout << "Name: " << this->name << "\nRarity: " << this->rarity << "\nUse Time: " << useTime << "\nOther Effects: " << vectorPrinter(this->otherEffects);
       }
-
+      
       // Prints out an addon, at the index idx.
       void printA(unsigned short idx) {
         std::string temp = "";
