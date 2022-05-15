@@ -54,8 +54,6 @@ namespace F {
     }
   }
 
-  
-
 // Addon adders
   // Adds an addon with the name under the parameter, to the target object parameter.
   template <typename T>
@@ -82,7 +80,7 @@ namespace F {
   }
 
   // calculates an addon's effects on the main flashlight
-  // note: dont even try to read this code it is a certified mess
+  // note: dont even try to read this code it is a certified mess, though i am ctrl c ctrl v'ing it for the other sections lol
   void effectCalculator(short addonCount, O::Flashlight& target) {
     if(lowercaseString(target.getAddOn(0).getName()) == "broken bulb") {
       target.O::Item::addOtherEffects("Flashlight flickers, increased spookiness");
@@ -93,9 +91,11 @@ namespace F {
     if(lowercaseString(target.getAddOn(0).getName()) == "placeholder" || lowercaseString(target.getAddOn(1).getName()) == "placeholder") {
       return;
     }
+    
     std::string temp = "";
     unsigned short ctr = 0;
     unsigned short idx = 0;
+
     // iterate through addons
     for(auto &it : target.getAddOns()) {
       // reset counter before going to a new addon
@@ -119,7 +119,7 @@ namespace F {
         if(temp.length() > 2) {
           if(temp.substr(1, temp.length()).compare("accuracy") == 0) {
             target.calculateEffects(1, it.getEffectPotency().at(ctr));
-            // this is more of a fallback; if ctr + 1 is larger than effect potency's size it will break.
+
             if(it.getEffectPotency().size() < ctr + 1) {
               break;
             }
@@ -129,6 +129,7 @@ namespace F {
           }
           else if(temp.substr(1, temp.length()).compare("width") == 0) {
             target.calculateEffects(2, it.getEffectPotency().at(ctr));
+
             if(it.getEffectPotency().size() < ctr + 1) {
               break;
             }
@@ -138,6 +139,7 @@ namespace F {
           }
           else if(temp.substr(1, temp.length()).compare("range") == 0) {
             target.calculateEffects(3, it.getEffectPotency().at(ctr));
+
             if(it.getEffectPotency().size() < ctr + 1) {
               break;
             }
@@ -147,6 +149,7 @@ namespace F {
           }
           else if(temp.substr(1, temp.length()).compare("use") == 0 || temp.substr(1, temp.length()).compare("depletion") == 0) {
             target.calculateEffects(4, it.getEffectPotency().at(ctr));
+
             if(it.getEffectPotency().size() < ctr + 1) {
               break;
             }
@@ -156,6 +159,7 @@ namespace F {
           }
           else if(temp.substr(1, temp.length()).compare("brightness") == 0) {
             target.calculateEffects(5, it.getEffectPotency().at(ctr));
+
             if(it.getEffectPotency().size() < ctr + 1) {
               break;
             }
@@ -165,6 +169,7 @@ namespace F {
           }
           else if(temp.substr(1, temp.length()).compare("duration") == 0) {
             target.calculateEffects(6, it.getEffectPotency().at(ctr));
+
             if(it.getEffectPotency().size() < ctr + 1) {
               break;
             }
@@ -172,7 +177,6 @@ namespace F {
               ctr++;
             }
           }
-          
           // verifies if temp is equal to & to make sure string isnt cluttered
           else if(temp[0] != '&' || et == ' ') {
             temp = "";
@@ -199,6 +203,7 @@ namespace F {
     if(target.getAddOn(0).getName() == "placeholder" || target.getAddOn(1).getName() == "placeholder") {
       return;
     }
+
     std::string temp = "";
     unsigned short ctr = 0;
     unsigned short idx = 0;
@@ -209,6 +214,7 @@ namespace F {
       ctr = 0;
       // iterate through effects string
       for(auto &et : it.getEffects()) {
+
         idx++;
 
         if(ctr >= it.getEffectPotency().size()) {
@@ -224,9 +230,12 @@ namespace F {
 
         // if temp is larger than 2, it will begin checking for effects.
         if(temp.length() > 2) {
+          
           if(temp.substr(1, temp.length()).compare("charges") == 0 || temp.substr(1, temp.length()).compare("use") == 0) {
             target.calculateEffects(1, it.getEffectPotency().at(ctr));
+
             if(it.getEffectPotency().size() < ctr + 1) {
+
               break;
             }
             else {     
@@ -235,6 +244,8 @@ namespace F {
           }
           else if(temp.substr(1, temp.length()).compare("speed") == 0) {
             target.calculateEffects(2, it.getEffectPotency().at(ctr));
+
+
             // this is more of a fallback; if ctr + 1 is larger than effect potency's size it will break.
             if(it.getEffectPotency().size() < ctr + 1) {
               break;
@@ -245,6 +256,7 @@ namespace F {
           }
           else if(temp.substr(1, temp.length()).compare("sabotage") == 0) {
             target.calculateEffects(3, it.getEffectPotency().at(ctr));
+
             if(it.getEffectPotency().size() < ctr + 1) {
               break;
             }
@@ -254,6 +266,7 @@ namespace F {
           }
           else if(temp.substr(1, temp.length()).compare("timer") == 0) {
             target.calculateEffects(4, it.getEffectPotency().at(ctr));
+
             if(it.getEffectPotency().size() < ctr + 1) {
               break;
             }
@@ -261,7 +274,6 @@ namespace F {
               ctr++;
             }
           }
-          
           // verifies if temp is equal to & to make sure string isnt cluttered
           else if(temp[0] != '&' || et == ' ') {
             temp = "";
@@ -271,7 +283,7 @@ namespace F {
       }
     }
   }
-  
+
   // prints both addons and prinary object
   template <typename T>
   const void printAll(T& inputObject, unsigned short addonCount) {
@@ -287,6 +299,8 @@ namespace F {
       }
     }
   }
+
+  // overload for printing only the object, no addon objects. (yeah it makes the name misleading but idrc tbh.)
   template <typename T>
   const void printAll(T& inputObject) {
     std::cout << '\n' << std::endl;

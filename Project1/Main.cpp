@@ -254,7 +254,6 @@ int main() {
       default: {
         userInputUS = 0;
         std::cout << "Please only input correct numerical values, ranging from 1 and 6.\n" << std::endl;
-        
         continue;
       }
     }
