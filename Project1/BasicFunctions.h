@@ -145,187 +145,160 @@ namespace F {
         }
         if(lowercaseString(target.getAddOn(1).getName()) == "brand new part") {
           target.Item::addOtherEffects("Brand New Part: Takes 5 seconds to install, adds 15% to generator progression. Triggers 2 difficult skillchecks during installation process, successful completion adds 5% extra progression up to a total of 25% progression"); 
-        temp = lowercaseString(temp);
-        // if temp is larger than 2, it will begin checking for effects.
-        if(temp.length() > 2) {
-          
         }
         if(lowercaseString(target.getAddOn(0).getName()) == "instructtions" || lowercaseString(target.getAddOn(1).getName()) == "instructions") {
           target.Item::addOtherEffects("No normal Skill Checks are present.");
         }
       }
-    }
-
-          switch(switcher) {
-            case 0: {
-              if(temp.substr(1, temp.length()).compare("accuracy") == 0) {
-                target.calculateEffects(1, it.getEffectPotency().at(ctr));
-                // this is more of a fallback; if ctr + 1 is larger than effect potency's size it will break.
-                if(it.getEffectPotency().size() < ctr + 1) {
-                  switchBreak = true;
-                  break;
-                }
-                else {     
-                  ctr++;
-                  break;
-                }
-              }
-              else if(temp.substr(1, temp.length()).compare("width") == 0) {
-                target.calculateEffects(2, it.getEffectPotency().at(ctr));
-                if(it.getEffectPotency().size() < ctr + 1) {
-                  switchBreak = true;
-                  break;
-                }
-                else {     
-                  ctr++;
-                  break;
-                }
-              }
-              else if(temp.substr(1, temp.length()).compare("range") == 0) {
-                target.calculateEffects(3, it.getEffectPotency().at(ctr));
-                if(it.getEffectPotency().size() < ctr + 1) {
-                  switchBreak = true;
-                  break;
-                }
-                else {     
-                  ctr++;
-                  break;
-                }
-              }
-              else if(temp.substr(1, temp.length()).compare("use") == 0 || temp.substr(1, temp.length()).compare("depletion") == 0) {
-                target.calculateEffects(4, it.getEffectPotency().at(ctr));
-                if(it.getEffectPotency().size() < ctr + 1) {
-                  switchBreak = true;
-                  break;
-                }
-                else {     
-                  ctr++;
-                  break;
-                }
-              }
-              else if(temp.substr(1, temp.length()).compare("brightness") == 0) {
-                target.calculateEffects(5, it.getEffectPotency().at(ctr));
-                if(it.getEffectPotency().size() < ctr + 1) {
-                  switchBreak = true;
-                  break;
-                }
-                else {     
-                  ctr++;
-                  break;
-                }
-              }
-              else if(temp.substr(1, temp.length()).compare("duration") == 0) {
-                target.calculateEffects(6, it.getEffectPotency().at(ctr));
-                if(it.getEffectPotency().size() < ctr + 1) {
-                  switchBreak = true;
-                  break;
-                }
-                else {     
-                  ctr++;
-                  break;
-                }
-              }
-              
-              // verifies if temp is equal to & to make sure string isnt cluttered
-              else if(temp[0] != '&' || et == ' ') {
-                temp = "";
-                continue;
-              }
-              // debugging statement below vvvvvvvvvvvvvvv
-              // std::cout << et << " | " << ctr << " | " << it.getEffectPotency().size() << " | " << temp << std::endl;
-            case 1: {
-              
-            }
-            case 2: {
+        
+      temp = lowercaseString(temp);
       
+      if(temp.length() > 2) {
+        switch(switcher) {
+          case 0: {
+            if(temp.substr(1, temp.length()).compare("accuracy") == 0) {
+              target.calculateEffects(1, it.getEffectPotency().at(ctr));
+              // this is more of a fallback; if ctr + 1 is larger than effect potency's size it will break.
+              if(it.getEffectPotency().size() < ctr + 1) {
+                switchBreak = true;
+                break;
+              }
+              else {     
+                ctr++;
+                break;
+              }
             }
-            case 3: {
-              
+            else if(temp.substr(1, temp.length()).compare("width") == 0) {
+              target.calculateEffects(2, it.getEffectPotency().at(ctr));
+              if(it.getEffectPotency().size() < ctr + 1) {
+                switchBreak = true;
+                break;
+              }
+              else {     
+                ctr++;
+                break;
+              }
             }
-            case 4: {
-              if(temp.substr(1, temp.length()).compare("charges") == 0 || temp.substr(1, temp.length()).compare("use") == 0) {
-                target.calculateEffects(1, it.getEffectPotency().at(ctr));
-                if(it.getEffectPotency().size() < ctr + 1) {
-                  switchBreak = true;
-                  break;
-                }
-                else {     
-                  ctr++;
-                  break;
-                }
+            else if(temp.substr(1, temp.length()).compare("range") == 0) {
+              target.calculateEffects(3, it.getEffectPotency().at(ctr));
+              if(it.getEffectPotency().size() < ctr + 1) {
+                switchBreak = true;
+                break;
               }
-              else if(temp.substr(1, temp.length()).compare("speed") == 0) {
-                target.calculateEffects(2, it.getEffectPotency().at(ctr));
-                // this is more of a fallback; if ctr + 1 is larger than effect potency's size it will break.
-                if(it.getEffectPotency().size() < ctr + 1) {
-                  switchBreak = true;
-                  break;
-                }
-                else {     
-                  ctr++;
-                  break;
-                }
+              else {     
+                ctr++;
+                break;
               }
-              else if(temp.substr(1, temp.length()).compare("sabotage") == 0) {
-                target.calculateEffects(3, it.getEffectPotency().at(ctr));
-                if(it.getEffectPotency().size() < ctr + 1) {
-                  switchBreak = true;
-                  break;
-                }
-                else {     
-                  ctr++;
-                  break;
-                }
+            }
+            else if(temp.substr(1, temp.length()).compare("use") == 0 || temp.substr(1, temp.length()).compare("depletion") == 0) {
+              target.calculateEffects(4, it.getEffectPotency().at(ctr));
+              if(it.getEffectPotency().size() < ctr + 1) {
+                switchBreak = true;
+                break;
               }
-              else if(temp.substr(1, temp.length()).compare("timer") == 0) {
-                target.calculateEffects(4, it.getEffectPotency().at(ctr));
-                if(it.getEffectPotency().size() < ctr + 1) {
-                  switchBreak = true;
-                  break;
-                }
-                else {     
-                  ctr++;
-                  break;
-                }
+              else {     
+                ctr++;
+                break;
               }
-              
-              // verifies if temp is equal to & to make sure string isnt cluttered
-              else if(temp[0] != '&' || et == ' ') {
-                temp = "";
-                continue;
+            }
+            else if(temp.substr(1, temp.length()).compare("brightness") == 0) {
+              target.calculateEffects(5, it.getEffectPotency().at(ctr));
+              if(it.getEffectPotency().size() < ctr + 1) {
+                switchBreak = true;
+                break;
               }
+              else {     
+                ctr++;
+                break;
+              }
+            }
+            else if(temp.substr(1, temp.length()).compare("duration") == 0) {
+              target.calculateEffects(6, it.getEffectPotency().at(ctr));
+              if(it.getEffectPotency().size() < ctr + 1) {
+                switchBreak = true;
+                break;
+              }
+              else {     
+                ctr++;
+                break;
+              }
+            }
+            
+            // verifies if temp is equal to & to make sure string isnt cluttered
+            else if(temp[0] != '&' || et == ' ') {
+              temp = "";
+              continue;
             }
           }
-          else if(temp.substr(1, temp.length()).compare("sabotage") == 0) {
-            target.calculateEffects(3, it.getEffectPotency().at(ctr));
-
-            if(it.getEffectPotency().size() < ctr + 1) {
-              break;
+            // debugging statement below vvvvvvvvvvvvvvv
+            // std::cout << et << " | " << ctr << " | " << it.getEffectPotency().size() << " | " << temp << std::endl;
+          case 1: {
+            
+          }
+          case 2: {
+    
+          }
+          case 3: {
+            
+          }
+          case 4: {
+            if(temp.substr(1, temp.length()).compare("charges") == 0 || temp.substr(1, temp.length()).compare("use") == 0) {
+              target.calculateEffects(1, it.getEffectPotency().at(ctr));
+              if(it.getEffectPotency().size() < ctr + 1) {
+                switchBreak = true;
+                break;
+              }
+              else {     
+                ctr++;
+                break;
+              }
             }
-            else {     
-              ctr++;
+            else if(temp.substr(1, temp.length()).compare("speed") == 0) {
+              target.calculateEffects(2, it.getEffectPotency().at(ctr));
+              // this is more of a fallback; if ctr + 1 is larger than effect potency's size it will break.
+              if(it.getEffectPotency().size() < ctr + 1) {
+                switchBreak = true;
+                break;
+              }
+              else {     
+                ctr++;
+                break;
+              }
+            }
+            else if(temp.substr(1, temp.length()).compare("sabotage") == 0) {
+              target.calculateEffects(3, it.getEffectPotency().at(ctr));
+              if(it.getEffectPotency().size() < ctr + 1) {
+                switchBreak = true;
+                break;
+              }
+              else {     
+                ctr++;
+                break;
+              }
+            }
+            else if(temp.substr(1, temp.length()).compare("timer") == 0) {
+              target.calculateEffects(4, it.getEffectPotency().at(ctr));
+              if(it.getEffectPotency().size() < ctr + 1) {
+                switchBreak = true;
+                break;
+              }
+              else {     
+                ctr++;
+                break;
+              }
+            }
+            
+            // verifies if temp is equal to & to make sure string isnt cluttered
+            else if(temp[0] != '&' || et == ' ') {
+              temp = "";
+              continue;
             }
           }
-          else if(temp.substr(1, temp.length()).compare("timer") == 0) {
-            target.calculateEffects(4, it.getEffectPotency().at(ctr));
-
-            if(it.getEffectPotency().size() < ctr + 1) {
-              break;
-            }
-            else {     
-              ctr++;
-            }
-          }
-          // verifies if temp is equal to & to make sure string isnt cluttered
-          else if(temp[0] != '&' || et == ' ') {
-            temp = "";
-            continue;
-          }
-        }  
-        if(switchBreak == true) {
-          switchBreak = false;
-          break;
         }
+      }
+      if(switchBreak == true) {
+        switchBreak = false;
+        break;
       }
     }
   }
