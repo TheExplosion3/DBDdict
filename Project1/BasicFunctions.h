@@ -80,8 +80,7 @@ namespace F {
     }
     return false;
   }
-
-<<<<<<< HEAD
+  
   /* calculates an addon's effects on the main flashlight
      note: dont even try to read this code it is a certified mess
      note 2: its worse i added switch statements so this can be 1 function without overloads becuase im lazy haha this is way too overcomplicated for my own good haha haha im funny and good at programming hahahaha

@@ -177,7 +177,7 @@ namespace O {
       // prints the primary flashlight object
       virtual void printObj() override {
         O::Item::printObj();
-        std::cout << "Accuracy: " << this->accuracy << "\nWidth: " << this->width << "\nRange: " << this->range << "\nBrightness: " << this->brightness << "\nBlindness Duration: " << this->blindnessDuration << '\n' << std::endl;
+        std::cout << "Accuracy: " << this -> accuracy << "\nWidth: " << this -> width << "\nRange: " << this -> range << "\nBrightness: " << this -> brightness << "\nBlindness Duration: " << this -> blindnessDuration << '\n' << std::endl;
       }
   };
 };

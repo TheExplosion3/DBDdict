@@ -219,11 +219,11 @@ namespace O {
       }
       virtual void printObj() override {
         O::Item::printObj();
-        std::cout << "Personal Heal Speed: " << pHealSpeed << "\nAltruistic Heal Speed: " << aHealSpeed << "\nBonus Bloodpoints: " << bonusBP << std::endl;
-        if(addOns[0].getName() == "Anti Hemmhoragic Syringe" || addOns[0].getName() == "Anti Hemmhoragic Syringe") {
-          std::cout << "Heal Time: " << healTime << std::endl;
+        std::cout << "Personal Heal Speed: " << this -> pHealSpeed << "\nAltruistic Heal Speed: " << this -> aHealSpeed << "\nBonus Bloodpoints: " << this -> bonusBP << std::endl;
+        if(this -> addOns[0].getName() == "Anti Hemmhoragic Syringe" || this -> addOns[1].getName() == "Anti Hemmhoragic Syringe") {
+          std::cout << "Heal Time: " << this -> healTime << std::endl;
         }
-        std::cout << "Great Skillcheck Progression Bonus: " << skillcheckProgression << "\nGood Skillcheck Zone Size: " << goodSkillcheckSize << "\nGreat Skillcheck Zone Size: " << greatSkillcheckSize << '\n' << std::endl;
+        std::cout << "Great Skillcheck Progression Bonus: " << this -> skillcheckProgression << "\nGood Skillcheck Zone Size: " << this -> goodSkillcheckSize << "\nGreat Skillcheck Zone Size: " << this -> greatSkillcheckSize << '\n' << std::endl;
       }
   };
 }

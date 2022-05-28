@@ -1,4 +1,12 @@
 { 
+  "Placeholder" : {
+    "name" : "Placeholder",
+    "rarity" : "Placeholder",
+    "forItem" : "Placeholder",
+    "effects" : "Placeholder",
+    "effectPotency" : [0]
+  },
+  
   "Wide Lens" : {
     "name" : "Wide Lens",
     "rarity" : "Common",
@@ -453,13 +461,5 @@
     "forItem" : "Toolbox",
     "effects" : "Takes 5 seconds to install, adds 15% to generator progression. Triggers 2 difficult skillchecks during installation process, successful completion adds 5% extra progression up to a total of 25% progression",
     "effectPotency" : [5, 15, 5, 25]
-  },
-
-  "Placeholder" : {
-    "name" : "Placeholder",
-    "rarity" : "Placeholder",
-    "forItem" : "Placeholder",
-    "effects" : "Placeholder",
-    "effectPotency" : [0]
   }
 }

@@ -30,7 +30,6 @@ namespace O {
 
       virtual ~Item() {}
 
-
       void setName(std::string name) {
         this -> name = name;
       }

@@ -172,7 +172,7 @@ namespace O {
 
     virtual void printObj() override {
       O::Item::printObj();
-      std::cout << "Repair Speed: " << repairSpeed << "\nSabotage Speed: " << sabotageSpeed << "\nSabotage Timer: " << sabotageTimer << std::endl;
+      std::cout << "Repair Speed: " << this -> repairSpeed << "\nSabotage Speed: " << this -> sabotageSpeed << "\nSabotage Timer: " << this -> sabotageTimer << std::endl;
     }
   };
 }

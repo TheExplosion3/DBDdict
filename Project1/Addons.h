@@ -7,8 +7,9 @@
 #include <nlohmann/json.hpp>
 #include "Item.h"
 
-// yes, these methods should be in basicfunctions, but they are needed there and here, so to prevent circular imports i have placed them here. cry about it.
+// yes, these methods should be in basicfunctions.h, but they are needed there and here, so to prevent circular imports i have placed them here. cry about it.
 
+// the black magic used in the next 2 methods i dont even understand, something with an inline lambda function, iterating over the string, something along those lines. who actually knows? i sure dont lmao.
 // very botched case changer
 std::string lowercaseString(std::string str) {
   std::transform(str.begin(), str.end(), str.begin(), [](unsigned char c){return std::tolower(c);});

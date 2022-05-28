@@ -196,7 +196,7 @@ int main() {
         }
         
         mapObject.O::Map::mapTypeSetter(userInputUS);
-
+        // runs the addon check, similar to toolbox one but for maps
         std::cout << "If there is an addon, what is it's name? If there is not one, then type N/A\n" << std::endl;
         std::cin.clear();
         std::getline(std::cin >> std::ws, userInputS);

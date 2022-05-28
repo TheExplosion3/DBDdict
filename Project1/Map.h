@@ -97,7 +97,7 @@ namespace O {
 
       virtual void printObj() override {
         O::Item::printObj();
-        std::cout << "Range: " << range << "\nTotal Items Tracked: " << totalObjectsTracked << '\n' << std::endl;
+        std::cout << "Range: " << this -> range << "\nTotal Items Tracked: " << this -> totalObjectsTracked << '\n' << std::endl;
       }
   };
 }

@@ -113,7 +113,7 @@ namespace O {
 
     virtual void printObj() override {
       O::Item::printObj();
-      std::cout << "Range: " << range << "\nObsession Chance" << obsessionChance << '\n' << std::endl;
+      std::cout << "Range: " << this -> range << "\nObsession Chance" << this -> obsessionChance << '\n' << std::endl;
     }
   };
 }
