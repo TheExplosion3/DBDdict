@@ -3,10 +3,10 @@
 <hr></hr>
 
 <p>
-  This is supposed to be a dictionary for Dead By Daylight's survivor items and addons, and it shows their effects on said items and addons.
+  This is supposed to be a dictionary for Dead By Daylight's survivor items and addons, and it shows their effects on said items and addons. Includes safety for incorrect addons on certain items, safety for incorrect input, and just overall very well defended code. This definitely didn't extend the time to program this mess by at least 3-5 hours.
 </p>
 
-><h4>note: i was testing signed commits in the process of making this, most unsigned commits were from before or are from my chromebook </h4>
+><h4>note: i was testing signed commits in the process of making this, most unsigned commits were from before or are from my chromebook</h4>
 
 <hr></hr>
 
