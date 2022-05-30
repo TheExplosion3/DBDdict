@@ -224,6 +224,85 @@ int main() {
             }
           }
         }
+
+        if(addonsPresent == true) {
+          std::cout << "\nIf there is a second addon, what is it's name? If there is not one, then type N/A\n" << std::endl;
+          std::cin.clear();
+          std::getline(std::cin >> std::ws, userInputS);
+          std::cout << '\n';
+          // verifies addon is not the same, and if it is then it will proceed to alert the user about it, otherwise it continues.
+          
+          userInputS = lowercaseString(userInputS);
+          
+          // if N/A is found, prints the object and the first addon, and returns to the main program.
+          
+          if(lowercaseString(userInputS).compare("n/a") == 0) {
+            F::printAll(mapObject, 1);
+            goto bypass;
+          }
+          
+          // verifies that user input for the addon isnt the same as the first addon already entered. if it is, then user can either add a new one, or exit to the main menu.
+          while(true) {
+            if(lowercaseString(mapObject.Item::getAddOn(0).getName()).compare(lowercaseString(userInputS)) == 0) {
+              F::addonAdder("Placeholder", mapObject, 1);
+              std::cout << "You can't have 2 of the same addon, type a different one or type N/A to exit.\n" << std::endl;
+              std::cin.clear();
+              std::getline(std::cin >> std::ws, userInputS);
+              bool temp = F::addonAdder(userInputS, mapObject, 1);
+              if(temp != true) {
+                F::printAll(mapObject, 1);
+                goto bypass;
+              }
+              if(lowercaseString(mapObject.getAddOn(0).getName()).compare(lowercaseString(userInputS)) != 0) {
+                break;
+              }
+              else if(lowercaseString(userInputS).compare("n/a") == 0) {
+                F::printAll(mapObject, 1);
+                goto bypass;
+              }
+            }
+            else {
+              break;
+            }
+          }
+          F::addonAdder(userInputS, mapObject, 1);
+          // checks if the add on is under the name map, and if it isn't then it makes the user either print without a new addon, or enter a new one.
+          if(mapObject.getAddOn(1).getForItem() != "Map") {
+            while(true) {
+              F::addonAdder("Placeholder", mapObject, 1);
+              std::cout << "Please only input addons for Flashlights. Alternatively, type N/A to exit.\n" << std::endl;
+              std::getline(std::cin >> std::ws, userInputS);
+              
+              bool temp = F::addonAdder(userInputS, mapObject, 1);
+              
+              if(temp != true) {
+                F::printAll(mapObject, 1);
+                goto bypass;
+              }
+              if(mapObject.getAddOn(1).getForItem() == "Map") {
+                break;
+              }
+              else if(lowercaseString(userInputS).compare("n/a") == 0) {
+                F::printAll(mapObject, 1);
+                goto bypass;
+              }
+            }
+          }
+        }
+        
+        // checks if one addon is present, or two, single addon check is for safety and fallback measures
+        
+        if(addonsPresent == true) {
+          if(mapObject.getAddOn(1).getName().compare(" ") == 0) {
+            F::effectCalculator(1, mapObject);
+          }
+          else {
+            F::effectCalculator(2, mapObject);
+          }
+        }
+        
+        // prints map object and both addons, with spaces inbetween each addon and the map itself
+        F::printAll(mapObject, 2);
         
         userInputUS = 0;
         std::cout << '\n';
