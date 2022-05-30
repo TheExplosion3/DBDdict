@@ -12,7 +12,9 @@
 #include "Toolbox.h"
 
 /*
-  yeah i should refactor this but im kinda lazy and sorta just wanna finish this project, big O notation is only a theory and is a lie created by big code to make efficiency seem important haha funny (no seriously ive spent way too much time on this thing.)
+  yeah i should refactor this but im kinda lazy and sorta just wanna finish this project,
+  big O notation is only a theory and is a lie created by big code to make efficiency seem important haha funny
+  (no seriously ive spent way too much time on this thing.)
 */
 
 // user input variables, will get reused
