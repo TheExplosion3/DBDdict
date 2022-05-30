@@ -7,11 +7,11 @@ cmake_install.cmake
 .vs
 .vscode
 x64
-Project1/DBDdict.sln
+DBDdict.sln
 Project1/DBDdict.vcxproj
 Project1/DBDdict.vcxproj.filters
 Project1/DBDdict.vcxproj.user
 Project1/x64
 DBDdict
 include
-vcpkg
+CppProperties.json
