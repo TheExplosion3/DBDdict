@@ -31,7 +31,7 @@ int main() {
   while(true) {
     switch(userInputUS) {
       case 0: {
-        // label for goto statements, needs to have something in it so i just replicated what was there before. On top of that, I set it up in a false block that will never be true, so it doesn't interfere with the functionality of the primary program.;
+        // label for goto statements, needs to have something in it so i just replicated what was there before. On top of that, I set it up in a false if statement so it doesn't interfere with the functionality of the primary program.;
         if(false) {  
           bypass:
             userInputUS = 0;
@@ -110,6 +110,7 @@ int main() {
           // if N/A is found, prints the object and the first addon, and returns to the main program.
           
           if(lowercaseString(userInputS).compare("n/a") == 0) {
+            F::effectCalculator(1, fObject, 1);
             F::printAll(fObject, 1);
             goto bypass;
           }
@@ -130,6 +131,7 @@ int main() {
                 break;
               }
               else if(lowercaseString(userInputS).compare("n/a") == 0) {
+                F::effectCalculator(1, fObject, 1);
                 F::printAll(fObject, 1);
                 goto bypass;
               }
@@ -156,6 +158,7 @@ int main() {
                 break;
               }
               else if(lowercaseString(userInputS).compare("n/a") == 0) {
+                F::effectCalculator(1, fObject, 1);
                 F::printAll(fObject, 1);
                 goto bypass;
               }
@@ -167,10 +170,10 @@ int main() {
         
         if(addonsPresent == true) {
           if(fObject.getAddOn(1).getName().compare(" ") == 0) {
-            F::effectCalculator(1, fObject);
+            F::effectCalculator(1, fObject, 0);
           }
           else {
-            F::effectCalculator(2, fObject);
+            F::effectCalculator(2, fObject, 0);
           }
         }
         
@@ -243,6 +246,7 @@ int main() {
           // if N/A is found, prints the object and the first addon, and returns to the main program.
           
           if(lowercaseString(userInputS).compare("n/a") == 0) {
+            F::effectCalculator(1, mapObject, 1);
             F::printAll(mapObject, 1);
             goto bypass;
           }
@@ -263,6 +267,7 @@ int main() {
                 break;
               }
               else if(lowercaseString(userInputS).compare("n/a") == 0) {
+                F::effectCalculator(1, mapObject, 1);
                 F::printAll(mapObject, 1);
                 goto bypass;
               }
@@ -276,7 +281,7 @@ int main() {
           if(mapObject.getAddOn(1).getForItem() != "Map") {
             while(true) {
               F::addonAdder("Placeholder", mapObject, 1);
-              std::cout << "Please only input addons for Flashlights. Alternatively, type N/A to exit.\n" << std::endl;
+              std::cout << "Please only input addons for Maps. Alternatively, type N/A to exit.\n" << std::endl;
               std::getline(std::cin >> std::ws, userInputS);
               
               bool temp = F::addonAdder(userInputS, mapObject, 1);
@@ -289,6 +294,7 @@ int main() {
                 break;
               }
               else if(lowercaseString(userInputS).compare("n/a") == 0) {
+                F::effectCalculator(1, mapObject, 1);
                 F::printAll(mapObject, 1);
                 goto bypass;
               }
@@ -300,10 +306,10 @@ int main() {
         
         if(addonsPresent == true) {
           if(mapObject.getAddOn(1).getName().compare(" ") == 0) {
-            F::effectCalculator(1, mapObject);
+            F::effectCalculator(1, mapObject, 1);
           }
           else {
-            F::effectCalculator(2, mapObject);
+            F::effectCalculator(2, mapObject, 1);
           }
         }
         
@@ -315,7 +321,7 @@ int main() {
         continue;
       }
       case 3: {
-        O::Key keyObject;
+        O::Key kObject;
         
         bool addonsPresent = false;
         std::cout << "Which rarity is it?\n\n1 | Rare \n2 | Very Rare \n3 | Ultra Rare" << std::endl;
@@ -334,31 +340,31 @@ int main() {
           }
         }
         
-        keyObject.O::Key::keyTypeSetter(userInputUS);
+        kObject.O::Key::keyTypeSetter(userInputUS);
         // runs the addon check, similar to toolbox one but for keys
         std::cout << "If there is an addon, what is it's name? If there is not one, then type N/A\n" << std::endl;
         std::cin.clear();
         std::getline(std::cin >> std::ws, userInputS);
         if(lowercaseString(userInputS).compare("n/a") == 0) {
           std::cout << '\n';
-          F::printAll(keyObject);
+          F::printAll(kObject);
           goto bypass;
         }
         else {
-          addonsPresent = F::addonAdder(userInputS, keyObject, 0);
+          addonsPresent = F::addonAdder(userInputS, kObject, 0);
         }
-        if(keyObject.Item::getAddOn(0).getForItem() != "Key") {
+        if(kObject.Item::getAddOn(0).getForItem() != "Key") {
           while(true) {
-            F::addonAdder("Placeholder", keyObject, 0);
+            F::addonAdder("Placeholder", kObject, 0);
             std::cout << "\nPlease only input addons for keys. Alternatively, type N/A to exit.\n" << std::endl;
             std::getline(std::cin >> std::ws, userInputS);
-            F::addonAdder(userInputS, keyObject, 0);
-            if(keyObject.getAddOn(0).getForItem() == "Key") {
+            F::addonAdder(userInputS, kObject, 0);
+            if(kObject.getAddOn(0).getForItem() == "Key") {
               break;
             }
             else if(lowercaseString(userInputS).compare("n/a") == 0) {
               std::cout << '\n';
-              F::printAll(keyObject);
+              F::printAll(kObject);
               goto bypass;
             }
           }
@@ -376,27 +382,29 @@ int main() {
           // if N/A is found, prints the object and the first addon, and returns to the main program.
           
           if(lowercaseString(userInputS).compare("n/a") == 0) {
-            F::printAll(keyObject, 1);
+            F::effectCalculator(1, kObject, 1);
+            F::printAll(kObject, 1);
             goto bypass;
           }
           
           // verifies that user input for the addon isnt the same as the first addon already entered. if it is, then user can either add a new one, or exit to the main menu.
           while(true) {
-            if(lowercaseString(keyObject.Item::getAddOn(0).getName()).compare(lowercaseString(userInputS)) == 0) {
-              F::addonAdder("Placeholder", keyObject, 1);
+            if(lowercaseString(kObject.Item::getAddOn(0).getName()).compare(lowercaseString(userInputS)) == 0) {
+              F::addonAdder("Placeholder", kObject, 1);
               std::cout << "You can't have 2 of the same addon, type a different one or type N/A to exit.\n" << std::endl;
               std::cin.clear();
               std::getline(std::cin >> std::ws, userInputS);
-              bool temp = F::addonAdder(userInputS, keyObject, 1);
+              bool temp = F::addonAdder(userInputS, kObject, 1);
               if(temp != true) {
-                F::printAll(keyObject, 1);
+                F::printAll(kObject, 1);
                 goto bypass;
               }
-              if(lowercaseString(keyObject.getAddOn(0).getName()).compare(lowercaseString(userInputS)) != 0) {
+              if(lowercaseString(kObject.getAddOn(0).getName()).compare(lowercaseString(userInputS)) != 0) {
                 break;
               }
               else if(lowercaseString(userInputS).compare("n/a") == 0) {
-                F::printAll(keyObject, 1);
+                F::effectCalculator(1, kObject, 1);
+                F::printAll(kObject, 1);
                 goto bypass;
               }
             }
@@ -404,25 +412,26 @@ int main() {
               break;
             }
           }
-          F::addonAdder(userInputS, keyObject, 1);
+          F::addonAdder(userInputS, kObject, 1);
           // checks if the add on is under the name key, and if it isn't then it makes the user either print without a new addon, or enter a new one.
-          if(keyObject.getAddOn(1).getForItem() != "Key") {
+          if(kObject.getAddOn(1).getForItem() != "Key") {
             while(true) {
-              F::addonAdder("Placeholder", keyObject, 1);
-              std::cout << "Please only input addons for Flashlights. Alternatively, type N/A to exit.\n" << std::endl;
+              F::addonAdder("Placeholder", kObject, 1);
+              std::cout << "Please only input addons for Keys. Alternatively, type N/A to exit.\n" << std::endl;
               std::getline(std::cin >> std::ws, userInputS);
               
-              bool temp = F::addonAdder(userInputS, keyObject, 1);
+              bool temp = F::addonAdder(userInputS, kObject, 1);
               
               if(temp != true) {
-                F::printAll(keyObject, 1);
+                F::printAll(kObject, 1);
                 goto bypass;
               }
-              if(keyObject.getAddOn(1).getForItem() == "Key") {
+              if(kObject.getAddOn(1).getForItem() == "Key") {
                 break;
               }
               else if(lowercaseString(userInputS).compare("n/a") == 0) {
-                F::printAll(keyObject, 1);
+                F::effectCalculator(1, kObject, 1);
+                F::printAll(kObject, 1);
                 goto bypass;
               }
             }
@@ -432,16 +441,16 @@ int main() {
         // checks if one addon is present, or two, single addon check is for safety and fallback measures
         
         if(addonsPresent == true) {
-          if(keyObject.getAddOn(1).getName().compare(" ") == 0) {
-            F::effectCalculator(1, keyObject);
+          if(kObject.getAddOn(1).getName().compare(" ") == 0) {
+            F::effectCalculator(1, kObject, 2);
           }
           else {
-            F::effectCalculator(2, keyObject);
+            F::effectCalculator(2, kObject, 2);
           }
         }
         
         // prints key object and both addons, with spaces inbetween each addon and the key itself
-        F::printAll(keyObject, 2);
+        F::printAll(kObject, 2);
         
         userInputUS = 0;
         std::cout << '\n';
@@ -509,6 +518,7 @@ int main() {
           // if N/A is found, prints the object and the first addon, and returns to the main program.
           
           if(lowercaseString(userInputS).compare("n/a") == 0) {
+            F::effectCalculator(1, medkitObject, 1);
             F::printAll(medkitObject, 1);
             goto bypass;
           }
@@ -529,6 +539,7 @@ int main() {
                 break;
               }
               else if(lowercaseString(userInputS).compare("n/a") == 0) {
+                F::effectCalculator(1, medkitObject, 1);
                 F::printAll(medkitObject, 1);
                 goto bypass;
               }
@@ -542,7 +553,7 @@ int main() {
           if(medkitObject.getAddOn(1).getForItem() != "Medkit") {
             while(true) {
               F::addonAdder("Placeholder", medkitObject, 1);
-              std::cout << "Please only input addons for Flashlights. Alternatively, type N/A to exit.\n" << std::endl;
+              std::cout << "Please only input addons for Medkits. Alternatively, type N/A to exit.\n" << std::endl;
               std::getline(std::cin >> std::ws, userInputS);
               
               bool temp = F::addonAdder(userInputS, medkitObject, 1);
@@ -555,6 +566,7 @@ int main() {
                 break;
               }
               else if(lowercaseString(userInputS).compare("n/a") == 0) {
+                F::effectCalculator(1, medkitObject, 1);
                 F::printAll(medkitObject, 1);
                 goto bypass;
               }
@@ -566,10 +578,10 @@ int main() {
         
         if(addonsPresent == true) {
           if(medkitObject.getAddOn(1).getName().compare(" ") == 0) {
-            F::effectCalculator(1, medkitObject);
+            F::effectCalculator(1, medkitObject, 3);
           }
           else {
-            F::effectCalculator(2, medkitObject);
+            F::effectCalculator(2, medkitObject, 3);
           }
         }
         
@@ -581,7 +593,7 @@ int main() {
         continue;
       }
       case 5: {
-        O::Toolbox toolboxObject;
+        O::Toolbox tObject;
         
         bool addonsPresent = false;
         std::cout << "Which rarity is it?\n\n1 | Rare \n2 | Ultra Rare" << std::endl;
@@ -600,31 +612,31 @@ int main() {
           }
         }
         
-        toolboxObject.O::Toolbox::toolboxTypeSetter(userInputUS);
+        tObject.O::Toolbox::toolboxTypeSetter(userInputUS);
         // runs the addon check, similar to toolbox one but for toolboxes
         std::cout << "If there is an addon, what is it's name? If there is not one, then type N/A\n" << std::endl;
         std::cin.clear();
         std::getline(std::cin >> std::ws, userInputS);
         if(lowercaseString(userInputS).compare("n/a") == 0) {
           std::cout << '\n';
-          F::printAll(toolboxObject);
+          F::printAll(tObject);
           goto bypass;
         }
         else {
-          addonsPresent = F::addonAdder(userInputS, toolboxObject, 0);
+          addonsPresent = F::addonAdder(userInputS, tObject, 0);
         }
-        if(toolboxObject.Item::getAddOn(0).getForItem() != "Toolbox") {
+        if(tObject.Item::getAddOn(0).getForItem() != "Toolbox") {
           while(true) {
-            F::addonAdder("Placeholder", toolboxObject, 0);
-            std::cout << "\nPlease only input addons for toolboxes. Alternatively, type N/A to exit.\n" << std::endl;
+            F::addonAdder("Placeholder", tObject, 0);
+            std::cout << "\nPlease only input addons for Toolboxes. Alternatively, type N/A to exit.\n" << std::endl;
             std::getline(std::cin >> std::ws, userInputS);
-            F::addonAdder(userInputS, toolboxObject, 0);
-            if(toolboxObject.getAddOn(0).getForItem() == "Toolbox") {
+            F::addonAdder(userInputS, tObject, 0);
+            if(tObject.getAddOn(0).getForItem() == "Toolbox") {
               break;
             }
             else if(lowercaseString(userInputS).compare("n/a") == 0) {
               std::cout << '\n';
-              F::printAll(toolboxObject);
+              F::printAll(tObject);
               goto bypass;
             }
           }
@@ -642,27 +654,29 @@ int main() {
           // if N/A is found, prints the object and the first addon, and returns to the main program.
           
           if(lowercaseString(userInputS).compare("n/a") == 0) {
-            F::printAll(toolboxObject, 1);
+            F::effectCalculator(1, tObject, 1);
+            F::printAll(tObject, 1);
             goto bypass;
           }
           
           // verifies that user input for the addon isnt the same as the first addon already entered. if it is, then user can either add a new one, or exit to the main menu.
           while(true) {
-            if(lowercaseString(toolboxObject.Item::getAddOn(0).getName()).compare(lowercaseString(userInputS)) == 0) {
-              F::addonAdder("Placeholder", toolboxObject, 1);
+            if(lowercaseString(tObject.Item::getAddOn(0).getName()).compare(lowercaseString(userInputS)) == 0) {
+              F::addonAdder("Placeholder", tObject, 1);
               std::cout << "You can't have 2 of the same addon, type a different one or type N/A to exit.\n" << std::endl;
               std::cin.clear();
               std::getline(std::cin >> std::ws, userInputS);
-              bool temp = F::addonAdder(userInputS, toolboxObject, 1);
+              bool temp = F::addonAdder(userInputS, tObject, 1);
               if(temp != true) {
-                F::printAll(toolboxObject, 1);
+                F::printAll(tObject, 1);
                 goto bypass;
               }
-              if(lowercaseString(toolboxObject.getAddOn(0).getName()).compare(lowercaseString(userInputS)) != 0) {
+              if(lowercaseString(tObject.getAddOn(0).getName()).compare(lowercaseString(userInputS)) != 0) {
                 break;
               }
               else if(lowercaseString(userInputS).compare("n/a") == 0) {
-                F::printAll(toolboxObject, 1);
+                F::effectCalculator(1, tObject, 1);
+                F::printAll(tObject, 1);
                 goto bypass;
               }
             }
@@ -670,25 +684,26 @@ int main() {
               break;
             }
           }
-          F::addonAdder(userInputS, toolboxObject, 1);
+          F::addonAdder(userInputS, tObject, 1);
           // checks if the add on is under the name toolbox, and if it isn't then it makes the user either print without a new addon, or enter a new one.
-          if(toolboxObject.getAddOn(1).getForItem() != "Toolbox") {
+          if(tObject.getAddOn(1).getForItem() != "Toolbox") {
             while(true) {
-              F::addonAdder("Placeholder", toolboxObject, 1);
-              std::cout << "Please only input addons for Flashlights. Alternatively, type N/A to exit.\n" << std::endl;
+              F::addonAdder("Placeholder", tObject, 1);
+              std::cout << "Please only input addons for Toolboxes. Alternatively, type N/A to exit.\n" << std::endl;
               std::getline(std::cin >> std::ws, userInputS);
               
-              bool temp = F::addonAdder(userInputS, toolboxObject, 1);
+              bool temp = F::addonAdder(userInputS, tObject, 1);
               
               if(temp != true) {
-                F::printAll(toolboxObject, 1);
+                F::printAll(tObject, 1);
                 goto bypass;
               }
-              if(toolboxObject.getAddOn(1).getForItem() == "Toolbox") {
+              if(tObject.getAddOn(1).getForItem() == "Toolbox") {
                 break;
               }
               else if(lowercaseString(userInputS).compare("n/a") == 0) {
-                F::printAll(toolboxObject, 1);
+                F::effectCalculator(1, tObject, 1);
+                F::printAll(tObject, 1);
                 goto bypass;
               }
             }
@@ -698,16 +713,16 @@ int main() {
         // checks if one addon is present, or two, single addon check is for safety and fallback measures
         
         if(addonsPresent == true) {
-          if(toolboxObject.getAddOn(1).getName().compare(" ") == 0) {
-            F::effectCalculator(1, toolboxObject);
+          if(tObject.getAddOn(1).getName().compare(" ") == 0) {
+            F::effectCalculator(1, tObject, 4);
           }
           else {
-            F::effectCalculator(2, toolboxObject);
+            F::effectCalculator(2, tObject, 4);
           }
         }
         
         // prints toolbox object and both addons, with spaces inbetween each addon and the toolbox itself
-        F::printAll(toolboxObject, 2);
+        F::printAll(tObject, 2);
         
         userInputUS = 0;
         std::cout << '\n';

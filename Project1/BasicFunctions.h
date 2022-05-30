@@ -86,24 +86,7 @@ namespace F {
      note 2: its worse i added switch statements so this can be 1 function without overloads becuase im lazy haha this is way too overcomplicated for my own good haha haha im funny and good at programming hahahaha
   */
   template <typename T>
-  void effectCalculator(short addonCount, T& target) {
-      
-    short switcher = -1;
-    if(target.getName().find("Flashlight") != -1 || target.getName() == "Will O' Wisp") {
-      switcher = 0;
-    }
-    else if(target.getName().find("Map") != -1) {
-      switcher = 1;
-    }
-    else if(target.getName().find("Key") != -1) {
-      switcher = 2;
-    }
-    else if(target.getName().find("Kit") != -1 || target.getName() == "All Hallows' Eve Lunchbox") {
-      switcher = 3;
-    }
-    else if(target.getName().find("Toolbox") != -1) {
-      switcher = 4;
-    }
+  void effectCalculator(short addonCount, T& target, short switcher) {
     if(target.getAddOn(0).getName() == "placeholder" || target.getAddOn(1).getName() == "placeholder") {
       return;
     }
@@ -151,7 +134,7 @@ namespace F {
       }
         
       temp = lowercaseString(temp);
-      
+      // the way this is supposed to work is to swap over each type of item, depending on what it is identified as in the method definition.
       if(temp.length() > 2) {
         switch(switcher) {
           case 0: {
